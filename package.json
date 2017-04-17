@@ -1,0 +1,30 @@
+{
+  "name": "scs-api",
+  "description": "CMU:SCS GraphQL API",
+  "author": "seckel@scs.cmu.edu",
+  "version": "1.0.0",
+  "repository": "https://github.com/scscmu/scs-api",
+  "engines": {
+    "node": "7.7.1"
+  },
+  "scripts": {
+    "dev": "nodemon --exec npm start",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "compression": "^1.6.2",
+    "cors": "^2.8.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "express-graphql": "^0.6.4",
+    "graphql": "^0.9.1",
+    "graphql-server-express": "^0.7.1",
+    "graphql-tag": "^2.0.0",
+    "helmet": "^3.5.0",
+    "mongoose": "^4.9.0",
+    "prismic.io": "^3.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}

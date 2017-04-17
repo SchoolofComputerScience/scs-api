@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+logs
+*.log
+dist
+
+# google build and environment variables
+app.yaml
+.env
