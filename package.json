@@ -3,7 +3,7 @@
   "description": "CMU:SCS GraphQL API",
   "author": "seckel@scs.cmu.edu",
   "version": "1.0.0",
-  "repository": "https://github.com/scscmu/scs-api",
+  "repository": "https://github.com/SchoolofComputerScience/scs-api",
   "engines": {
     "node": "7.7.1"
   },
