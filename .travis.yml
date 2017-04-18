@@ -8,3 +8,4 @@ deploy:
   provider: gae
   keyfile: scs-shadow-e5e41dfcb0f6.json
   project: scs-api
+  skip_cleanup: true
