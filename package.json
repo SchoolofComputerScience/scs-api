@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "nodemon --exec npm start",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "echo \"no tests for today.\" && exit 0"
   },
   "dependencies": {
     "compression": "^1.6.2",
