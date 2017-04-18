@@ -5,5 +5,4 @@ logs
 dist
 
 # google build and environment variables
-app.yaml
 .env
