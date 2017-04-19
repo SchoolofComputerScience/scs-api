@@ -1,13 +1,20 @@
 language: node_js
 node_js:
 - '7'
+cache:
+  directories:
+  - "$HOME/gcloud/"
+env:
+- PATH=$PATH:$HOME/google-cloud-sdk/bin CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
-- openssl aes-256-cbc -K $encrypted_d88b7c395367_key -iv $encrypted_d88b7c395367_iv
-  -in key.json.enc -out key.json -d
-deploy:
-  provider: gae
-  keyfile: key.json
-  project: scs-api
-  default: false
-  skip_cleanup: true
-  on: master
+- openssl aes-256-cbc -K $encrypted_7e805129ca2f_key -iv $encrypted_7e805129ca2f_iv
+  -in gce-key.json.enc -out gce-key.json -d
+- ssh-keygen -q -N "" -f ~/.ssh/google_compute_engine
+- if [ ! -d $HOME/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash;
+  fi
+- gcloud auth activate-service-account --key-file gce-key.json
+install:
+- gcloud config set compute/zone us-east1-b
+- gcloud config set project scs-shadow
+script:
+- gcloud -q app deploy app.yaml
