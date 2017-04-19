@@ -3,10 +3,10 @@ node_js:
 - '7'
 before_install:
 - openssl aes-256-cbc -K $encrypted_d88b7c395367_key -iv $encrypted_d88b7c395367_iv
-  -in travis-cred.json.enc -out travis-cred.json -d
+  -in key.json.enc -out key.json -d
 deploy:
   provider: gae
-  keyfile: travis-cred.json
+  keyfile: key.json
   project: scs-api
   default: false
   skip_cleanup: true
