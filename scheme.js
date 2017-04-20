@@ -36,6 +36,16 @@ let memberType = new graphql.GraphQLObjectType({
     department: { type: graphql.GraphQLString},
     fulldepartment: { type: graphql.GraphQLString},
     short_jobtitle: { type: graphql.GraphQLString },
+    biography: {
+      type: new graphql.GraphQLList(biographyType),
+      resolve: function(args){
+        if(args.name)
+          return data.getBiographyData()
+            .find({scid :`${args.name}`})
+            .then((data) => data)
+            .catch(err =>  err)
+      }
+    },
     gsProfile: {
       type: new graphql.GraphQLList(gsProfileType),
       resolve: function(args){
@@ -83,6 +93,23 @@ let courseMeetingType = new graphql.GraphQLObjectType({
     room: { type: graphql.GraphQLString },
     startTime: { type: graphql.GraphQLString },
     days: { type: graphql.GraphQLString }
+  })
+})
+
+let biographyType = new graphql.GraphQLObjectType({
+  name: 'biography',
+  description: 'Biography for professor',
+  fields: () => ({
+    _id: { type: graphql.GraphQLString },
+    andrewid: { type: graphql.GraphQLString },
+    bio: { type: graphql.GraphQLString },
+    department: { type: graphql.GraphQLString },
+    email: { type: graphql.GraphQLString },
+    homepage: { type: graphql.GraphQLString },
+    name: { type: graphql.GraphQLString },
+    photo_URL: { type: graphql.GraphQLString },
+    title: { type: graphql.GraphQLString },
+    scid: { type: graphql.GraphQLString },
   })
 })
 
@@ -429,6 +456,23 @@ let queryType = new graphql.GraphQLObjectType({
 
         else
           return data.directory().find({}).sort({name:1})
+          .then((data) => data)
+          .catch(err => err)
+      }
+    },
+    biography: {
+      type: new graphql.GraphQLList(biographyType),
+      description: 'Information from department sites including bios, photo url, published email, etc.',
+      args: {
+        scid: { type: graphql.GraphQLString },
+      },
+      resolve: function(_, args){
+        if(args.scid)
+          return data.getBiographyData().find({'scid': args.scid})
+            .then((data) => data)
+            .catch(err =>  err)
+        else
+          return data.getBiographyData().find({}).sort({scid:1})
           .then((data) => data)
           .catch(err => err)
       }

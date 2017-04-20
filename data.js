@@ -33,6 +33,22 @@ const directorySchema = mongoose.Schema(
   { collection : 'directory'}
 );
 
+const biographySchema = mongoose.Schema(
+  {
+    _id: mongoose.Schema.Types.ObjectId,
+    andrewid: String,
+    bio: String,
+    department: String,
+    email: String,
+    homepage: String,
+    name: String,
+    photo_URL: String,
+    title: String,
+    scid: String
+  },
+  { collection : 'biography'}
+);
+
 const newsArchiveSchema = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
@@ -185,6 +201,10 @@ module.exports = {
 
   directory(){
     return mongoose.model('directory', directorySchema, 'directory');
+  },
+
+  getBiographyData(){
+    return mongoose.model('biographies', biographySchema, 'biographies');
   },
 
   getGsProfileData(){
