@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const pris = require('prismic.io');
 const dotenv = require('dotenv');
-const prismicApi = 'https://scs-main.prismic.io/api';
+const prismicApi = process.env.PRISMIC
 
 dotenv.load({ path: '.env' });
 
