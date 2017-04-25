@@ -16,6 +16,6 @@ automatic_scaling:
   cpu_utilization:
     target_utilization: 0.3
 env_variables:
-  PRISMIC: prismic
-  DB_CONNECT: db_connect
+  PRISMIC: pris
+  DB_CONNECT: db
   NODE_ENV: production
