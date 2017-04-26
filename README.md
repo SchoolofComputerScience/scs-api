@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/SchoolofComputerScience/scs-api.svg?branch=master)](https://travis-ci.org/SchoolofComputerScience/scs-api)
 
 # CMU:SCS GraphQL API
 Data Endpoint.
