@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/SchoolofComputerScience/scs-api.svg?branch=master)](https://travis-ci.org/SchoolofComputerScience/scs-api)
 
 # CMU:SCS GraphQL API
 Data Endpoint.
+
+[![Build Status](https://travis-ci.org/SchoolofComputerScience/scs-api.svg?branch=master)](https://travis-ci.org/SchoolofComputerScience/scs-api)
 
 ## Requirements
 [Node.js 7.7.1](https://nodejs.org/en/)
