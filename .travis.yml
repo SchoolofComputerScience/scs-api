@@ -16,7 +16,7 @@ before_install:
 - if [ ! -d $HOME/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash;
   fi
 - gcloud auth activate-service-account --key-file gce-key.json
-- echo "  TEST: " $test >> app.yaml
+- echo "  TEST:" $test >> app.yaml
 - cat app.yaml
 install:
 - gcloud config set compute/zone us-east1-b
