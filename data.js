@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const pris = require('prismic.io');
 const dotenv = require('dotenv');
-const prismicApi = process.env.PRISMIC;
 
 dotenv.load({ path: '.env' });
+
+const prismicApi = process.env.PRISMIC;
 
 mongoose.Promise = Promise;
 
