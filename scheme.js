@@ -24,18 +24,55 @@ let aggregateCourseDepartmentType = new graphql.GraphQLObjectType({
   })
 })
 
+let memberPositionType = new graphql.GraphQLObjectType({
+  name: 'MemberPosition',
+  description: 'Positions of a Member Schema',
+  fields: () => ({
+    building: {type: graphql.GraphQLString},
+    department: {type: graphql.GraphQLString},
+    department_name: {type: graphql.GraphQLString},
+    employee_type: {type: graphql.GraphQLString},
+    full_part_time_indicator: {type: graphql.GraphQLString},
+    hr_department: {type: graphql.GraphQLString},
+    performance_supervisor: {type: graphql.GraphQLString},
+    primary_position: {type: graphql.GraphQLString},
+    room: {type: graphql.GraphQLString},
+    title: {type: graphql.GraphQLString}
+  })
+})
+
 let memberType = new graphql.GraphQLObjectType({
   name: 'Member',
   description: 'Available properties for SCS members',
   fields: () => ({
     _id: { type: graphql.GraphQLString },
-    name: { type: graphql.GraphQLString },
-    fullname: { type: graphql.GraphQLString },
-    job: { type: graphql.GraphQLString },
-    room: { type: graphql.GraphQLString },
-    department: { type: graphql.GraphQLString},
-    fulldepartment: { type: graphql.GraphQLString},
-    short_jobtitle: { type: graphql.GraphQLString },
+    andrew_id: { type: graphql.GraphQLString },
+    email: { type: graphql.GraphQLString },
+    employee_status: { type: graphql.GraphQLString },
+    employee_status_desc: { type: graphql.GraphQLString },
+    family_name: { type: graphql.GraphQLString },
+    fax_phone: { type: graphql.GraphQLString },
+    given_name: { type: graphql.GraphQLString },
+    homepage_url: { type: graphql.GraphQLString },
+    middle_name: { type: graphql.GraphQLString },
+    name_suffix: { type: graphql.GraphQLString },
+    phone_area_code: { type: graphql.GraphQLFloat },
+    phone_area_code_secondary: { type: graphql.GraphQLFloat },
+    phone_exchange: { type: graphql.GraphQLFloat },
+    phone_extension: { type: graphql.GraphQLString },
+    phone_extension_secondary: { type: graphql.GraphQLString },
+    positions: { type: new graphql.GraphQLList(memberPositionType) },
+    relationship: { type: graphql.GraphQLString },
+    relationship_class: { type: graphql.GraphQLString },
+    relationship_desc: { type: graphql.GraphQLString },
+    research_areas: { type: new graphql.GraphQLList(graphql.GraphQLString) },
+    full_name: { 
+      type: graphql.GraphQLString,
+      resolve: function(member){
+        return member.given_name + ' ' + member.family_name;
+      }
+    },
+    scid: { type: graphql.GraphQLString },
     biography: {
       type: new graphql.GraphQLList(biographyType),
       resolve: function(args){
@@ -49,9 +86,9 @@ let memberType = new graphql.GraphQLObjectType({
     gsProfile: {
       type: new graphql.GraphQLList(gsProfileType),
       resolve: function(args){
-        if(args.name)
+        if(args.scid)
           return data.getGsProfileData()
-            .find({scid :`${args.name}`})
+            .find({scid :`${args.scid}`})
             .then((data) => data)
             .catch(err =>  err)
       }
@@ -59,10 +96,10 @@ let memberType = new graphql.GraphQLObjectType({
     gsPublication: {
       type: new graphql.GraphQLList(gsPublicationType),
       resolve: function(args){
-        if(args.name)
+        if(args.scid)
           return data.getGsPublicationData()
-            .find({scid :`${args.name}`,
-              pub_year: {$ne: null},
+            .find({scid :`${args.scid}`,
+              pub_year: {$exists: true},
               authors: {$exists: true}
             })
             .then((data) => data)
@@ -72,13 +109,13 @@ let memberType = new graphql.GraphQLObjectType({
     news: {
       type: new graphql.GraphQLList(newsType),
       resolve: function(args){
-        return data.getNewsWithTag(args.name);
+        return data.getNewsWithTag(args.full_name);
       }
     },
     events: {
       type: new graphql.GraphQLList(newsType),
       resolve: function(args){
-        return data.getEventsWithTag(args.name);
+        return data.getEventsWithTag(args.full_name);
       }
     }
   })
@@ -440,22 +477,28 @@ let queryType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(memberType),
       description: 'Directory listing of SCS, sortable by name / department.',
       args: {
-        name: { type: graphql.GraphQLString },
-        department: { type: graphql.GraphQLString }
+        scid: { type: gqlStr },
+        department: { type: gqlStr },
+        starts_with: { type: gqlStr }
       },
       resolve: function(_, args) {
-        if(args.name)
-          return data.directory().find({'name': args.name})
+        if(args.scid)
+          return data.directory().find({'scid': args.scid})
             .then((data) => data)
             .catch(err => err)
 
-        if(args.department)
-          return data.directory().find({'department': args.department})
+        else if(args.department)
+          return data.directory().find({'positions': {$elemMatch: {'department': args.department }}})
+            .then((data) => data)
+            .catch(err => err)
+
+        else if(args.starts_with)
+          return data.directory().find({'last_name' : { $regex : /^`${args.starts_with}`/ }})
             .then((data) => data)
             .catch(err => err)
 
         else
-          return data.directory().find({}).sort({name:1})
+          return data.directory().find({}).sort({full_name:1})
           .then((data) => data)
           .catch(err => err)
       }
