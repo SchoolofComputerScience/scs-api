@@ -22,16 +22,41 @@ let mongo = mongoose.connect(process.env.DB_CONNECT)
 const directorySchema = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
-    name: String,
-    fullname: String,
-    person: String,
-    room: String,
-    department: String,
-    fulldepartment: String,
-    job: String,
-    short_jobtitle: String
+    andrew_id: String,
+    email: String,
+    employee_status: String,
+    employee_status_desc: String,
+    family_name: String,
+    fax_phone: String,
+    given_name: String,
+    homepage_url: String,
+    image_url: String,
+    middle_name: String,
+    name_suffix: String,
+    phone_area_code: Number,
+    phone_area_code_secondary: Number,
+    phone_exchange: Number,
+    phone_extension: String,
+    phone_extension_secondary: String,
+    positions: [{
+      building: String,
+      department: String,
+      department_name: String,
+      employee_type: String,
+      full_part_time_indicator: String,
+      hr_department: String,
+      performance_supervisor: String,
+      primary_position: Boolean,
+      room: String,
+      title: String
+    }],
+    relationship: String,
+    relationship_class: String,
+    relationship_desc: String,
+    research_areas: [String],
+    scid: String
   },
-  { collection : 'directory'}
+  { collection : 'directory_hris'}
 );
 
 const biographySchema = mongoose.Schema(
@@ -201,7 +226,7 @@ const gsPublicationSchema = mongoose.Schema(
 module.exports = {
 
   directory(){
-    return mongoose.model('directory', directorySchema, 'directory');
+    return mongoose.model('directory', directorySchema, 'directory_hris');
   },
 
   getBiographyData(){
