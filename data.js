@@ -30,6 +30,7 @@ const directorySchema = mongoose.Schema(
     fax_phone: String,
     given_name: String,
     homepage_url: String,
+    image_url: String,
     middle_name: String,
     name_suffix: String,
     phone_area_code: Number,

@@ -54,6 +54,7 @@ let memberType = new graphql.GraphQLObjectType({
     fax_phone: { type: graphql.GraphQLString },
     given_name: { type: graphql.GraphQLString },
     homepage_url: { type: graphql.GraphQLString },
+    image_url: { type: graphql.GraphQLString },
     middle_name: { type: graphql.GraphQLString },
     name_suffix: { type: graphql.GraphQLString },
     phone_area_code: { type: graphql.GraphQLFloat },
@@ -66,7 +67,19 @@ let memberType = new graphql.GraphQLObjectType({
     relationship_class: { type: graphql.GraphQLString },
     relationship_desc: { type: graphql.GraphQLString },
     research_areas: { type: new graphql.GraphQLList(graphql.GraphQLString) },
-    full_name: { 
+    phone_full: {
+      type: graphql.GraphQLString,
+      resolve: function(member){
+        return `(${member.phone_area_code}) ${member.phone_exchange} - ${member.phone_extension}`
+      }
+    },
+    phone_full_call: {
+      type: graphql.GraphQLString,
+      resolve: function(member){
+        return `${member.phone_area_code}${member.phone_exchange}${member.phone_extension}`
+      }
+    },
+    full_name: {
       type: graphql.GraphQLString,
       resolve: function(member){
         return member.given_name + ' ' + member.family_name;
@@ -477,9 +490,9 @@ let queryType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(memberType),
       description: 'Directory listing of SCS, sortable by name / department.',
       args: {
-        scid: { type: gqlStr },
-        department: { type: gqlStr },
-        starts_with: { type: gqlStr }
+        scid: { type: graphql.GraphQLString  },
+        department: { type: graphql.GraphQLString  },
+        starts_with: { type: graphql.GraphQLString  }
       },
       resolve: function(_, args) {
         if(args.scid)
@@ -492,13 +505,13 @@ let queryType = new graphql.GraphQLObjectType({
             .then((data) => data)
             .catch(err => err)
 
-        else if(args.starts_with)
-          return data.directory().find({'last_name' : { $regex : /^`${args.starts_with}`/ }})
-            .then((data) => data)
-            .catch(err => err)
+        // else if(args.starts_with)
+        //   return data.directory().find({'last_name' : { $regex : /^`${args.starts_with}`/ }})
+        //     .then((data) => data)
+        //     .catch(err => err)
 
         else
-          return data.directory().find({}).sort({full_name:1})
+          return data.directory().find({}).sort({scid:1})
           .then((data) => data)
           .catch(err => err)
       }
