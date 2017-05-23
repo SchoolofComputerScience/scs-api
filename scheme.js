@@ -201,6 +201,7 @@ let coursesType = new graphql.GraphQLObjectType({
     },
     deliveryMode: { type: graphql.GraphQLString },
     s3Department: { type: graphql.GraphQLString },
+    department: { type: graphql.GraphQLString },
     courseCode: { type: graphql.GraphQLString },
     title: { type: graphql.GraphQLString },
     parentCourse: {

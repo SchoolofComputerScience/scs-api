@@ -139,6 +139,7 @@ const coursesSchema = mongoose.Schema(
     ],
     deliveryMode: String,
     s3Department: String,
+    department: String,
     courseCode: String,
     title: String,
     parentCourse: mongoose.Schema({
