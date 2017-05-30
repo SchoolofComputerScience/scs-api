@@ -650,6 +650,16 @@ let queryType = new graphql.GraphQLObjectType({
         return data.getCourses().find({semesterCode: `${semCode}` })
       }
     },
+    newsByTag:{
+      type: new graphql.GraphQLList(newsType),
+      args: {
+        department: { type: graphql.GraphQLString }
+      },
+      description: 'list of news articles associated to a tag',
+      resolve: function(_,args){
+        return data.getNewsWithTag(args.department);
+      }
+    },
     news: {
       type: new graphql.GraphQLList(newsType),
       description: 'List of News',
