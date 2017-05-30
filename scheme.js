@@ -122,13 +122,13 @@ let memberType = new graphql.GraphQLObjectType({
     news: {
       type: new graphql.GraphQLList(newsType),
       resolve: function(args){
-        return data.getNewsWithTag(args.full_name);
+        return data.getNewsWithTag(args.scid);
       }
     },
     events: {
       type: new graphql.GraphQLList(newsType),
       resolve: function(args){
-        return data.getEventsWithTag(args.full_name);
+        return data.getEventsWithTag(args.scid);
       }
     }
   })
