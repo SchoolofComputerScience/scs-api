@@ -122,13 +122,13 @@ let memberType = new graphql.GraphQLObjectType({
     news: {
       type: new graphql.GraphQLList(newsType),
       resolve: function(args){
-        return data.getNewsWithTag(args.full_name);
+        return data.getNewsWithTag(args.scid);
       }
     },
     events: {
       type: new graphql.GraphQLList(newsType),
       resolve: function(args){
-        return data.getEventsWithTag(args.full_name);
+        return data.getEventsWithTag(args.scid);
       }
     }
   })
@@ -648,6 +648,16 @@ let queryType = new graphql.GraphQLObjectType({
       resolve: function(_,args){
         let semCode = args.semesterCode || "S17"
         return data.getCourses().find({semesterCode: `${semCode}` })
+      }
+    },
+    newsByTag:{
+      type: new graphql.GraphQLList(newsType),
+      args: {
+        department: { type: graphql.GraphQLString }
+      },
+      description: 'list of news articles associated to a tag',
+      resolve: function(_,args){
+        return data.getNewsWithTag(args.department);
       }
     },
     news: {
