@@ -62,17 +62,17 @@ const directorySchema = mongoose.Schema(
 const biographySchema = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
-    andrewid: String,
-    bio: String,
+    andrew_id: String,
+    biography: String,
     department: String,
     email: String,
-    homepage: String,
+    homepage_url: String,
     name: String,
-    photo_URL: String,
+    image_url: String,
     title: String,
     scid: String
   },
-  { collection : 'biography'}
+  { collection : 'biographies'}
 );
 
 const newsArchiveSchema = mongoose.Schema(
