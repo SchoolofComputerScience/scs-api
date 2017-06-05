@@ -38,6 +38,7 @@ const directorySchema = mongoose.Schema(
     phone_exchange: Number,
     phone_extension: String,
     phone_extension_secondary: String,
+    biography: String,
     positions: [{
       building: String,
       department: String,
@@ -62,13 +63,14 @@ const directorySchema = mongoose.Schema(
 const biographySchema = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
-    andrewid: String,
-    bio: String,
-    department: String,
+    andrew_id: String,
+    biography: String,
+    department_name: String,
     email: String,
-    homepage: String,
+    homepage_url: String,
     name: String,
-    photo_URL: String,
+    image_url: String,
+    image_format: String,
     title: String,
     scid: String
   },
@@ -224,6 +226,22 @@ const gsPublicationSchema = mongoose.Schema(
   { collection : 'gs_profile'}
 );
 
+const programsSchema = mongoose.Schema(
+  {
+    _id: mongoose.Schema.Types.ObjectId,
+    additional_degree: Boolean,
+    degree_level: String,
+    department: [String],
+    description: String,
+    graduate_level: String,
+    program_alias: String,
+    program_id: String,
+    program_name: String,
+    url: String
+  },
+  { collection : 'programs'}
+);
+
 module.exports = {
 
   directory(){
@@ -252,6 +270,10 @@ module.exports = {
 
   getCourses(){
     return mongoose.model('courses', coursesSchema, 'courses')
+  },
+
+  getPrograms(){
+    return mongoose.model('programs', programsSchema, 'programs')
   },
 
   getNews(){
