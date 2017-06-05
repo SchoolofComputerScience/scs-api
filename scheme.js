@@ -47,6 +47,7 @@ let memberType = new graphql.GraphQLObjectType({
   fields: () => ({
     _id: { type: graphql.GraphQLString },
     andrew_id: { type: graphql.GraphQLString },
+    biography: { type: graphql.GraphQLString },
     email: { type: graphql.GraphQLString },
     employee_status: { type: graphql.GraphQLString },
     employee_status_desc: { type: graphql.GraphQLString },
@@ -86,16 +87,6 @@ let memberType = new graphql.GraphQLObjectType({
       }
     },
     scid: { type: graphql.GraphQLString },
-    biography: {
-      type: new graphql.GraphQLList(biographyType),
-      resolve: function(args){
-        if(args.name)
-          return data.getBiographyData()
-            .find({scid :`${args.name}`})
-            .then((data) => data)
-            .catch(err =>  err)
-      }
-    },
     gsProfile: {
       type: new graphql.GraphQLList(gsProfileType),
       resolve: function(args){
@@ -146,9 +137,9 @@ let courseMeetingType = new graphql.GraphQLObjectType({
   })
 })
 
-let biographyType = new graphql.GraphQLObjectType({
-  name: 'biography',
-  description: 'Biography for professor',
+let biographiesType = new graphql.GraphQLObjectType({
+  name: 'biographies',
+  description: 'Biographies for professor',
   fields: () => ({
     _id: { type: graphql.GraphQLString },
     andrewid: { type: graphql.GraphQLString },
@@ -517,8 +508,8 @@ let queryType = new graphql.GraphQLObjectType({
           .catch(err => err)
       }
     },
-    biography: {
-      type: new graphql.GraphQLList(biographyType),
+    biographies: {
+      type: new graphql.GraphQLList(biographiesType),
       description: 'Information from department sites including bios, photo url, published email, etc.',
       args: {
         scid: { type: graphql.GraphQLString },
