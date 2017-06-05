@@ -142,13 +142,13 @@ let biographiesType = new graphql.GraphQLObjectType({
   description: 'Biographies for professor',
   fields: () => ({
     _id: { type: graphql.GraphQLString },
-    andrewid: { type: graphql.GraphQLString },
-    bio: { type: graphql.GraphQLString },
+    andrew_id: { type: graphql.GraphQLString },
+    biography: { type: graphql.GraphQLString },
     department: { type: graphql.GraphQLString },
     email: { type: graphql.GraphQLString },
-    homepage: { type: graphql.GraphQLString },
+    homepage_url: { type: graphql.GraphQLString },
     name: { type: graphql.GraphQLString },
-    photo_URL: { type: graphql.GraphQLString },
+    image_url: { type: graphql.GraphQLString },
     title: { type: graphql.GraphQLString },
     scid: { type: graphql.GraphQLString },
   })
