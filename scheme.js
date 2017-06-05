@@ -35,6 +35,7 @@ let memberPositionType = new graphql.GraphQLObjectType({
     full_part_time_indicator: {type: graphql.GraphQLString},
     hr_department: {type: graphql.GraphQLString},
     performance_supervisor: {type: graphql.GraphQLString},
+    performance_supervisor_scid: {type: graphql.GraphQLString},
     primary_position: {type: graphql.GraphQLString},
     room: {type: graphql.GraphQLString},
     title: {type: graphql.GraphQLString}

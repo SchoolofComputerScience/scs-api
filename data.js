@@ -47,6 +47,7 @@ const directorySchema = mongoose.Schema(
       full_part_time_indicator: String,
       hr_department: String,
       performance_supervisor: String,
+      performance_supervisor_scid: String,
       primary_position: Boolean,
       room: String,
       title: String
