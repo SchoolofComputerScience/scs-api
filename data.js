@@ -243,6 +243,19 @@ const programsSchema = mongoose.Schema(
   { collection : 'programs'}
 );
 
+const departmentsSchema = mongoose.Schema(
+  {
+    _id: mongoose.Schema.Types.ObjectId,
+    college: String,
+    college_name: String,
+    department: String,
+    department_name: String,
+    scs_relationship: String,
+    type: String
+  },
+  { collection : 'departments'}
+);
+
 module.exports = {
 
   directory(){
@@ -275,6 +288,10 @@ module.exports = {
 
   getPrograms(){
     return mongoose.model('programs', programsSchema, 'programs')
+  },
+
+  getDepartments(){
+    return mongoose.model('departments', departmentsSchema, 'departments')
   },
 
   getNews(){

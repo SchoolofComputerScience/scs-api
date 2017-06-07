@@ -490,6 +490,19 @@ let programType = new graphql.GraphQLObjectType({
   })
 });
 
+let departmentsType = new graphql.GraphQLObjectType({
+  name: 'departments',
+  description: 'List of Departments',
+  fields: () => ({
+    department: { type: graphql.GraphQLString },
+    department_name: { type: graphql.GraphQLString },
+    college: { type: graphql.GraphQLString },
+    college_name: { type: graphql.GraphQLString },
+    scs_relationship: { type: graphql.GraphQLString },
+    type: { type: graphql.GraphQLString }
+  })
+});
+
 let queryType = new graphql.GraphQLObjectType({
   name: 'Query',
   description: 'SCS top level data points',
@@ -730,6 +743,23 @@ let queryType = new graphql.GraphQLObjectType({
         return data.getPrograms().find(query)
           .then((data) => data)
           .catch(err =>  err); 
+      }
+    },
+    departments: {
+      type: new graphql.GraphQLList(departmentsType),
+      args: {
+        college: { type: graphql.GraphQLString }
+      },
+      description: 'List of Departments',
+      resolve: function(_, args){
+        if (args.college)
+          return data.getDepartments().find({college: `${args.college}`})
+            .then((data) => data)
+            .catch(err =>  err); 
+        else
+          return data.getDepartments().find({})
+            .then((data) => data)
+            .catch(err =>  err); 
       }
     }
   }
