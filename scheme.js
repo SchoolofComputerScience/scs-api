@@ -35,6 +35,7 @@ let memberPositionType = new graphql.GraphQLObjectType({
     full_part_time_indicator: {type: graphql.GraphQLString},
     hr_department: {type: graphql.GraphQLString},
     performance_supervisor: {type: graphql.GraphQLString},
+    performance_supervisor_scid: {type: graphql.GraphQLString},
     primary_position: {type: graphql.GraphQLString},
     room: {type: graphql.GraphQLString},
     title: {type: graphql.GraphQLString}
@@ -472,7 +473,22 @@ let eventsType = new graphql.GraphQLObjectType({
       resolve: (_,args) => _.data ? '' : _.posterText || ''
     }
   })
-})
+});
+
+let programType = new graphql.GraphQLObjectType({
+  name: 'programs',
+  description: 'List of Programs',
+  fields: () => ({
+    program_id: { type: graphql.GraphQLString },
+    program_name: { type: graphql.GraphQLString },
+    url: { type: graphql.GraphQLString },
+    description: { type: graphql.GraphQLString },
+    department: { type: new graphql.GraphQLList(graphql.GraphQLString) },
+    graduate_level: { type: graphql.GraphQLString },
+    degree_level: { type: graphql.GraphQLString },
+    additional_degree: { type: graphql.GraphQLBoolean }
+  })
+});
 
 let queryType = new graphql.GraphQLObjectType({
   name: 'Query',
@@ -694,6 +710,28 @@ let queryType = new graphql.GraphQLObjectType({
             .catch((err) => err)
         })
         .catch(err => err)
+      }
+    },
+    programs: {
+      type: new graphql.GraphQLList(programType),
+      args: {
+        department: { type: graphql.GraphQLString },
+        degree_level: { type: graphql.GraphQLString },
+        graduate_level: { type: graphql.GraphQLString }
+      },
+      description: 'List of Programs',
+      resolve: function(_, args){
+        let query = {};
+        if (args.department)
+          query.department = args.department;
+        if (args.degree_level)
+          query.degree_level = args.degree_level;
+        if (args.graduate_level)
+          query.graduate_level = args.graduate_level;
+
+        return data.getPrograms().find(query)
+          .then((data) => data)
+          .catch(err =>  err); 
       }
     }
   }
