@@ -664,12 +664,14 @@ let queryType = new graphql.GraphQLObjectType({
         return data.getNews().then((res) => {
           res.map((item) => news.push(item))
           limit -= res.length
-          return data.getNewsArchive().find().sort({date: -1}).limit(limit)
-            .then((res) => {
-              res.map((item) => news.push(item))
-              return news
-            })
-            .catch((err) => err)
+          if(limit != 0) {
+            return data.getNewsArchive().find().sort({date: -1}).limit(limit)
+              .then((res) => {
+                res.map((item) => news.push(item))
+                return news
+              })
+              .catch((err) => err)
+          }
         })
         .catch(err => err)
       }

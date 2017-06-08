@@ -258,8 +258,10 @@ module.exports = {
   getNews(){
     return pris.api(prismicApi).then(function(api) {
       return api.query(
-        pris.Predicates.at("document.type", "news")
-      )})
+        pris.Predicates.at('document.type', 'news'),
+        { pageSize : 10, page: 1, orderings : '[my.news.publish_date desc]' }
+      )
+    })
     .then((res) => res.results);
   },
 
