@@ -16,6 +16,7 @@ let aggregateCourseYearType = new graphql.GraphQLObjectType({
     _id: {type: graphql.GraphQLInt}
   })
 })
+
 let aggregateCourseDepartmentType = new graphql.GraphQLObjectType({
   name: 'AggregateCourseDepartment',
   description: 'Aggregation of fields',
@@ -392,7 +393,13 @@ let eventsType = new graphql.GraphQLObjectType({
     },
     room: {
       type: graphql.GraphQLString,
-      resolve: (_,args) => _.data ? _.data['events.room'].value[0].text : _.room
+      resolve: (_,args) => {
+        let room = ''
+        if(_.data['events.room']){
+          room = _.data['events.room'].value[0].text
+        }
+        return _.data ? room : _.room || ''
+      }
     },
     building: {
       type: graphql.GraphQLString,
@@ -410,7 +417,6 @@ let eventsType = new graphql.GraphQLObjectType({
       type: graphql.GraphQLString,
       resolve: (_,args) => {
         let date = _.data ? _.data['events.starttime'].value : _.startdate || '';
-        console.log("!" +date)
         return date
       }
     },
@@ -462,7 +468,7 @@ let eventsType = new graphql.GraphQLObjectType({
       type: graphql.GraphQLString,
       resolve: (_,args) => {
         return _.data &&  _.data['events.eventurl']
-        ? _.data['events.eventurl'].value[0].text
+        ? _.data['events.eventurl'].value.url
         : _.speakerSite || ''
       }
     },
@@ -514,11 +520,6 @@ let queryType = new graphql.GraphQLObjectType({
           return data.directory().find({'positions': {$elemMatch: {'department': args.department }}})
             .then((data) => data)
             .catch(err => err)
-
-        // else if(args.starts_with)
-        //   return data.directory().find({'last_name' : { $regex : /^`${args.starts_with}`/ }})
-        //     .then((data) => data)
-        //     .catch(err => err)
 
         else
           return data.directory().find({}).sort({scid:1})
