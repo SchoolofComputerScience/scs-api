@@ -409,7 +409,9 @@ let eventsType = new graphql.GraphQLObjectType({
     startDate: {
       type: graphql.GraphQLString,
       resolve: (_,args) => {
-        return _.data ? _.data['events.starttime'].value : _.startdate || ''
+        let date = _.data ? _.data['events.starttime'].value : _.startdate || '';
+        console.log("!" +date)
+        return date
       }
     },
     endDate: {
@@ -687,6 +689,8 @@ let queryType = new graphql.GraphQLObjectType({
                 return news
               })
               .catch((err) => err)
+          }else{
+            return news
           }
         })
         .catch(err => err)
@@ -698,16 +702,24 @@ let queryType = new graphql.GraphQLObjectType({
       resolve: function(_,args){
         let count;
         let events = [];
-        let limit = args.first || 40;
+        let limit = args.first || 20;
         return data.getEvents().then((res) => {
-          res.map((item) => events.push(item))
+          res.map((item) => {
+            if(item.data['events.starttime']){
+              events.push(item)
+            }
+          })
           limit -= res.length
-          return data.getEventsArchive().find().limit(limit)
-            .then((res) => {
-              res.map((item) => events.push(item))
-              return events
-            })
-            .catch((err) => err)
+          if(limit != 0) {
+            return data.getEventsArchive().find().limit(limit)
+              .then((res) => {
+                res.map((item) => events.push(item))
+                return events
+              })
+              .catch((err) => err)
+          }else{
+            return events
+          }
         })
         .catch(err => err)
       }
@@ -731,7 +743,7 @@ let queryType = new graphql.GraphQLObjectType({
 
         return data.getPrograms().find(query)
           .then((data) => data)
-          .catch(err =>  err); 
+          .catch(err =>  err);
       }
     }
   }
