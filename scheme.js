@@ -115,7 +115,7 @@ let memberType = new graphql.GraphQLObjectType({
       }
     },
     events: {
-      type: new graphql.GraphQLList(newsType),
+      type: new graphql.GraphQLList(eventsType),
       resolve: function(args){
         return data.getEventsWithTag(args.scid);
       }
@@ -766,11 +766,11 @@ let queryType = new graphql.GraphQLObjectType({
         if (args.college)
           return data.getDepartments().find({college: `${args.college}`})
             .then((data) => data)
-            .catch(err =>  err); 
+            .catch(err =>  err);
         else
           return data.getDepartments().find({})
             .then((data) => data)
-            .catch(err =>  err); 
+            .catch(err =>  err);
       }
     }
   }
