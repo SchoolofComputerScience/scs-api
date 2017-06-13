@@ -623,6 +623,16 @@ let queryType = new graphql.GraphQLObjectType({
         }).catch((err) => err)
       }
     },
+    eventsBySearch:{
+      type: new graphql.GraphQLList(eventsType),
+      args: {
+        query: { type: graphql.GraphQLString }
+      },
+      description: 'list of events seached by a query',
+      resolve: function(_,args){
+        return data.getEventsWithSearch(args.query);
+      }
+    },
     department: {
       type: departmentType,
       description: 'Department Data from Prismic',
@@ -677,6 +687,16 @@ let queryType = new graphql.GraphQLObjectType({
       description: 'list of news articles associated to a tag',
       resolve: function(_,args){
         return data.getNewsWithTag(args.department);
+      }
+    },
+    newsBySearch:{
+      type: new graphql.GraphQLList(newsType),
+      args: {
+        query: { type: graphql.GraphQLString }
+      },
+      description: 'list of news articles associated to a query',
+      resolve: function(_,args){
+        return data.getNewsWithSearch(args.query);
       }
     },
     news: {
