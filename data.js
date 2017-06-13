@@ -328,6 +328,28 @@ module.exports = {
       .then((res) => res.results)
   },
 
+  getNewsWithSearch(topic){
+    return pris.api(prismicApi).then(function(api) {
+      return api.query([
+        pris.Predicates.at('document.type', 'news'),
+        pris.Predicates.fulltext('document', `${topic}`)
+      ])
+    }).then((res) => {
+      return res.results
+    })
+  },
+
+  getEventsWithSearch(topic){
+    return pris.api(prismicApi).then(function(api) {
+      return api.query([
+        pris.Predicates.at('document.type', 'events'),
+        pris.Predicates.fulltext('document', `${topic}`)
+      ])
+    }).then((res) => {
+      return res.results
+    })
+  },
+
   getNewsWithId(uid){
     return pris.api(prismicApi)
       .then(function(api) {
