@@ -333,7 +333,7 @@ module.exports = {
       return api.query([
         pris.Predicates.at('document.type', 'news'),
         pris.Predicates.fulltext('document', `${topic}`)
-      ])
+      ],{ pageSize: 20, orderings :'[my.news.publish_date desc]' })
     }).then((res) => {
       return res.results
     })
@@ -344,7 +344,7 @@ module.exports = {
       return api.query([
         pris.Predicates.at('document.type', 'events'),
         pris.Predicates.fulltext('document', `${topic}`)
-      ])
+      ],{ pageSize: 20, orderings :'[my.events.starttime desc]' })
     }).then((res) => {
       return res.results
     })
