@@ -317,6 +317,36 @@ let departmentType = new graphql.GraphQLObjectType({
 
 })
 
+let TagScids = new graphql.GraphQLObjectType({
+  name: 'TagScids',
+  description: 'Tag to Scids',
+  fields: (_,args) => ({
+    name: {
+      type: graphql.GraphQLString,
+      resolve: (_,args) => {
+        if(_.includes('_')) {
+          return data.directory().findOne({'scid': _})
+            .then((data) => {
+              return data.given_name + ' ' + data.family_name
+            })
+        }else{
+          return _
+        }
+      }
+    },
+    tag: {
+      type: graphql.GraphQLString,
+      resolve: (_,args) => {
+        if(_.includes('_')) {
+          return '/directory/' + _
+        }else{
+          return '/departments/' + _
+        }
+      }
+    }
+  })
+})
+
 let articleType = new graphql.GraphQLObjectType({
   name: 'Article',
   description: 'SCS Campus Article',
@@ -329,7 +359,7 @@ let articleType = new graphql.GraphQLObjectType({
       resolve: (_,args) => _.results ? _.results[0].data['news.title'].value[0].text : _.title
     },
     tags: {
-      type: new graphql.GraphQLList(graphql.GraphQLString),
+      type: new graphql.GraphQLList(TagScids),
       resolve: (_,args) => _.results[0].tags
     },
     uid: {
@@ -365,7 +395,10 @@ let newsType = new graphql.GraphQLObjectType({
   fields: () => ({
     id:{ type: graphql.GraphQLString },
     uid: { type: graphql.GraphQLString},
-    tags:{ type: new graphql.GraphQLList(graphql.GraphQLString) },
+    tags: {
+      type: new graphql.GraphQLList(TagScids),
+      resolve: (_,args) => _.tags
+    },
     image: {
       type: graphql.GraphQLString,
       resolve: (_,args) => _.data ? _.data['news.image'].value.main.url : _.image
@@ -378,7 +411,6 @@ let newsType = new graphql.GraphQLObjectType({
       type: graphql.GraphQLString,
       resolve: (_,args) => _.data ? _.data['news.title'].value[0].text : _.title
     }
-
   })
 })
 
