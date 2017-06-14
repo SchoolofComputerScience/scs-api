@@ -328,6 +328,10 @@ let articleType = new graphql.GraphQLObjectType({
       type: graphql.GraphQLString,
       resolve: (_,args) => _.results ? _.results[0].data['news.title'].value[0].text : _.title
     },
+    tags: {
+      type: new graphql.GraphQLList(graphql.GraphQLString),
+      resolve: (_,args) => _.results[0].tags
+    },
     uid: {
       type: graphql.GraphQLString,
       resolve: (_,args) => _.results ? _.results[0].uid : _.uid
@@ -599,11 +603,12 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_,args){
         return data.getNewsWithId(args.uid).then((res, err) => {
-          if(res[0].results.length !== 0)
+          if(res[0].results.length !== 0){
             return res
-          else
+          }else{
             return data.getNewsArchive().find({uid :`${args.uid}`})
             .then((article) => article)
+          }
         }).catch((err) => err)
       }
     },
