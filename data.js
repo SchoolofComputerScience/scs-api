@@ -23,13 +23,16 @@ const directorySchema = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
     andrew_id: String,
+    biography: String,
     email: String,
     family_name: String,
     fax_phone: String,
     given_name: String,
     homepage_url: String,
+    hr_relationship: String,
+    hr_relationship_class: String,
+    hr_relationship_desc: String,
     image_url: String,
-    biography: String,
     middle_name: String,
     name_suffix: String,
     phone_area_code: Number,
@@ -37,7 +40,6 @@ const directorySchema = mongoose.Schema(
     phone_exchange: Number,
     phone_extension: String,
     phone_extension_secondary: String,
-    biography: String,
     positions: [{
       building: String,
       department: String,
@@ -47,13 +49,14 @@ const directorySchema = mongoose.Schema(
       performance_supervisor_scid: String,
       primary_position: Boolean,
       room: String,
+      scs_position_class: String,
+      scs_position_desc: String,
       title: String
     }],
-    relationship: String,
-    relationship_class: String,
-    relationship_desc: String,
     research_areas: [String],
-    scid: String
+    scid: String,
+    scs_relationship_class: String,
+    scs_relationship_desc: String
   },
   { collection : 'directory_hris'}
 );
