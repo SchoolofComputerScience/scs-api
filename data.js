@@ -246,12 +246,14 @@ const programsSchema = mongoose.Schema(
 const departmentsSchema = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
-    college: String,
-    college_name: String,
-    department: String,
+    department_id: String,
     department_name: String,
+    college_id: String,
+    college_name: String,
     scs_relationship: String,
-    type: String
+    scs_type: String,
+    cmu_type: String,
+    url: String
   },
   { collection : 'departments'}
 );
