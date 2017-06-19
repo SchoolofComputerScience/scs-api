@@ -37,6 +37,8 @@ let memberPositionType = new graphql.GraphQLObjectType({
     performance_supervisor_scid: {type: graphql.GraphQLString},
     primary_position: {type: graphql.GraphQLString},
     room: {type: graphql.GraphQLString},
+    scs_position_class: {type: graphql.GraphQLString},
+    scs_position_desc: {type: graphql.GraphQLString},
     title: {type: graphql.GraphQLString}
   })
 })
@@ -53,6 +55,9 @@ let memberType = new graphql.GraphQLObjectType({
     fax_phone: { type: graphql.GraphQLString },
     given_name: { type: graphql.GraphQLString },
     homepage_url: { type: graphql.GraphQLString },
+    hr_relationship: { type: graphql.GraphQLString },
+    hr_relationship_class: { type: graphql.GraphQLString },
+    hr_relationship_desc: { type: graphql.GraphQLString },
     image_url: { type: graphql.GraphQLString },
     middle_name: { type: graphql.GraphQLString },
     name_suffix: { type: graphql.GraphQLString },
@@ -62,9 +67,6 @@ let memberType = new graphql.GraphQLObjectType({
     phone_extension: { type: graphql.GraphQLString },
     phone_extension_secondary: { type: graphql.GraphQLString },
     positions: { type: new graphql.GraphQLList(memberPositionType) },
-    relationship: { type: graphql.GraphQLString },
-    relationship_class: { type: graphql.GraphQLString },
-    relationship_desc: { type: graphql.GraphQLString },
     research_areas: { type: new graphql.GraphQLList(graphql.GraphQLString) },
     phone_full: {
       type: graphql.GraphQLString,
@@ -85,6 +87,8 @@ let memberType = new graphql.GraphQLObjectType({
       }
     },
     scid: { type: graphql.GraphQLString },
+    scs_relationship_class: { type: graphql.GraphQLString },
+    scs_relationship_desc: { type: graphql.GraphQLString },
     gsProfile: {
       type: new graphql.GraphQLList(gsProfileType),
       resolve: function(args){
