@@ -534,12 +534,14 @@ let departmentsType = new graphql.GraphQLObjectType({
   name: 'departments',
   description: 'List of Departments',
   fields: () => ({
-    department: { type: graphql.GraphQLString },
+    department_id: { type: graphql.GraphQLString },
     department_name: { type: graphql.GraphQLString },
-    college: { type: graphql.GraphQLString },
+    college_id: { type: graphql.GraphQLString },
     college_name: { type: graphql.GraphQLString },
     scs_relationship: { type: graphql.GraphQLString },
-    type: { type: graphql.GraphQLString }
+    scs_type: { type: graphql.GraphQLString },
+    cmu_type: { type: graphql.GraphQLString },
+    url: { type: graphql.GraphQLString }
   })
 });
 
@@ -816,12 +818,12 @@ let queryType = new graphql.GraphQLObjectType({
     departments: {
       type: new graphql.GraphQLList(departmentsType),
       args: {
-        college: { type: graphql.GraphQLString }
+        college_id: { type: graphql.GraphQLString }
       },
       description: 'List of Departments',
       resolve: function(_, args){
-        if (args.college)
-          return data.getDepartments().find({college: `${args.college}`})
+        if (args.college_id)
+          return data.getDepartments().find({college_id: `${args.college_id}`})
             .then((data) => data)
             .catch(err =>  err);
         else
