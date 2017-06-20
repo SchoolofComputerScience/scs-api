@@ -331,7 +331,10 @@ let TagScids = new graphql.GraphQLObjectType({
         if(_.includes('_')) {
           return data.directory().findOne({'scid': _})
             .then((data) => {
-              return data.given_name + ' ' + data.family_name
+              if(data !== null)
+                return data.given_name + ' ' + data.family_name
+              else
+                return ''
             })
         }else{
           return _
