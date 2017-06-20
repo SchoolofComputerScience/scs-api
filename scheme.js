@@ -327,7 +327,10 @@ let TagScids = new graphql.GraphQLObjectType({
         if(_.includes('_')) {
           return data.directory().findOne({'scid': _})
             .then((data) => {
-              return data.given_name + ' ' + data.family_name
+              if(data !== null)
+                return data.given_name + ' ' + data.family_name
+              else
+                return ''
             })
         }else{
           return _
@@ -397,7 +400,9 @@ let newsType = new graphql.GraphQLObjectType({
     uid: { type: graphql.GraphQLString},
     tags: {
       type: new graphql.GraphQLList(TagScids),
-      resolve: (_,args) => _.tags
+      resolve: (_,args) => {
+        return _.tags
+      }
     },
     image: {
       type: graphql.GraphQLString,
