@@ -400,9 +400,7 @@ let newsType = new graphql.GraphQLObjectType({
     uid: { type: graphql.GraphQLString},
     tags: {
       type: new graphql.GraphQLList(TagScids),
-      resolve: (_,args) => {
-        return _.tags
-      }
+      resolve: (_,args) => _.tags
     },
     image: {
       type: graphql.GraphQLString,
