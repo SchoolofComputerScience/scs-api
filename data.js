@@ -33,6 +33,7 @@ const directorySchema = mongoose.Schema(
     hr_relationship_class: String,
     hr_relationship_desc: String,
     image_url: String,
+    is_alum: Boolean,
     middle_name: String,
     name_suffix: String,
     phone_area_code: Number,
@@ -55,6 +56,8 @@ const directorySchema = mongoose.Schema(
     }],
     research_areas: [String],
     scid: String,
+    scs_id: String,
+    scs_email: String,
     scs_relationship_class: String,
     scs_relationship_desc: String
   },
