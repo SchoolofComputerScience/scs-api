@@ -123,6 +123,13 @@ let memberType = new graphql.GraphQLObjectType({
       resolve: function(args){
         return data.getEventsWithTag(args.scid);
       }
+    },
+    courses: {
+      type: new graphql.GraphQLList(coursesType),
+      resolve: function(args){
+        let semesterCode = getNextSemesterCode();
+        return data.getCourses().find({instructors: {$elemMatch: {scid: `${args.scid}`}}, semesterCode: `${semesterCode}` });
+      }
     }
   })
 })
@@ -841,6 +848,28 @@ let queryType = new graphql.GraphQLObjectType({
     }
   }
 })
+
+function getNextSemesterCode() {
+  let semesterCode = {
+    0: 'S',
+    1: 'S',
+    2: 'S',
+    3: 'S',
+    4: 'M',
+    5: 'M',
+    6: 'M',
+    7: 'M',
+    8: 'F',
+    9: 'F',
+    10: 'F',
+    11: 'F'
+  };
+
+  let currentDate = new Date();
+  let currentMonth = currentDate.getMonth() + 4;
+  
+  return semesterCode[currentMonth] + currentDate.getFullYear().toString().substr(2,3);
+}
 
 module.exports = new graphql.GraphQLSchema({
   query: queryType
