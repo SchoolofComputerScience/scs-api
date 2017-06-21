@@ -6,3 +6,5 @@ dist
 
 # google build and environment variables
 .env
+
+package-lock.json
