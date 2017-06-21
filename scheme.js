@@ -35,7 +35,7 @@ let memberPositionType = new graphql.GraphQLObjectType({
     hr_department: {type: graphql.GraphQLString},
     performance_supervisor: {type: graphql.GraphQLString},
     performance_supervisor_scid: {type: graphql.GraphQLString},
-    primary_position: {type: graphql.GraphQLString},
+    primary_position: {type: graphql.GraphQLBoolean},
     room: {type: graphql.GraphQLString},
     scs_position_class: {type: graphql.GraphQLString},
     scs_position_desc: {type: graphql.GraphQLString},
@@ -59,6 +59,7 @@ let memberType = new graphql.GraphQLObjectType({
     hr_relationship_class: { type: graphql.GraphQLString },
     hr_relationship_desc: { type: graphql.GraphQLString },
     image_url: { type: graphql.GraphQLString },
+    is_alum: { type: graphql.GraphQLBoolean },
     middle_name: { type: graphql.GraphQLString },
     name_suffix: { type: graphql.GraphQLString },
     phone_area_code: { type: graphql.GraphQLFloat },
@@ -87,6 +88,8 @@ let memberType = new graphql.GraphQLObjectType({
       }
     },
     scid: { type: graphql.GraphQLString },
+    scs_id: { type: graphql.GraphQLString },
+    scs_email: { type: graphql.GraphQLString },
     scs_relationship_class: { type: graphql.GraphQLString },
     scs_relationship_desc: { type: graphql.GraphQLString },
     gsProfile: {
