@@ -558,23 +558,31 @@ let queryType = new graphql.GraphQLObjectType({
       args: {
         scid: { type: graphql.GraphQLString  },
         department: { type: graphql.GraphQLString  },
-        starts_with: { type: graphql.GraphQLString  }
+        starts_with: { type: graphql.GraphQLString  },
+        sortBy: { type: graphql.GraphQLString }
       },
       resolve: function(_, args) {
-        if(args.scid)
+        if(args.scid){
           return data.directory().find({'scid': args.scid})
             .then((data) => data)
             .catch(err => err)
 
-        else if(args.department)
+        }else if(args.department){
           return data.directory().find({'positions': {$elemMatch: {'department': args.department }}})
             .then((data) => data)
             .catch(err => err)
 
-        else
-          return data.directory().find({}).sort({scid:1})
-          .then((data) => data)
-          .catch(err => err)
+        }else{
+          if(args.sortBy.toLowerCase() == 'family_name'){
+            return data.directory().find({}).sort({family_name : 1})
+            .then((data) => data)
+            .catch(err => err)
+          }else{
+            return data.directory().find({}).sort({scid:1})
+            .then((data) => data)
+            .catch(err => err)
+          }
+        }
       }
     },
     biographies: {
