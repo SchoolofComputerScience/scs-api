@@ -35,7 +35,7 @@ let memberPositionType = new graphql.GraphQLObjectType({
     hr_department: {type: graphql.GraphQLString},
     performance_supervisor: {type: graphql.GraphQLString},
     performance_supervisor_scid: {type: graphql.GraphQLString},
-    primary_position: {type: graphql.GraphQLString},
+    primary_position: {type: graphql.GraphQLBoolean},
     room: {type: graphql.GraphQLString},
     title: {type: graphql.GraphQLString}
   })
@@ -54,6 +54,7 @@ let memberType = new graphql.GraphQLObjectType({
     given_name: { type: graphql.GraphQLString },
     homepage_url: { type: graphql.GraphQLString },
     image_url: { type: graphql.GraphQLString },
+    is_alum: { type: graphql.GraphQLBoolean },
     middle_name: { type: graphql.GraphQLString },
     name_suffix: { type: graphql.GraphQLString },
     phone_area_code: { type: graphql.GraphQLFloat },
@@ -120,6 +121,13 @@ let memberType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(eventsType),
       resolve: function(args){
         return data.getEventsWithTag(args.scid);
+      }
+    },
+    courses: {
+      type: new graphql.GraphQLList(coursesType),
+      resolve: function(args){
+        let semesterCode = getNextSemesterCode();
+        return data.getCourses().find({instructors: {$elemMatch: {scid: `${args.scid}`}}, semesterCode: `${semesterCode}` });
       }
     }
   })
@@ -847,6 +855,28 @@ let queryType = new graphql.GraphQLObjectType({
     }
   }
 })
+
+function getNextSemesterCode() {
+  let semesterCode = {
+    0: 'S',
+    1: 'S',
+    2: 'S',
+    3: 'S',
+    4: 'M',
+    5: 'M',
+    6: 'M',
+    7: 'M',
+    8: 'F',
+    9: 'F',
+    10: 'F',
+    11: 'F'
+  };
+
+  let currentDate = new Date();
+  let currentMonth = currentDate.getMonth() + 4;
+  
+  return semesterCode[currentMonth] + currentDate.getFullYear().toString().substr(2,3);
+}
 
 module.exports = new graphql.GraphQLSchema({
   query: queryType
