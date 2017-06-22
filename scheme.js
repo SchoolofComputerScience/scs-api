@@ -35,7 +35,7 @@ let memberPositionType = new graphql.GraphQLObjectType({
     hr_department: {type: graphql.GraphQLString},
     performance_supervisor: {type: graphql.GraphQLString},
     performance_supervisor_scid: {type: graphql.GraphQLString},
-    primary_position: {type: graphql.GraphQLString},
+    primary_position: {type: graphql.GraphQLBoolean},
     room: {type: graphql.GraphQLString},
     title: {type: graphql.GraphQLString}
   })
@@ -54,6 +54,7 @@ let memberType = new graphql.GraphQLObjectType({
     given_name: { type: graphql.GraphQLString },
     homepage_url: { type: graphql.GraphQLString },
     image_url: { type: graphql.GraphQLString },
+    is_alum: { type: graphql.GraphQLBoolean },
     middle_name: { type: graphql.GraphQLString },
     name_suffix: { type: graphql.GraphQLString },
     phone_area_code: { type: graphql.GraphQLFloat },
@@ -87,6 +88,10 @@ let memberType = new graphql.GraphQLObjectType({
       }
     },
     scid: { type: graphql.GraphQLString },
+    scs_id: { type: graphql.GraphQLString },
+    scs_email: { type: graphql.GraphQLString },
+    scs_relationship_class: { type: graphql.GraphQLString },
+    scs_relationship_desc: { type: graphql.GraphQLString },
     gsProfile: {
       type: new graphql.GraphQLList(gsProfileType),
       resolve: function(args){
@@ -120,6 +125,12 @@ let memberType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(eventsType),
       resolve: function(args){
         return data.getEventsWithTag(args.scid);
+      }
+    },
+    courses: {
+      type: new graphql.GraphQLList(coursesType),
+      resolve: function(args){
+        return data.getCourses().find({instructors: {$elemMatch: {scid: `${args.scid}`}}, semesterCode: `${data.getNextSemesterCode()}` });
       }
     }
   })
@@ -843,6 +854,13 @@ let queryType = new graphql.GraphQLObjectType({
           return data.getDepartments().find({})
             .then((data) => data)
             .catch(err =>  err);
+      }
+    },
+    semesterCode: {
+      type: graphql.GraphQLString,
+      description: 'Upcoming Semester Code',
+      resolve: function(_, args) {
+        return data.getNextSemesterCode();
       }
     }
   }
