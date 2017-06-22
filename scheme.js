@@ -88,13 +88,10 @@ let memberType = new graphql.GraphQLObjectType({
       }
     },
     scid: { type: graphql.GraphQLString },
-<<<<<<< HEAD
     scs_id: { type: graphql.GraphQLString },
     scs_email: { type: graphql.GraphQLString },
     scs_relationship_class: { type: graphql.GraphQLString },
     scs_relationship_desc: { type: graphql.GraphQLString },
-=======
->>>>>>> 3361589fcb257ff5c461c88575727288513c1702
     gsProfile: {
       type: new graphql.GraphQLList(gsProfileType),
       resolve: function(args){
