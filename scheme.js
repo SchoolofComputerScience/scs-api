@@ -37,8 +37,6 @@ let memberPositionType = new graphql.GraphQLObjectType({
     performance_supervisor_scid: {type: graphql.GraphQLString},
     primary_position: {type: graphql.GraphQLBoolean},
     room: {type: graphql.GraphQLString},
-    scs_position_class: {type: graphql.GraphQLString},
-    scs_position_desc: {type: graphql.GraphQLString},
     title: {type: graphql.GraphQLString}
   })
 })
@@ -55,9 +53,6 @@ let memberType = new graphql.GraphQLObjectType({
     fax_phone: { type: graphql.GraphQLString },
     given_name: { type: graphql.GraphQLString },
     homepage_url: { type: graphql.GraphQLString },
-    hr_relationship: { type: graphql.GraphQLString },
-    hr_relationship_class: { type: graphql.GraphQLString },
-    hr_relationship_desc: { type: graphql.GraphQLString },
     image_url: { type: graphql.GraphQLString },
     is_alum: { type: graphql.GraphQLBoolean },
     middle_name: { type: graphql.GraphQLString },
@@ -68,6 +63,11 @@ let memberType = new graphql.GraphQLObjectType({
     phone_extension: { type: graphql.GraphQLString },
     phone_extension_secondary: { type: graphql.GraphQLString },
     positions: { type: new graphql.GraphQLList(memberPositionType) },
+    hr_relationship: { type: graphql.GraphQLString },
+    hr_relationship_class: { type: graphql.GraphQLString },
+    hr_relationship_desc: { type: graphql.GraphQLString },
+    scs_relationship_desc: { type: graphql.GraphQLString },
+    scs_relationship_class: { type: graphql.GraphQLString },
     research_areas: { type: new graphql.GraphQLList(graphql.GraphQLString) },
     phone_full: {
       type: graphql.GraphQLString,
@@ -88,10 +88,6 @@ let memberType = new graphql.GraphQLObjectType({
       }
     },
     scid: { type: graphql.GraphQLString },
-    scs_id: { type: graphql.GraphQLString },
-    scs_email: { type: graphql.GraphQLString },
-    scs_relationship_class: { type: graphql.GraphQLString },
-    scs_relationship_desc: { type: graphql.GraphQLString },
     gsProfile: {
       type: new graphql.GraphQLList(gsProfileType),
       resolve: function(args){
@@ -571,23 +567,31 @@ let queryType = new graphql.GraphQLObjectType({
       args: {
         scid: { type: graphql.GraphQLString  },
         department: { type: graphql.GraphQLString  },
-        starts_with: { type: graphql.GraphQLString  }
+        starts_with: { type: graphql.GraphQLString  },
+        sortBy: { type: graphql.GraphQLString }
       },
       resolve: function(_, args) {
-        if(args.scid)
+        if(args.scid){
           return data.directory().find({'scid': args.scid})
             .then((data) => data)
             .catch(err => err)
 
-        else if(args.department)
+        }else if(args.department){
           return data.directory().find({'positions': {$elemMatch: {'department': args.department }}})
             .then((data) => data)
             .catch(err => err)
 
-        else
-          return data.directory().find({}).sort({scid:1})
-          .then((data) => data)
-          .catch(err => err)
+        }else{
+          if(args.sortBy == 'family_name'){
+            return data.directory().find({}).sort({family_name : 1})
+            .then((data) => data)
+            .catch(err => err)
+          }else{
+            return data.directory().find({}).sort({scid:1})
+            .then((data) => data)
+            .catch(err => err)
+          }
+        }
       }
     },
     biographies: {
