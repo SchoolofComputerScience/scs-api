@@ -766,25 +766,12 @@ let queryType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(newsType),
       description: 'List of News',
       args: {
-        first: { type: graphql.GraphQLInt }
+        limit: { type: graphql.GraphQLInt }
       },
       resolve: function(_,args) {
-        let count;
-        let news = [];
-        let limit = args.first || 20;
-        return data.getNews().then((res) => {
-          res.map((item) => news.push(item))
-          limit -= res.length
-          if(limit != 0) {
-            return data.getNewsArchive().find().sort({date: -1}).limit(limit)
-              .then((res) => {
-                res.map((item) => news.push(item))
-                return news
-              })
-              .catch((err) => err)
-          }else{
-            return news
-          }
+        let _limit = args.limit || 20;
+        return data.getNews(_limit).then((res) => {
+          return res
         })
         .catch(err => err)
       }
