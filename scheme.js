@@ -37,8 +37,6 @@ let memberPositionType = new graphql.GraphQLObjectType({
     performance_supervisor_scid: {type: graphql.GraphQLString},
     primary_position: {type: graphql.GraphQLBoolean},
     room: {type: graphql.GraphQLString},
-    scs_position_class: {type: graphql.GraphQLString},
-    scs_position_desc: {type: graphql.GraphQLString},
     title: {type: graphql.GraphQLString}
   })
 })
@@ -50,14 +48,12 @@ let memberType = new graphql.GraphQLObjectType({
     _id: { type: graphql.GraphQLString },
     andrew_id: { type: graphql.GraphQLString },
     biography: { type: graphql.GraphQLString },
+    display_email: { type: graphql.GraphQLString },
     email: { type: graphql.GraphQLString },
     family_name: { type: graphql.GraphQLString },
     fax_phone: { type: graphql.GraphQLString },
     given_name: { type: graphql.GraphQLString },
     homepage_url: { type: graphql.GraphQLString },
-    hr_relationship: { type: graphql.GraphQLString },
-    hr_relationship_class: { type: graphql.GraphQLString },
-    hr_relationship_desc: { type: graphql.GraphQLString },
     image_url: { type: graphql.GraphQLString },
     is_alum: { type: graphql.GraphQLBoolean },
     middle_name: { type: graphql.GraphQLString },
@@ -68,6 +64,11 @@ let memberType = new graphql.GraphQLObjectType({
     phone_extension: { type: graphql.GraphQLString },
     phone_extension_secondary: { type: graphql.GraphQLString },
     positions: { type: new graphql.GraphQLList(memberPositionType) },
+    hr_relationship: { type: graphql.GraphQLString },
+    hr_relationship_class: { type: graphql.GraphQLString },
+    hr_relationship_desc: { type: graphql.GraphQLString },
+    scs_relationship_desc: { type: graphql.GraphQLString },
+    scs_relationship_class: { type: graphql.GraphQLString },
     research_areas: { type: new graphql.GraphQLList(graphql.GraphQLString) },
     phone_full: {
       type: graphql.GraphQLString,
@@ -130,8 +131,7 @@ let memberType = new graphql.GraphQLObjectType({
     courses: {
       type: new graphql.GraphQLList(coursesType),
       resolve: function(args){
-        let semesterCode = getNextSemesterCode();
-        return data.getCourses().find({instructors: {$elemMatch: {scid: `${args.scid}`}}, semesterCode: `${semesterCode}` });
+        return data.getCourses().find({instructors: {$elemMatch: {scid: `${args.scid}`}}, semesterCode: `${data.getNextSemesterCode()}` });
       }
     }
   })
@@ -586,27 +586,34 @@ let queryType = new graphql.GraphQLObjectType({
         department: { type: graphql.GraphQLString  },
         starts_with: { type: graphql.GraphQLString  },
         research_area: { type: graphql.GraphQLString  },
+        sortBy: { type: graphql.GraphQLString }
       },
       resolve: function(_, args) {
-        if(args.scid)
+        if(args.scid){
           return data.directory().find({'scid': args.scid})
             .then((data) => data)
             .catch(err => err)
 
-        else if(args.department)
+        }else if(args.department){
           return data.directory().find({'positions': {$elemMatch: {'department': args.department }}})
             .then((data) => data)
             .catch(err => err)
 
-        else if(args.research_area)
+        }else if(args.research_area){
           return data.directory().find({'research_areas': args.research_area })
             .then((data) => data)
             .catch(err => err)
-
-        else
-          return data.directory().find({}).sort({scid:1})
-          .then((data) => data)
-          .catch(err => err)
+        }else{
+          if(args.sortBy == 'family_name'){
+            return data.directory().find({}).sort({family_name : 1})
+            .then((data) => data)
+            .catch(err => err)
+          }else{
+            return data.directory().find({}).sort({scid:1})
+            .then((data) => data)
+            .catch(err => err)
+          }
+        }
       }
     },
     biographies: {
@@ -777,25 +784,12 @@ let queryType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(newsType),
       description: 'List of News',
       args: {
-        first: { type: graphql.GraphQLInt }
+        limit: { type: graphql.GraphQLInt }
       },
       resolve: function(_,args) {
-        let count;
-        let news = [];
-        let limit = args.first || 20;
-        return data.getNews().then((res) => {
-          res.map((item) => news.push(item))
-          limit -= res.length
-          if(limit != 0) {
-            return data.getNewsArchive().find().sort({date: -1}).limit(limit)
-              .then((res) => {
-                res.map((item) => news.push(item))
-                return news
-              })
-              .catch((err) => err)
-          }else{
-            return news
-          }
+        let _limit = args.limit || 20;
+        return data.getNews(_limit).then((res) => {
+          return res
         })
         .catch(err => err)
       }
@@ -888,31 +882,16 @@ let queryType = new graphql.GraphQLObjectType({
             .then((data) => data)
             .catch(err =>  err);
       }
+    },
+    semesterCode: {
+      type: graphql.GraphQLString,
+      description: 'Upcoming Semester Code',
+      resolve: function(_, args) {
+        return data.getNextSemesterCode();
+      }
     }
   }
 })
-
-function getNextSemesterCode() {
-  let semesterCode = {
-    0: 'S',
-    1: 'S',
-    2: 'S',
-    3: 'S',
-    4: 'M',
-    5: 'M',
-    6: 'M',
-    7: 'M',
-    8: 'F',
-    9: 'F',
-    10: 'F',
-    11: 'F'
-  };
-
-  let currentDate = new Date();
-  let currentMonth = currentDate.getMonth() + 4;
-  
-  return semesterCode[currentMonth] + currentDate.getFullYear().toString().substr(2,3);
-}
 
 module.exports = new graphql.GraphQLSchema({
   query: queryType

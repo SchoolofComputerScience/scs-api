@@ -24,6 +24,7 @@ const directorySchema = mongoose.Schema(
     _id: mongoose.Schema.Types.ObjectId,
     andrew_id: String,
     biography: String,
+    display_email: String,
     email: String,
     family_name: String,
     fax_phone: String,
@@ -313,12 +314,12 @@ module.exports = {
   getResearchAreas(){
     return mongoose.model('research_areas', researchAreasSchema, 'research_areas')
   },
-
-  getNews(){
+  
+  getNews(limit){
     return pris.api(prismicApi).then(function(api) {
       return api.query(
         pris.Predicates.at('document.type', 'news'),
-        { pageSize : 20, orderings : '[my.news.publish_date desc]' }
+        { pageSize : limit, orderings : '[my.news.publish_date desc]' }
       )
     })
     .then((res) => res.results);
@@ -406,4 +407,11 @@ module.exports = {
         })
       .then((res) => [res])
   },
+  getNextSemesterCode() {
+    let semesterCode = { 0: 'S', 1: 'S', 2: 'S', 3: 'S', 4: 'M', 5: 'M', 6: 'M', 7: 'M', 8: 'F', 9: 'F', 10: 'F', 11: 'F' };
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth() + 4;
+
+    return semesterCode[currentMonth] + currentDate.getFullYear().toString().substr(2,3);
+  }
 }
