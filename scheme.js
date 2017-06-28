@@ -48,6 +48,7 @@ let memberType = new graphql.GraphQLObjectType({
     _id: { type: graphql.GraphQLString },
     andrew_id: { type: graphql.GraphQLString },
     biography: { type: graphql.GraphQLString },
+    display_email: { type: graphql.GraphQLString },
     email: { type: graphql.GraphQLString },
     family_name: { type: graphql.GraphQLString },
     fax_phone: { type: graphql.GraphQLString },
