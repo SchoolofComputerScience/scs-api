@@ -62,7 +62,7 @@ const directorySchema = mongoose.Schema(
     scs_relationship_class: String,
     scs_relationship_desc: String
   },
-  { collection : 'directory_hris'}
+  { collection : 'directory'}
 );
 
 const biographySchema = mongoose.Schema(
@@ -264,7 +264,7 @@ const departmentsSchema = mongoose.Schema(
 module.exports = {
 
   directory(){
-    return mongoose.model('directory', directorySchema, 'directory_hris');
+    return mongoose.model('directory', directorySchema, 'directory');
   },
 
   getBiographyData(){
