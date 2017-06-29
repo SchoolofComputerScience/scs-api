@@ -98,7 +98,9 @@ let memberType = new graphql.GraphQLObjectType({
       resolve: function(args){
         if(args.scid)
           return data.getGsProfileData()
-            .find({scid :`${args.scid}`})
+            .find({
+              scid :`${args.scid}`
+            })
             .then((data) => data)
             .catch(err =>  err)
       }
@@ -108,9 +110,10 @@ let memberType = new graphql.GraphQLObjectType({
       resolve: function(args){
         if(args.scid)
           return data.getGsPublicationData()
-            .find({scid :`${args.scid}`,
-              pub_year: {$exists: true},
-              authors: {$exists: true}
+            .find({
+              scid :`${args.scid}`,
+              pub_year: { $exists: true },
+              authors: { $exists: true }
             })
             .then((data) => data)
             .catch(err =>  err)
@@ -118,20 +121,31 @@ let memberType = new graphql.GraphQLObjectType({
     },
     news: {
       type: new graphql.GraphQLList(newsType),
-      resolve: function(args){
-        return data.getNewsWithTag(args.scid);
+      args: {
+        limit: { type: graphql.GraphQLInt }
+      },
+      resolve: function(_, args){
+        return data.getNewsWithTag(_.scid, args);
       }
     },
     events: {
       type: new graphql.GraphQLList(eventsType),
-      resolve: function(args){
-        return data.getEventsWithTag(args.scid);
+      args: {
+        limit: { type: graphql.GraphQLInt }
+      },
+      resolve: function(_, args){
+        return data.getEventsWithTag(_.scid, args);
       }
     },
     courses: {
       type: new graphql.GraphQLList(coursesType),
       resolve: function(args){
-        return data.getCourses().find({instructors: {$elemMatch: {scid: `${args.scid}`}}, semesterCode: `${data.getNextSemesterCode()}` });
+        return data.getCourses()
+          .find({
+            instructors: { $elemMatch: { scid: `${args.scid}` }},
+            semesterCode: `${data.getNextSemesterCode()}`
+          })
+          .catch(err => err)
       }
     }
   })
@@ -258,11 +272,12 @@ let gsProfileType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(aggregateType),
       resolve: function(args){
         if(args.scid)
-          return data.getGsPublicationData().aggregate([
-            {$match: { scid : `${args.scid}`, pub_year:{ $ne: null}} },
-            {$group: { _id: '$pub_year'}},
-            {$sort: {'_id' :-1}}
-          ])
+          return data.getGsPublicationData()
+            .aggregate([
+              {$match: { scid : `${args.scid}`, pub_year:{ $ne: null}} },
+              {$group: { _id: '$pub_year'}},
+              {$sort: {'_id' :-1}}
+            ])
       }
     }
   })
@@ -346,6 +361,7 @@ let TagScids = new graphql.GraphQLObjectType({
               else
                 return ''
             })
+            .catch(err => err)
         }else{
           return _
         }
@@ -577,24 +593,38 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_, args) {
         if(args.scid){
-          return data.directory().find({'scid': args.scid})
+          return data.directory()
+            .find({
+              'scid': args.scid
+            })
             .then((data) => data)
             .catch(err => err)
 
         }else if(args.department){
-          return data.directory().find({'positions': {$elemMatch: {'department': args.department }}})
+          return data.directory()
+            .find({
+              'positions': { $elemMatch: { 'department': args.department }}
+            })
             .then((data) => data)
             .catch(err => err)
 
         }else{
           if(args.sortBy == 'family_name'){
-            return data.directory().find({}).sort({family_name : 1})
-            .then((data) => data)
-            .catch(err => err)
+            return data.directory()
+              .find({})
+              .sort({
+                family_name: 1
+              })
+              .then((data) => data)
+              .catch(err => err)
           }else{
-            return data.directory().find({}).sort({scid:1})
-            .then((data) => data)
-            .catch(err => err)
+            return data.directory()
+              .find({})
+              .sort({
+                scid: 1
+              })
+              .then((data) => data)
+              .catch(err => err)
           }
         }
       }
@@ -606,14 +636,22 @@ let queryType = new graphql.GraphQLObjectType({
         scid: { type: graphql.GraphQLString },
       },
       resolve: function(_, args){
-        if(args.scid)
-          return data.getBiographyData().find({'scid': args.scid})
+        if(args.scid){
+          return data.getBiographyData()
+            .find({
+              'scid': args.scid
+            })
             .then((data) => data)
             .catch(err =>  err)
-        else
-          return data.getBiographyData().find({}).sort({scid:1})
+        }else{
+          return data.getBiographyData()
+          .find({})
+          .sort({
+            scid: 1
+          })
           .then((data) => data)
           .catch(err => err)
+        }
       }
     },
     directoryAggregate: {
@@ -624,33 +662,35 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_, args) {
         if(args.field)
-          return data.directory().aggregate([{$group:{_id : `$${args.field}`}}])
+          return data.directory()
+            .aggregate([{
+              $group: { _id : `$${args.field}` }
+            }])
             .then((data) => data)
-            .catch(err => err)
       }
     },
     courseYearAggregate: {
       type: new graphql.GraphQLList(aggregateCourseYearType),
       description: 'aggregate of Available years',
       resolve: function(_, args) {
-        return data.getCourses().aggregate([
-          {$group:{ _id : `$year`}},
-          {$sort:{ _id: -1 }}
+        return data.getCourses()
+        .aggregate([
+          { $group: { _id : `$year` }},
+          { $sort: { _id: -1 }}
         ])
         .then((data) => data)
-        .catch(err => err)
       }
     },
     courseDepartmentAggregate: {
       type: new graphql.GraphQLList(aggregateCourseDepartmentType),
       description: 'aggregate of Available departements',
       resolve: function(_, args) {
-        return data.getCourses().aggregate([
-          {$group:{ _id : `$s3Department`}},
-          {$sort:{ _id: 1 }}
+        return data.getCourses()
+        .aggregate([
+          { $group: { _id : `$s3Department` }},
+          { $sort: { _id: 1 }}
         ])
         .then((data) => data)
-        .catch(err => err)
       }
     },
     article: {
@@ -665,10 +705,16 @@ let queryType = new graphql.GraphQLObjectType({
           if(res[0].results.length !== 0){
             return res
           }else{
-            return data.getNewsArchive().find({uid :`${args.uid}`})
-            .then((article) => article)
+            return data.getNewsArchive()
+              .find({
+                uid: `${args.uid}`
+              })
+              .then(article => article)
+              .catch(err => err)
+
           }
-        }).catch((err) => err)
+        })
+        .catch(err => err)
       }
     },
     event: {
@@ -678,13 +724,18 @@ let queryType = new graphql.GraphQLObjectType({
         uid: { type: graphql.GraphQLString }
       },
       resolve: function(_,args){
-        return data.getEventsWithId(args.uid).then((res, err) => {
-          if(res[0].results.length !== 0)
-            return res[0].results
-          else
-            return data.getEventsArchive().find({slug :`${args.uid}`})
-            .then((event) => event)
-        }).catch((err) => err)
+        return data.getEventsWithId(args.uid)
+          .then((res, err) => {
+            if(res[0].results.length !== 0)
+              return res[0].results
+            else
+              return data.getEventsArchive()
+                .find({
+                  slug: `${args.uid}`
+                })
+                .then(event => event)
+          })
+          .catch(err => err)
       }
     },
     eventsBySearch:{
@@ -704,9 +755,11 @@ let queryType = new graphql.GraphQLObjectType({
         uid: { type : graphql.GraphQLString }
       },
       resolve: (_, args) => {
-        return data.getDepartmentWithId(args.uid).then((res, err) => {
+        return data.getDepartmentWithId(args.uid)
+        .then((res, err) => {
           return res[0].results
-        }).catch((err) => err)
+        })
+        .catch(err => err)
       }
     },
     publication: {
@@ -716,7 +769,9 @@ let queryType = new graphql.GraphQLObjectType({
         id: { type: graphql.GraphQLString }
       },
       resolve: function(_,args){
-        return data.getGsPublicationData().findById(args.id)
+        return data.getGsPublicationData()
+          .findById(args.id)
+          .catch(err => err)
       }
     },
     course: {
@@ -727,7 +782,11 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_,args){
         let semCode = args.semesterCode || "S17"
-        return data.getCourses().findOne({courseCode: `${args.courseCode}` })
+        return data.getCourses()
+          .findOne({
+            courseCode: `${args.courseCode}`
+          })
+          .catch(err => err)
       }
     },
     courses: {
@@ -740,17 +799,22 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_,args){
         let semCode = args.semesterCode || "S17"
-        return data.getCourses().find({semesterCode: `${semCode}` })
+        return data.getCourses()
+          .find({
+            semesterCode: `${semCode}`
+          })
+          .catch(err => err)
       }
     },
     newsByTag:{
       type: new graphql.GraphQLList(newsType),
       args: {
-        department: { type: graphql.GraphQLString }
+        department: { type: graphql.GraphQLString },
+        limit: { type: graphql.GraphQLInt }
       },
       description: 'list of news articles associated to a tag',
       resolve: function(_,args){
-        return data.getNewsWithTag(args.department);
+        return data.getNewsWithTag(args.department, args);
       }
     },
     newsBySearch:{
@@ -771,36 +835,27 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_,args) {
         let _limit = args.limit || 20;
-        return data.getNews(_limit).then((res) => {
-          return res
-        })
-        .catch(err => err)
+        return data.getNews(_limit)
+          .then(res => res)
+          .catch(err => err)
       }
     },
     events: {
       type: new graphql.GraphQLList(eventsType),
       description: 'List of Events',
+      args: {
+        limit: { type: graphql.GraphQLInt }
+      },
       resolve: function(_,args){
-        let count;
-        let events = [];
-        let limit = args.first || 20;
-        return data.getEvents().then((res) => {
+        let events = []
+        let _limit = args.limit || 20;
+        return data.getEvents(_limit).then((res) => {
           res.map((item) => {
-            if(item.data['events.starttime']){
+            if(item.data['events.starttime']) {
               events.push(item)
             }
           })
-          limit -= res.length
-          if(limit != 0) {
-            return data.getEventsArchive().find().limit(limit)
-              .then((res) => {
-                res.map((item) => events.push(item))
-                return events
-              })
-              .catch((err) => err)
-          }else{
-            return events
-          }
+          return events;
         })
         .catch(err => err)
       }
@@ -823,8 +878,8 @@ let queryType = new graphql.GraphQLObjectType({
           query.graduate_level = args.graduate_level;
 
         return data.getPrograms().find(query)
-          .then((data) => data)
-          .catch(err =>  err);
+          .then(data => data)
+          .catch(err =>  err)
       }
     },
     departments: {
@@ -835,13 +890,17 @@ let queryType = new graphql.GraphQLObjectType({
       description: 'List of Departments',
       resolve: function(_, args){
         if (args.college_id)
-          return data.getDepartments().find({college_id: `${args.college_id}`})
-            .then((data) => data)
-            .catch(err =>  err);
+          return data.getDepartments()
+            .find({
+              college_id: `${args.college_id}`
+            })
+            .then(data => data)
+            .catch(err =>  err)
         else
-          return data.getDepartments().find({})
-            .then((data) => data)
-            .catch(err =>  err);
+          return data.getDepartments()
+            .find({})
+            .then(data => data)
+            .catch(err =>  err)
       }
     },
     semesterCode: {
