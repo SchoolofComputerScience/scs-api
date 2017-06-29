@@ -272,12 +272,11 @@ let gsProfileType = new graphql.GraphQLObjectType({
       type: new graphql.GraphQLList(aggregateType),
       resolve: function(args){
         if(args.scid)
-          return data.getGsPublicationData()
-            .aggregate([
-              {$match: { scid : `${args.scid}`, pub_year:{ $ne: null}} },
-              {$group: { _id: '$pub_year'}},
-              {$sort: {'_id' :-1}}
-            ])
+          return data.getGsPublicationData().aggregate([
+            {$match: { scid : `${args.scid}`, pub_year:{ $ne: null}} },
+            {$group: { _id: '$pub_year'}},
+            {$sort: {'_id' :-1}}
+          ])
       }
     }
   })
@@ -593,38 +592,14 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_, args) {
         if(args.scid){
-          return data.directory()
-            .find({
-              'scid': args.scid
-            })
-            .then((data) => data)
-            .catch(err => err)
-
+          return data.directory().find({'scid': args.scid}).then((data) => data)
         }else if(args.department){
-          return data.directory()
-            .find({
-              'positions': { $elemMatch: { 'department': args.department }}
-            })
-            .then((data) => data)
-            .catch(err => err)
-
+          return data.directory().find({'positions': { $elemMatch: { 'department': args.department }}}).then((data) => data)
         }else{
           if(args.sortBy == 'family_name'){
-            return data.directory()
-              .find({})
-              .sort({
-                family_name: 1
-              })
-              .then((data) => data)
-              .catch(err => err)
+            return data.directory().find({}).sort({ family_name: 1}).then(data => data)
           }else{
-            return data.directory()
-              .find({})
-              .sort({
-                scid: 1
-              })
-              .then((data) => data)
-              .catch(err => err)
+            return data.directory().find({}).sort({scid: 1}).then(data => data)
           }
         }
       }
@@ -637,20 +612,9 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_, args){
         if(args.scid){
-          return data.getBiographyData()
-            .find({
-              'scid': args.scid
-            })
-            .then((data) => data)
-            .catch(err =>  err)
+          return data.getBiographyData().find({'scid': args.scid}).then((data) => data)
         }else{
-          return data.getBiographyData()
-          .find({})
-          .sort({
-            scid: 1
-          })
-          .then((data) => data)
-          .catch(err => err)
+          return data.getBiographyData().find({}).sort({scid: 1}).then((data) => data)
         }
       }
     },
@@ -662,35 +626,27 @@ let queryType = new graphql.GraphQLObjectType({
       },
       resolve: function(_, args) {
         if(args.field)
-          return data.directory()
-            .aggregate([{
-              $group: { _id : `$${args.field}` }
-            }])
-            .then((data) => data)
+          return data.directory().aggregate([{$group: { _id : `$${args.field}` }}]).then((data) => data)
       }
     },
     courseYearAggregate: {
       type: new graphql.GraphQLList(aggregateCourseYearType),
       description: 'aggregate of Available years',
       resolve: function(_, args) {
-        return data.getCourses()
-        .aggregate([
+        return data.getCourses().aggregate([
           { $group: { _id : `$year` }},
           { $sort: { _id: -1 }}
-        ])
-        .then((data) => data)
+        ]).then((data) => data)
       }
     },
     courseDepartmentAggregate: {
       type: new graphql.GraphQLList(aggregateCourseDepartmentType),
       description: 'aggregate of Available departements',
       resolve: function(_, args) {
-        return data.getCourses()
-        .aggregate([
+        return data.getCourses().aggregate([
           { $group: { _id : `$s3Department` }},
           { $sort: { _id: 1 }}
-        ])
-        .then((data) => data)
+        ]).then((data) => data)
       }
     },
     article: {
