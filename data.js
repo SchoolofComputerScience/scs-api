@@ -55,7 +55,12 @@ const directorySchema = mongoose.Schema(
       scs_position_desc: String,
       title: String
     }],
-    research_areas: [String],
+    research_areas: [
+      mongoose.Schema({
+        area_id: String,
+        title: String
+      })
+    ],
     scid: String,
     scs_id: String,
     scs_email: String,
