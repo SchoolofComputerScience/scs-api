@@ -261,6 +261,18 @@ const departmentsSchema = mongoose.Schema(
   { collection : 'departments'}
 );
 
+const researchAreasSchema = mongoose.Schema(
+  {
+    _id: mongoose.Schema.Types.ObjectId,
+    area_id: String,
+    description: String,
+    gs_count: Number,
+    members: [String],
+    title: String
+  },
+  { collection : 'research_areas' }
+);
+
 module.exports = {
 
   directory(){
@@ -297,6 +309,10 @@ module.exports = {
 
   getDepartments(){
     return mongoose.model('departments', departmentsSchema, 'departments')
+  },
+
+  getResearchAreas(){
+    return mongoose.model('research_areas', researchAreasSchema, 'research_areas')
   },
 
   getNews(limit){

@@ -577,6 +577,18 @@ let departmentsType = new graphql.GraphQLObjectType({
   })
 });
 
+let researchAreasType = new graphql.GraphQLObjectType({
+  name: 'ResearchAreas',
+  description: 'List of Research Areas',
+  fields: () => ({
+    area_id: { type: graphql.GraphQLString },
+    description: { type: graphql.GraphQLString },
+    title: { type: graphql.GraphQLString },
+    gs_count: { type: graphql.GraphQLFloat },
+    members: { type: new graphql.GraphQLList(graphql.GraphQLString) },
+  })
+});
+
 let queryType = new graphql.GraphQLObjectType({
   name: 'Query',
   description: 'SCS top level data points',
@@ -588,13 +600,21 @@ let queryType = new graphql.GraphQLObjectType({
         scid: { type: graphql.GraphQLString  },
         department: { type: graphql.GraphQLString  },
         starts_with: { type: graphql.GraphQLString  },
+        research_area: { type: graphql.GraphQLString  },
         sortBy: { type: graphql.GraphQLString }
       },
       resolve: function(_, args) {
         if(args.scid){
           return data.directory().find({'scid': args.scid}).then((data) => data)
         }else if(args.department){
-          return data.directory().find({'positions': { $elemMatch: { 'department': args.department }}}).then((data) => data)
+          return data.directory().find({'positions': {$elemMatch: {'department': args.department }}})
+            .then((data) => data)
+            .catch(err => err)
+
+        }else if(args.research_area){
+          return data.directory().find({'research_areas': args.research_area })
+            .then((data) => data)
+            .catch(err => err)
         }else{
           if(args.sortBy == 'family_name'){
             return data.directory().find({}).sort({ family_name: 1}).then(data => data)
@@ -857,6 +877,28 @@ let queryType = new graphql.GraphQLObjectType({
             .find({})
             .then(data => data)
             .catch(err =>  err)
+      }
+    },
+    research_areas: {
+      type: new graphql.GraphQLList(researchAreasType),
+      args: {
+        area: { type: graphql.GraphQLString },
+        title: { type: graphql.GraphQLString }
+      },
+      description: 'List of Research Areas',
+      resolve: function(_, args){
+        if (args.area)
+          return data.getResearchAreas().find({area_id: `${args.area}`})
+            .then((data) => data)
+            .catch(err =>  err);
+        else if (args.title)
+          return data.getResearchAreas().find({title: `${args.title}`})
+            .then((data) => data)
+            .catch(err =>  err);
+        else
+          return data.getResearchAreas().find({})
+            .then((data) => data)
+            .catch(err =>  err);
       }
     },
     semesterCode: {
