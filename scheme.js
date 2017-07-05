@@ -41,6 +41,15 @@ let memberPositionType = new graphql.GraphQLObjectType({
   })
 })
 
+let memberResearchAreasType = new graphql.GraphQLObjectType({
+  name: 'MemberResearchAreas',
+  description: 'Research Areas For Directory Members',
+  fields: () => ({
+    area_id: { type: graphql.GraphQLString },
+    title: { type: graphql.GraphQLString }
+  })
+})
+
 let memberType = new graphql.GraphQLObjectType({
   name: 'Member',
   description: 'Available properties for SCS members',
@@ -69,7 +78,7 @@ let memberType = new graphql.GraphQLObjectType({
     hr_relationship_desc: { type: graphql.GraphQLString },
     scs_relationship_desc: { type: graphql.GraphQLString },
     scs_relationship_class: { type: graphql.GraphQLString },
-    research_areas: { type: new graphql.GraphQLList(graphql.GraphQLString) },
+    research_areas: { type: new graphql.GraphQLList(memberResearchAreasType) },
     phone_full: {
       type: graphql.GraphQLString,
       resolve: function(member){
@@ -612,7 +621,7 @@ let queryType = new graphql.GraphQLObjectType({
             .catch(err => err)
 
         }else if(args.research_area){
-          return data.directory().find({'research_areas': args.research_area })
+          return data.directory().find({'research_areas': {$elemMatch: {'area_id': args.research_area }}})
             .then((data) => data)
             .catch(err => err)
         }else{
