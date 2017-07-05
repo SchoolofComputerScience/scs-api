@@ -62,7 +62,7 @@ const directorySchema = mongoose.Schema(
     scs_relationship_class: String,
     scs_relationship_desc: String
   },
-  { collection : 'directory_hris'}
+  { collection : 'directory'}
 );
 
 const biographySchema = mongoose.Schema(
@@ -316,63 +316,81 @@ module.exports = {
   },
 
   getNews(limit){
-    return pris.api(prismicApi).then(function(api) {
-      return api.query(
-        pris.Predicates.at('document.type', 'news'),
-        { pageSize : limit, orderings : '[my.news.publish_date desc]' }
-      )
-    })
-    .then((res) => res.results);
-  },
-
-  getEvents(){
-    return pris.api(prismicApi).then(function(api) {
-      return api.query(
-        pris.Predicates.at('document.type', 'events'),
-        { pageSize : 20, orderings : '[my.events.starttime desc]' }
-      )
-    })
-    .then((res) => res.results)
-  },
-
-  getEventsWithTag(tag){
     return pris.api(prismicApi)
       .then(function(api) {
         return api.query(
-          `[[:d = at(document.type, "events")][:d = any(document.tags, ["${tag}"])]]`
-        )})
-      .then((res) => res.results)
+          pris.Predicates.at('document.type', 'news'),
+          { pageSize : limit, orderings : '[my.news.publish_date desc]' }
+        )
+      })
+      .then(res => res.results)
+      .catch(err => err)
   },
 
-  getNewsWithTag(tag){
+  getEvents(limit){
     return pris.api(prismicApi)
       .then(function(api) {
         return api.query(
-          `[[:d = at(document.type, "news")][:d = any(document.tags, ["${tag}"])]]`
-        )})
-      .then((res) => res.results)
+          pris.Predicates.at('document.type', 'events'),
+          { pageSize : limit, orderings : '[my.events.starttime desc]' }
+        )
+      })
+      .then(res => res.results)
+      .catch(err => err)
+  },
+
+  getEventsWithTag(tag, args){
+    let limit = args ? args.limit : 20
+    return pris.api(prismicApi)
+      .then(function(api) {
+        return api.query(
+          [ pris.Predicates.at('document.type', 'events'),
+            pris.Predicates.at("document.tags", [tag]) ],
+          { pageSize: limit, orderings :'[my.events.starttime desc]' }
+        )
+      })
+      .then(res => res.results )
+      .catch(err => err)
+  },
+
+  getNewsWithTag(tag, args){
+    let limit = args ? args.limit : 20
+    return pris.api(prismicApi)
+      .then(function(api) {
+        return api.query(
+          [ pris.Predicates.at('document.type', 'news'),
+            pris.Predicates.at("document.tags", [tag]) ],
+          { pageSize: limit, orderings :'[my.news.publish_date desc]' }
+        )
+      })
+      .then(res => res.results)
+      .catch(err => err)
   },
 
   getNewsWithSearch(topic){
-    return pris.api(prismicApi).then(function(api) {
-      return api.query([
-        pris.Predicates.at('document.type', 'news'),
-        pris.Predicates.fulltext('document', `${topic}`)
-      ],{ pageSize: 20, orderings :'[my.news.publish_date desc]' })
-    }).then((res) => {
-      return res.results
-    })
+    return pris.api(prismicApi)
+      .then(function(api) {
+        return api.query(
+          [ pris.Predicates.at('document.type', 'news'),
+            pris.Predicates.fulltext('document', `${topic}`) ],
+          { pageSize: 20, orderings :'[my.news.publish_date desc]' }
+        )
+      })
+      .then(res => res.results)
+      .catch(err => err)
   },
 
   getEventsWithSearch(topic){
-    return pris.api(prismicApi).then(function(api) {
-      return api.query([
-        pris.Predicates.at('document.type', 'events'),
-        pris.Predicates.fulltext('document', `${topic}`)
-      ],{ pageSize: 20, orderings :'[my.events.starttime desc]' })
-    }).then((res) => {
-      return res.results
-    })
+    return pris.api(prismicApi)
+      .then(function(api) {
+        return api.query(
+          [ pris.Predicates.at('document.type', 'events'),
+            pris.Predicates.fulltext('document', `${topic}`)],
+          { pageSize: 20, orderings :'[my.events.starttime desc]' }
+        )
+      })
+      .then(res => res.results)
+      .catch(err => err)
   },
 
   getNewsWithId(uid){
@@ -380,10 +398,10 @@ module.exports = {
       .then(function(api) {
         return api.query(
           `[[:d = at(my.news.uid,"${uid}")]]`
-        )}, function(err){
-         err
-        })
-      .then((res) => [res])
+        )
+      })
+      .then(res => [res])
+      .catch(err => err)
   },
 
   getEventsWithId(uid){
@@ -391,10 +409,10 @@ module.exports = {
       .then(function(api) {
         return api.query(
           `[[:d = at(my.events.uid,"${uid}")]]`
-        )}, function(err){
-         err
-        })
+        )
+      })
       .then((res) => [res])
+      .catch(err => err)
   },
 
   getDepartmentWithId(uid){
@@ -402,16 +420,16 @@ module.exports = {
       .then(function(api) {
         return api.query(
           `[[:d = at(my.departments.uid,"${uid}")]]`
-        )}, function(err){
-         err
-        })
+        )
+      })
       .then((res) => [res])
+      .catch(err => err)
   },
+
   getNextSemesterCode() {
     let semesterCode = { 0: 'S', 1: 'S', 2: 'S', 3: 'S', 4: 'M', 5: 'M', 6: 'M', 7: 'M', 8: 'F', 9: 'F', 10: 'F', 11: 'F' };
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth() + 4;
-
     return semesterCode[currentMonth] + currentDate.getFullYear().toString().substr(2,3);
   }
 }
