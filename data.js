@@ -276,7 +276,7 @@ const researchAreasSchema = mongoose.Schema(
 module.exports = {
 
   directory(){
-    return mongoose.model('directory', directorySchema, 'directory_hris');
+    return mongoose.model('directory', directorySchema, 'directory');
   },
 
   getBiographyData(){
@@ -314,7 +314,7 @@ module.exports = {
   getResearchAreas(){
     return mongoose.model('research_areas', researchAreasSchema, 'research_areas')
   },
-  
+
   getNews(limit){
     return pris.api(prismicApi).then(function(api) {
       return api.query(
