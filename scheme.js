@@ -848,6 +848,7 @@ let queryType = new graphql.GraphQLObjectType({
     programs: {
       type: new graphql.GraphQLList(programType),
       args: {
+        program_id: { type: graphql.GraphQLString },
         department: { type: graphql.GraphQLString },
         degree_level: { type: graphql.GraphQLString },
         graduate_level: { type: graphql.GraphQLString }
@@ -855,6 +856,8 @@ let queryType = new graphql.GraphQLObjectType({
       description: 'List of Programs',
       resolve: function(_, args){
         let query = {};
+        if (args.program_id)
+          query.program_id = args.program_id;
         if (args.department)
           query.department = args.department;
         if (args.degree_level)
@@ -920,6 +923,6 @@ let queryType = new graphql.GraphQLObjectType({
   }
 })
 
-module.exports = new graphql.GraphQLSchema({
+export var ScsApiSchema = new graphql.GraphQLSchema({
   query: queryType
-})
+});

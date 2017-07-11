@@ -2,8 +2,9 @@ const app = require('express')()
 const graph = require('express-graphql')
 const compression = require('compression')
 const cors = require('cors')
-const schema = require('./scheme.js')
 const helmet = require('helmet')
+// const schema = require('./scheme.js')
+import { ScsApiSchema } from './scheme.js'
 
 app.use(helmet.xssFilter());
 app.use(helmet.frameguard({action: 'deny'}));
@@ -22,7 +23,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/graph', graph({
-  schema: schema,
+  schema: ScsApiSchema,
   allowUndefinedInResolve: false,
   pretty: true,
   graphiql: true,
