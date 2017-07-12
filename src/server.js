@@ -1,9 +1,9 @@
-const express = require('express')
-const graph = require('express-graphql')
-const compression = require('compression')
-const cors = require('cors')
-const helmet = require('helmet')
-const schemata = require('./schema.js')
+import express from 'express';
+import graph from 'express-graphql';
+import compression from 'compression';
+import cors from 'cors';
+import helmet from 'helmet';
+import { ScsApiSchema } from './schema.js';
 
 let app = express();
 
@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/graph', graph({
-  schema: schemata.ScsApiSchema,
+  schema: ScsApiSchema,
   allowUndefinedInResolve: false,
   pretty: true,
   graphiql: true,
