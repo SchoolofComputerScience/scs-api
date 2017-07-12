@@ -18,7 +18,7 @@ before_install:
   fi
 - gcloud auth activate-service-account --key-file gce-key.json
 - echo "  PRISMIC:" $PRISMIC >> app.yaml
-- echo "  DB_CONNECT:" $CONNECT >> app.yaml
+- echo "  DB_CONNECT:" $ATLAS >> app.yaml
 install:
 - gcloud config set compute/zone us-east1-b
 - gcloud config set project scs-shadow
