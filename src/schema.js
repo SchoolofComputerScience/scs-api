@@ -1,5 +1,5 @@
-const graphql = require('graphql')
-const data = require('./data.js')
+import * as graphql from 'graphql';
+import data from './data.js';
 
 let aggregateType = new graphql.GraphQLObjectType({
   name: 'Aggregate',

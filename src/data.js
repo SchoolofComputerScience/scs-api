@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const pris = require('prismic.io');
-const dotenv = require('dotenv');
+import mongoose from 'mongoose';
+import pris from 'prismic.io';
+import dotenv from 'dotenv';
 
 dotenv.load({ path: '.env' });
 
