@@ -320,6 +320,10 @@ module.exports = {
     return mongoose.model('research_areas', researchAreasSchema, 'research_areas')
   },
 
+  getScid(){
+    return mongoose.model('directory', directorySchema, 'directory');
+  },
+
   getNews(limit){
     return pris.api(prismicApi)
       .then(function(api) {
