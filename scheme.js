@@ -598,6 +598,14 @@ let researchAreasType = new graphql.GraphQLObjectType({
   })
 });
 
+let findScidType = new graphql.GraphQLObjectType({
+  name: 'FindScid',
+  description: 'Find Scid From Directory',
+  fields: () => ({
+    exists: {type: graphql.GraphQLBoolean}
+  })
+})
+
 let queryType = new graphql.GraphQLObjectType({
   name: 'Query',
   description: 'SCS top level data points',
@@ -915,6 +923,21 @@ let queryType = new graphql.GraphQLObjectType({
       description: 'Upcoming Semester Code',
       resolve: function(_, args) {
         return data.getNextSemesterCode();
+      }
+    },
+    findScid: {
+      type: findScidType,
+      args: {
+        scid: { type: graphql.GraphQLString }
+      },
+      description: 'Finding Scid Existence',
+      resolve: function(_, args) {
+        return data.directory().findOne({'scid': args.scid}).then(function(data) { 
+          if (data)
+            return { exists : true }
+          else
+            return { exists : false }
+        }).catch(err =>  err);
       }
     }
   }
