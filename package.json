@@ -5,7 +5,8 @@
   "version": "1.0.0",
   "repository": "https://github.com/SchoolofComputerScience/scs-api",
   "engines": {
-    "node": "7.7.1"
+    "node": "8.2.1",
+    "npm": ">=5.0"
   },
   "license": "MIT",
   "scripts": {
