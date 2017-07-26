@@ -633,11 +633,7 @@ let queryType = new graphql.GraphQLObjectType({
             .then((data) => data)
             .catch(err => err)
         }else{
-          if(args.sortBy == 'family_name'){
-            return data.directory().find({}).sort({ family_name: 1}).then(data => data)
-          }else{
-            return data.directory().find({}).sort({scid: 1}).then(data => data)
-          }
+          return data.directory().find({}).sort({family_name: 1}).then(data => data)
         }
       }
     },
