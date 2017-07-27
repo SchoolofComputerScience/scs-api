@@ -4,6 +4,16 @@ import compression from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
 import { ScsApiSchema } from './schema.js';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.load({ path: '.env' });
+
+mongoose.connect(process.env.DB_CONNECT);
+mongoose.connection.on('error', () => console.log('> scs:cmu / mongo error'))
+mongoose.connection.once('open', () => console.log('> scs:cmu / mongo connected\n'))
+
+if(!process.env.NODE_ENV === 'production')
+  mongoose.set('debug', true)
 
 let app = express();
 
