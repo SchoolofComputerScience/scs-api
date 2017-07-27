@@ -2,7 +2,13 @@
   "name": "scs-api",
   "description": "CMU:SCS GraphQL API",
   "author": "seckel@scs.cmu.edu",
-  "version": "1.0.0",
+  "contributors": [
+    {
+      "author": "Ryan Bungard",
+      "email": "ryanbungard@cmu.edu"
+    }
+  ],
+  "version": "2.0.0",
   "repository": "https://github.com/SchoolofComputerScience/scs-api",
   "engines": {
     "node": "8.2.1",
@@ -10,9 +16,11 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec npm start",
-    "start": "node server.js",
-    "test": "echo \"no tests for today.\" && exit 0"
+    "build": "npm run clean && babel src -d dist",
+    "clean": "rm -rf dist && mkdir dist",
+    "dev": "nodemon src/server.js --exec babel-node",
+    "start": "node dist/server.js",
+    "test": "mocha --compilers js:babel-register --require babel-polyfill"
   },
   "dependencies": {
     "compression": "^1.6.2",
@@ -24,10 +32,14 @@
     "graphql-server-express": "^1.0.0",
     "graphql-tag": "^2.4.2",
     "helmet": "^3.6.1",
-    "mongoose": "4.10.8",
+    "mongoose": "4.11.4",
     "prismic.io": "^3.5.7"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "mocha": "^3.4.2",
     "nodemon": "^1.11.0"
   }
 }

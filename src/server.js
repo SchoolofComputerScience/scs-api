@@ -1,9 +1,21 @@
-const app = require('express')()
-const graph = require('express-graphql')
-const compression = require('compression')
-const cors = require('cors')
-const schema = require('./scheme.js')
-const helmet = require('helmet')
+import express from 'express';
+import graph from 'express-graphql';
+import compression from 'compression';
+import cors from 'cors';
+import helmet from 'helmet';
+import { ScsApiSchema } from './schema.js';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.load({ path: '.env' });
+
+mongoose.connect(process.env.DB_CONNECT);
+mongoose.connection.on('error', () => console.log('> scs:cmu / mongo error'))
+mongoose.connection.once('open', () => console.log('> scs:cmu / mongo connected\n'))
+
+if(!process.env.NODE_ENV === 'production')
+  mongoose.set('debug', true)
+
+let app = express();
 
 app.use(helmet.xssFilter());
 app.use(helmet.frameguard({action: 'deny'}));
@@ -22,7 +34,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/graph', graph({
-  schema: schema,
+  schema: ScsApiSchema,
   allowUndefinedInResolve: false,
   pretty: true,
   graphiql: true,
