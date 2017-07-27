@@ -12,27 +12,31 @@ export const DepartmentContentType = new GraphQLObjectType({
   fields: () => ({
     uid: {
       type: GraphQLString,
-      resolve: (_,args) => _[0].uid
+      resolve: (parent, args) => parent.uid
     },
     name: {
       type: GraphQLString,
-      resolve: (_,args) => _[0].data['departments.name'].value[0].text
+      resolve: (parent, args) => parent.data['departments.name'].value[0].text
     },
     description: {
       type: GraphQLString,
-      resolve: (_,args) => _[0].data['departments.description'].value[0].text
+      resolve: (parent, args) => parent.data['departments.description'].value[0].text
+    },
+    short_description: {
+      type: GraphQLString,
+      resolve: (parent, args) => parent.data['departments.short_description'].value[0].text
     },
     mainimg: {
       type: GraphQLString,
-      resolve: (_,args) => _[0].data['departments.mainimg'].value.main.url
+      resolve: (parent, args) => parent.data['departments.mainimg'].value.main.url
     },
     logo: {
       type: GraphQLString,
-      resolve: (_,args) => _[0].data['departments.logo'] ? _[0].data['departments.logo'].value.main.url : ''
+      resolve: (parent, args) => parent.data['departments.logo'] ? parent.data['departments.logo'].value.main.url : ''
     },
     url: {
       type: GraphQLString,
-      resolve: (_,args) => _[0].data['departments.url'].value.url
+      resolve: (parent, args) => parent.data['departments.url'].value.url
     }
   })
 })

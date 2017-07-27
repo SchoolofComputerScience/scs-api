@@ -5,6 +5,7 @@ import courses from './courses';
 import courseStringAgg from './courseStringAgg';
 import department from './department';
 import departments from './departments';
+import departmentsContent from './departmentsContent';
 import directoryAgg from './directoryAgg';
 import event from './event';
 import events from './events';
@@ -28,6 +29,7 @@ export default {
   courseStringAgg,
   department,
   departments,
+  departmentsContent,
   directoryAgg,
   event,
   events,
