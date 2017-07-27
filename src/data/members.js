@@ -9,6 +9,7 @@ const DirectorySchema = new Schema(
     andrew_id: String,
     biography: String,
     display_email: String,
+    display_name: String,
     email: String,
     family_name: String,
     fax_phone: String,

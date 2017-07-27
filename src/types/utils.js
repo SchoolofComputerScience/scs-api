@@ -16,7 +16,7 @@ export const TagScids = new GraphQLObjectType({
           return MembersData.findOne({'scid': parent})
             .then((data) => {
               if(data !== null)
-                return data.given_name + ' ' + data.family_name
+                return data.display_name
               else
                 return ''
             })

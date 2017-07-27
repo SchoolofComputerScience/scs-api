@@ -27,6 +27,7 @@ export const MemberType = new GraphQLObjectType({
     andrew_id: { type: GraphQLString },
     biography: { type: GraphQLString },
     display_email: { type: GraphQLString },
+    display_name: { type: GraphQLString },
     email: { type: GraphQLString },
     family_name: { type: GraphQLString },
     fax_phone: { type: GraphQLString },
@@ -58,12 +59,6 @@ export const MemberType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: function(member){
         return `${member.phone_area_code}${member.phone_exchange}${member.phone_extension}`
-      }
-    },
-    full_name: {
-      type: GraphQLString,
-      resolve: function(member) {
-        return member.given_name + ' ' + member.family_name;
       }
     },
     scid: { type: GraphQLString },
