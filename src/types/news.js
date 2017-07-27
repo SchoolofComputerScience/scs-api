@@ -22,7 +22,7 @@ export const NewsType = new GraphQLObjectType({
     },
     date: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.data['news.publishparentdate'].value
+      resolve: (parent, args) => parent.data['news.publish_date'].value
     },
     title: {
       type: GraphQLString,

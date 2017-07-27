@@ -11,6 +11,7 @@ import { PublicationType, ProfileType } from './publications';
 import { NewsType } from './news';
 import { EventsType } from './events';
 import { CoursesType } from './courses';
+import { getNextSemesterCode } from '../queries/semesterCode';
 
 import { getEventsWithTag } from '../data/events'
 import { getNewsWithTag } from '../data/news'
@@ -120,7 +121,7 @@ export const MemberType = new GraphQLObjectType({
         return CoursesData
           .find({
             instructors: { $elemMatch: { scid: `${parent.scid}` } },
-            semesterCode: `${data.getNextSemesterCode()}`
+            semesterCode: `${getNextSemesterCode}`
           })
           .catch(err => err)
       }
