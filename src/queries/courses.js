@@ -3,11 +3,11 @@ import {
   GraphQLString
 } from 'graphql'
 
-import { CourseListType } from '../types/courses'
+import { CoursesType } from '../types/courses'
 import CoursesData from '../data/courses.js'
 
 export default {
-  type: new GraphQLList(CourseListType),
+  type: new GraphQLList(CoursesType),
   description: 'course listing',
   args: {
     courseNumber: { type: GraphQLString },

@@ -13,6 +13,6 @@ export default {
   },
   description: 'List of events seached by a query',
   resolve: function(parent, args){
-    return data.getEventsWithSearch(args.query);
+    return getEventsWithSearch(args.query);
   }
 }

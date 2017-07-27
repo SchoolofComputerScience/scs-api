@@ -16,6 +16,7 @@ export default {
     if(args.field)
       return MembersData.aggregate([
         {$group: { _id : `$${args.field}` }}
-      ]).then((data) => data)
+      ])
+      .then((data) => data)
   }
 }

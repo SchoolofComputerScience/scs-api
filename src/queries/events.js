@@ -15,14 +15,15 @@ export default {
   resolve: function(_,args){
     let events = []
     let _limit = args.limit || 20;
-    return data.getEvents(_limit).then((res) => {
-      res.map((item) => {
-        if(item.data['events.starttime']) {
-          events.push(item)
-        }
+    return getEvents(_limit)
+      .then((res) => {
+        res.map((item) => {
+          if(item.data['events.starttime']) {
+            events.push(item)
+          }
+        })
+        return events;
       })
-      return events;
-    })
-    .catch(err => err)
+      .catch(err => err)
   }
 }

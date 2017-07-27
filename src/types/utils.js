@@ -12,7 +12,7 @@ export const TagScids = new GraphQLObjectType({
     name: {
       type: GraphQLString,
       resolve: (parent, args) => {
-        if(parent.includes('parent')) {
+        if(parent.includes('_')) {
           return MembersData.findOne({'scid': parent})
             .then((data) => {
               if(data !== null)
@@ -29,7 +29,7 @@ export const TagScids = new GraphQLObjectType({
     tag: {
       type: GraphQLString,
       resolve: (parent, args) => {
-        if(parent.includes('parent')) {
+        if(parent.includes('_')) {
           return '/directory/' + parent
         }else{
           return '/departments/' + parent

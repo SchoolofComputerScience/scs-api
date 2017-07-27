@@ -11,8 +11,10 @@ import events from './events';
 import eventsBySearch from './eventsBySearch';
 import members from './members';
 import news from './news';
+import newsArticle from './newsArticle';
 import newsBySearch from './newsBySearch';
 import newsByTag from './newsByTag';
+import programs from './programs';
 import publication from './publication';
 import publications from './publications';
 import researchAreas from './researchAreas';
@@ -32,8 +34,10 @@ export default {
   eventsBySearch,
   members,
   news,
+  newsArticle,
   newsBySearch,
   newsByTag,
+  programs,
   publication,
   publications,
   researchAreas,
