@@ -28,11 +28,7 @@ export default {
         .then((data) => data)
         .catch(err => err)
     }else {
-      if(args.sortBy == 'family_name'){
-        return MembersData.find({}).sort({ family_name: 1}).then(data => data)
-      }else{
-        return MembersData.find({}).sort({scid: 1}).then(data => data)
-      }
+      return MembersData.find({}).sort({ family_name: 1}).then(data => data)
     }
   }
 }
