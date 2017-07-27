@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { CourseAggregateIntType } from '../types/courses'
-import MembersData from '../data/members.js'
+import CoursesData from '../data/courses.js'
 
 export default {
   type: new GraphQLList(CourseAggregateIntType),
@@ -14,7 +14,7 @@ export default {
   },
   resolve: function(parent, args) {
     if(args.field)
-      return MembersData.aggregate([
+      return CoursesData.aggregate([
         {$group: { _id : `$${args.field}` }},
         {$sort: { _id: -1 }}
       ]).then((data) => data)
