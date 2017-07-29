@@ -8,10 +8,7 @@ import { getDepartments } from '../data/departmentContent'
 
 export default {
   type: new GraphQLList(DepartmentContentType),
-  description: 'Single department content from Prismic',
-  args:{
-    uid: { type : GraphQLString }
-  },
+  description: 'Department content from Prismic',
   resolve: (parent, args) => {
     return getDepartments()
       .then((res, err) => {

@@ -1,13 +1,26 @@
 import {
   GraphQLObjectType,
-  GraphQLString
+  GraphQLInt,
+  GraphQLString,
+  GraphQLList
 } from 'graphql';
+
+import { FieldCounts } from './utils'
+import { EventsType } from './events'
+import { NewsType } from './news'
+
+import CoursesData from '../data/courses'
+import MemberData from '../data/members'
+import ProgramsData from '../data/programs'
+import { getEventsWithTag } from '../data/events'
+import { getNewsWithTag } from '../data/news'
 
 export const DepartmentContentType = new GraphQLObjectType({
   name: 'DepartmentInfo',
   description: 'Department content information from Prismic.io',
   arg: {
-    uid: { type: GraphQLString }
+    newsCount: { type: GraphQLInt },
+    eventsCount: { type: GraphQLInt }
   },
   fields: () => ({
     uid: {
@@ -37,7 +50,56 @@ export const DepartmentContentType = new GraphQLObjectType({
     url: {
       type: GraphQLString,
       resolve: (parent, args) => parent.data['departments.url'].value.url
-    }
+    },
+    programs_count: {
+      type: FieldCounts,
+      resolve: function(parent, args) {
+        return ProgramsData.count({ 'department':`${parent.uid}` })
+          .then(res => res)
+          .catch(err => err)
+      }
+    },
+    member_count: {
+      type: FieldCounts,
+      resolve: function(parent, args) {
+        return MemberData.count({'positions': {$elemMatch: {'department': `${parent.uid}`}}})
+          .then(res => res)
+          .catch(err => err)
+      }
+    },
+    course_count: {
+      type: FieldCounts,
+      args: {
+        semesterCode: { type: GraphQLString }
+      },
+      resolve: function(parent, args) {
+        return CoursesData.count({semesterCode: `${args.semesterCode}`, department: `${parent.uid}`})
+          .then(res => res)
+          .catch(err => err)
+      }
+    },
+    events: {
+      type: new GraphQLList(EventsType),
+      args: {
+        limit: { type: GraphQLInt }
+      },
+      resolve: function(parent, args) {
+        return getEventsWithTag(parent.uid.toUpperCase(), args)
+          .then(res => res)
+          .catch(err => err)
+      }
+    },
+    news: {
+      type: new GraphQLList(NewsType),
+      args: {
+        limit: { type: GraphQLInt }
+      },
+      resolve: function(parent, args) {
+        return getNewsWithTag(parent.uid.toUpperCase(), args )
+          .then(res => res)
+          .catch(err => err)
+      }
+    },
   })
 })
 
