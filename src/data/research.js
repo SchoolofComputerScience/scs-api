@@ -9,8 +9,19 @@ const ResearchAreasSchema = new Schema(
     area_id: String,
     description: String,
     gs_count: Number,
-    members: [String],
-    title: String
+    members: [{
+      scid: String,
+      display_name: String
+    }],
+    title: String,
+    programs: [{
+      program_name: String,
+      program_id: String,
+      tracks: [{
+        track_id: String,
+        track_name: String
+      }]
+    }]
   },
   { collection : 'research_areas' }
 )
