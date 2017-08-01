@@ -14,7 +14,26 @@ const ProgramsSchema = new Schema(
     program_alias: String,
     program_id: String,
     program_name: String,
-    url: String
+    url: String,
+    goals: [{
+      track_id: String,
+      goal: String
+    }],
+    tracks: [{
+      track_id: String,
+      track_name: String
+    }],
+    learning_outcomes: [{
+      track_id: String,
+      outcomes: [String]
+    }],
+    areas: [{
+      track_id: String,
+      areas: [{
+        title: String,
+        area_id: String
+      }]
+    }]
   },
   { collection : 'programs'}
 )
