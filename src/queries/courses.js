@@ -15,7 +15,7 @@ export default {
     semesterCode: { type: GraphQLString }
   },
   resolve: function(parent, args){
-    let semCode = args.semesterCode || "S17"
+    let semCode = args.semesterCode || "F17"
     return CoursesData.find({
       semesterCode: `${semCode}`
     })
