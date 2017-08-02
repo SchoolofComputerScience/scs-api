@@ -1,5 +1,6 @@
 import {
   GraphQLObjectType,
+  GraphQLInt,
   GraphQLString,
 } from 'graphql';
 
@@ -16,7 +17,7 @@ export const TagScids = new GraphQLObjectType({
           return MembersData.findOne({'scid': parent})
             .then((data) => {
               if(data !== null)
-                return data.given_name + ' ' + data.family_name
+                return data.display_name
               else
                 return ''
             })
@@ -35,6 +36,17 @@ export const TagScids = new GraphQLObjectType({
           return '/departments/' + parent
         }
       }
+    }
+  })
+})
+
+export const FieldCounts = new GraphQLObjectType({
+  name: 'FieldCounts',
+  description: 'A count on the passed field',
+  fields: () => ({
+    _id: {
+      type: GraphQLInt,
+      resolve: (parent, args) => parent
     }
   })
 })

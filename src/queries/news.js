@@ -12,7 +12,7 @@ export default {
   args: {
     limit: { type: GraphQLInt }
   },
-  resolve: function(_,args) {
+  resolve: function(parent, args) {
     let _limit = args.limit || 20;
     return getNews(_limit)
       .then(res => res)
