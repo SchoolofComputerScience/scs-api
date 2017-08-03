@@ -2,8 +2,11 @@ import {
   GraphQLObjectType,
   GraphQLList,
   GraphQLString,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLBoolean
 } from 'graphql';
+
+import MemberData from '../data/members';
 
 export const CoursesType = new GraphQLObjectType({
   name: 'Courses',
@@ -55,7 +58,18 @@ export const CourseInstructorType = new GraphQLObjectType({
     scid: { type: GraphQLString },
     lastName: { type: GraphQLString },
     firstName: { type: GraphQLString },
-    email: { type: GraphQLString }
+    email: { type: GraphQLString },
+    valid: {
+      type: GraphQLBoolean,
+      resolve: function(instructor){
+        return MemberData.findOne({'scid': `${instructor.scid}`}).then((data) => {
+          if (data)
+            return true;
+          else 
+            return false;
+        });
+      }
+    }
   })
 })
 
