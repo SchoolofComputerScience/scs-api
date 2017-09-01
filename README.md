@@ -9,7 +9,7 @@ Data Endpoint.
 
 ## Getting Started
 
-`git clone git@github.com:scscmu/scs-api.git`.
+`git clone git@github.com:SchoolofComputerScience/scs-app.git`.
 
 `cd scs-api`.
 
