@@ -46,8 +46,6 @@ export const MemberType = new GraphQLObjectType({
     hr_relationship: { type: GraphQLString },
     hr_relationship_class: { type: GraphQLString },
     hr_relationship_desc: { type: GraphQLString },
-    scs_relationship_desc: { type: GraphQLString },
-    scs_relationship_class: { type: GraphQLString },
     research_areas: { type: new GraphQLList(MemberResearchAreasType) },
     phone_full: {
       type: GraphQLString,
@@ -64,8 +62,9 @@ export const MemberType = new GraphQLObjectType({
     scid: { type: GraphQLString },
     scs_id: { type: GraphQLString },
     scs_email: { type: GraphQLString },
-    scs_relationship_class: { type: GraphQLString },
     scs_relationship_desc: { type: GraphQLString },
+    scs_relationship_class: { type: GraphQLString },
+    scs_relationship_subclass: { type: GraphQLString },
     profile: {
       type: new GraphQLList(ProfileType),
       resolve: function(args) {
@@ -136,6 +135,8 @@ export const MemberPositionType = new GraphQLObjectType({
     performance_supervisor_scid: { type: GraphQLString },
     primary_position: { type: GraphQLBoolean },
     room: { type: GraphQLString },
+    scs_position_class: { type: GraphQLString },
+    scs_position_desc: { type: GraphQLString },
     title: { type: GraphQLString }
   })
 })
