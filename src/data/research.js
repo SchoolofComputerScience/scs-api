@@ -7,7 +7,15 @@ const ResearchAreasSchema = new Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
     area_id: String,
-    description: String,
+    description: {
+      contributors: [String],
+      sources: [{
+          title: String,
+          url: String
+      }],
+      text: String,
+      title: String
+    },
     gs_count: Number,
     members: [{
       scid: String,
