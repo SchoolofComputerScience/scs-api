@@ -50,6 +50,7 @@ const DirectorySchema = new Schema(
     scs_id: String,
     scs_email: String,
     scs_relationship_class: String,
+    scs_relationship_subclass: String,
     scs_relationship_desc: String
   },
   { collection : 'directory'}
