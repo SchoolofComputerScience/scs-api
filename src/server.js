@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.load({ path: '.env' });
 
+mongoose.set('debug', true);
 mongoose.connect(process.env.DB_CONNECT);
 mongoose.connection.on('error', () => console.log('> scs:cmu / mongo error'))
 mongoose.connection.once('open', () => console.log('> scs:cmu / mongo connected\n'))

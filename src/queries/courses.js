@@ -10,14 +10,14 @@ export default {
   type: new GraphQLList(CoursesType),
   description: 'course listing',
   args: {
-    courseNumber: { type: GraphQLString },
-    s3Department: { type: GraphQLString },
-    semesterCode: { type: GraphQLString }
+    course_number: { type: GraphQLString },
+    s3_department: { type: GraphQLString },
+    semester_code: { type: GraphQLString }
   },
   resolve: function(parent, args){
-    let semCode = args.semesterCode || "F17"
+    let semCode = args.semester_code || "F17"
     return CoursesData.find({
-      semesterCode: `${semCode}`
+      semester_code: `${semCode}`
     })
     .catch(err => err)
   }

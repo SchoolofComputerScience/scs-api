@@ -10,12 +10,12 @@ export default {
   type: CoursesType,
   description: 'Single Course',
   args: {
-    courseCode: { type: GraphQLString },
+    course_id: { type: GraphQLString },
   },
   resolve: function(_,args){
-    let semCode = args.semesterCode || "S17"
+    let semCode = args.semester_code || "S17"
     return CoursesData.findOne({
-      courseCode: `${args.courseCode}`
+      course_id: `${args.course_id}`
     })
     .catch(err => err)
   }
