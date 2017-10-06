@@ -47,7 +47,7 @@ export const CourseSectionType = new GraphQLObjectType({
       resolve: (args) => args.instructors
     },
     meetings: { type: new GraphQLList(CourseMeetingType) },
-    parent_course: { type: new GraphQLList(CourseListType) }
+    parent_course: { type: CourseListType }
   })
 })
 
