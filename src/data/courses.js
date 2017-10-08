@@ -12,6 +12,7 @@ const CoursesSchema = new Schema(
     department: String,
     description: String,
     graduate_level: String,
+    long_title: String,
     s3_department: String,
     semester: String,
     semester_code: String,
@@ -27,6 +28,7 @@ const CoursesSchema = new Schema(
         location: String,
         long_title:  String,
         presence_required: String,
+        section: String,
         title: String,
 
         child_courses: [
