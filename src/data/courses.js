@@ -12,6 +12,7 @@ const CoursesSchema = new Schema(
     department: String,
     description: String,
     graduate_level: String,
+    lecture_distinction: Boolean,
     long_title: String,
     s3_department: String,
     semester: String,
@@ -19,6 +20,13 @@ const CoursesSchema = new Schema(
     // timestamp: Date,
     units:  String,
     year: Number,
+
+    areas: [
+      mongoose.Schema({
+        area_id: String,
+        title: String
+      })
+    ],
 
     sections: [
       mongoose.Schema({

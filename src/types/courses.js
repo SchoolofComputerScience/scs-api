@@ -13,12 +13,14 @@ export const CoursesType = new GraphQLObjectType({
   description: 'List of courses',
   fields: () => ({
     _id: { type: GraphQLString },
+    areas: { type: new GraphQLList(CourseAreaType)},
     college: { type: GraphQLString },
     course_id: { type: GraphQLString },
     course_number: { type: GraphQLString },
     department: { type: GraphQLString },
     description: { type: GraphQLString },
     graduate_level: { type: GraphQLString },
+    lecture_distinction: { type: GraphQLString },
     long_title: { type: GraphQLString },
     s3_department: { type: GraphQLString },
     sections: { type: new GraphQLList(CourseSectionType) },
@@ -27,6 +29,15 @@ export const CoursesType = new GraphQLObjectType({
     units:  { type: GraphQLString },
     year: { type: GraphQLInt },
    })
+})
+
+export const CourseAreaType = new GraphQLObjectType({
+  name: 'CourseAreas',
+  description: 'Course Areas',
+  fields: () => ({
+    area_id: { type: GraphQLString },
+    title: { type: GraphQLString }
+  })
 })
 
 export const CourseSectionType = new GraphQLObjectType({

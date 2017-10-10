@@ -11,7 +11,7 @@ export default {
   description: 'course listing',
   args: {
     course_number: { type: GraphQLString },
-    s3_department: { type: GraphQLString },
+    department: { type: GraphQLString },
     semester_code: { type: GraphQLString }
   },
   resolve: function(parent, args){
