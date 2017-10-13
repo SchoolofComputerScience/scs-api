@@ -6,65 +6,81 @@ const Schema = mongoose.Schema
 const CoursesSchema = new Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
-    description: String,
-    courseNumber: String,
-    meetings: [
-      mongoose.Schema({
-        endTime: String,
-        building: String,
-        room: String,
-        startTime: String,
-        days: String,
-      })
-    ],
-    childCourses: [
-      mongoose.Schema({
-        section: String,
-        semesterCode: String,
-        detailUri: String,
-        courseNumber: String
-      })
-    ],
-    deliveryMode: String,
-    s3Department: String,
-    department: String,
-    courseCode: String,
-    title: String,
-    parentCourse: mongoose.Schema({
-      section: String,
-      semesterCode: String,
-      detailUri: String,
-      courseNumber: String
-    }),
-    programLocation: String,
-    level: String,
-    isStudentPresenceRequired: String,
-    crossListedCourses: [
-      mongoose.Schema({
-        section: String,
-        semesterCode: String,
-        detailUri: String,
-        courseNumber: String
-      })
-    ],
-    units:  String,
-    longTitle:  String,
-    instructors: [
-      mongoose.Schema({
-        andrewId: String,
-        scid: String,
-        lastName: String,
-        firstName: String,
-        email: String,
-      })
-    ],
     college: String,
-    section: String,
-    semesterCode: String,
+    course_id: String,
+    course_number: String,
+    department: String,
+    description: String,
+    graduate_level: String,
+    lecture_distinction: Boolean,
+    long_title: String,
+    s3_department: String,
     semester: String,
+    semester_code: String,
+    // timestamp: Date,
+    units:  String,
     year: Number,
+
+    areas: [
+      mongoose.Schema({
+        area_id: String,
+        title: String
+      })
+    ],
+
+    sections: [
+      mongoose.Schema({
+        course_section_id: String,
+        delivery_mode: String,
+        level: String,
+        location: String,
+        long_title:  String,
+        presence_required: String,
+        section: String,
+        title: String,
+
+        child_courses: [
+          mongoose.Schema({
+            course_number: String,
+            section: String,
+            semester_code: String
+          })
+        ],
+        cross_listed_courses: [
+          mongoose.Schema({
+            course_number: String,
+            section: String,
+            semester_code: String
+          })
+        ],
+        instructors: [
+          mongoose.Schema({
+            andrew_id: String,
+            email: String,
+            first_name: String,
+            last_name: String,
+            scid: String
+          })
+        ],
+        meetings: [
+          mongoose.Schema({
+            building: String,
+            days: String,
+            end_time: String,
+            room: String,
+            room_id: String,
+            start_time: String
+          })
+        ],
+        parent_course: mongoose.Schema({
+          course_number: String,
+          section: String,
+          semester_code: String
+        }),
+      })
+    ]
   },
-  { collection : 'courses'}
+  { collection : 'courses_by_semester'}
 )
 
-export default mongoose.model('courses', CoursesSchema, 'courses')
+export default mongoose.model('courses_by_semester', CoursesSchema)

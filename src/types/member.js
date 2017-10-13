@@ -11,13 +11,13 @@ import { PublicationType, ProfileType } from './publications';
 import { NewsType } from './news';
 import { EventsType } from './events';
 import { CoursesType } from './courses';
-import { getNextSemesterCode } from '../queries/semesterCode';
 
 import { getEventsWithTag } from '../data/events'
 import { getNewsWithTag } from '../data/news'
 import CoursesData from '../data/courses.js'
 import ProfileData from '../data/profile.js'
 import PublicationData from '../data/publications.js'
+import getCurrentSemesterCode from '../data/semesterCode';
 
 export const MemberType = new GraphQLObjectType({
   name: 'Member',
@@ -46,8 +46,6 @@ export const MemberType = new GraphQLObjectType({
     hr_relationship: { type: GraphQLString },
     hr_relationship_class: { type: GraphQLString },
     hr_relationship_desc: { type: GraphQLString },
-    scs_relationship_desc: { type: GraphQLString },
-    scs_relationship_class: { type: GraphQLString },
     research_areas: { type: new GraphQLList(MemberResearchAreasType) },
     phone_full: {
       type: GraphQLString,
@@ -64,8 +62,9 @@ export const MemberType = new GraphQLObjectType({
     scid: { type: GraphQLString },
     scs_id: { type: GraphQLString },
     scs_email: { type: GraphQLString },
-    scs_relationship_class: { type: GraphQLString },
     scs_relationship_desc: { type: GraphQLString },
+    scs_relationship_class: { type: GraphQLString },
+    scs_relationship_subclass: { type: GraphQLString },
     profile: {
       type: new GraphQLList(ProfileType),
       resolve: function(args) {
@@ -113,10 +112,11 @@ export const MemberType = new GraphQLObjectType({
     courses: {
       type: new GraphQLList(CoursesType),
       resolve: function(parent){
+        let semester_code = getCurrentSemesterCode();
         return CoursesData
           .find({
-            instructors: { $elemMatch: { scid: `${parent.scid}` } },
-            semesterCode: `${getNextSemesterCode}`
+            "sections.instructors.scid": `${parent.scid}`,
+            "semester_code": `${semester_code}`
           })
           .catch(err => err)
       }
@@ -136,6 +136,8 @@ export const MemberPositionType = new GraphQLObjectType({
     performance_supervisor_scid: { type: GraphQLString },
     primary_position: { type: GraphQLBoolean },
     room: { type: GraphQLString },
+    scs_position_class: { type: GraphQLString },
+    scs_position_desc: { type: GraphQLString },
     title: { type: GraphQLString }
   })
 })
