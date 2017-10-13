@@ -9,6 +9,7 @@ const ResearchAreasSchema = new Schema(
     area_id: String,
     courses: [{
       course_id: String,
+      course_number: String,
       title: String
     }],
     description: {

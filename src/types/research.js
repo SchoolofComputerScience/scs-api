@@ -10,6 +10,7 @@ const ResearchAreasCourseType = new GraphQLObjectType({
   description: 'Course that has an association with an area',
   fields: () => ({
     course_id: { type: GraphQLString },
+    course_number: { type: GraphQLString },
     title: { type: GraphQLString }
   })
 });
