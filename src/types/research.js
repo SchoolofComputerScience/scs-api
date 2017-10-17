@@ -5,6 +5,16 @@ import {
   GraphQLFloat
 } from 'graphql';
 
+const ResearchAreasCourseType = new GraphQLObjectType({
+  name: 'ResearchAreasCourse',
+  description: 'Course that has an association with an area',
+  fields: () => ({
+    course_id: { type: GraphQLString },
+    course_number: { type: GraphQLString },
+    title: { type: GraphQLString }
+  })
+});
+
 const ResearchAreasDescriptionSourceType = new GraphQLObjectType({
   name: 'ResearchAreasDescriptionSource',
   description: 'Source metadata for a description of an area',
@@ -59,6 +69,7 @@ export const ResearchAreasType = new GraphQLObjectType({
   description: 'List of research areas',
   fields: () => ({
     area_id: { type: GraphQLString },
+    courses: { type: new GraphQLList(ResearchAreasCourseType) },
     description: { type: ResearchAreasDescriptionType },
     title: { type: GraphQLString },
     gs_count: { type: GraphQLFloat },

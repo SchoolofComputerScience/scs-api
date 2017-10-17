@@ -7,6 +7,11 @@ const ResearchAreasSchema = new Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
     area_id: String,
+    courses: [{
+      course_id: String,
+      course_number: String,
+      title: String
+    }],
     description: {
       contributors: [String],
       sources: [{

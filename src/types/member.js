@@ -11,13 +11,13 @@ import { PublicationType, ProfileType } from './publications';
 import { NewsType } from './news';
 import { EventsType } from './events';
 import { CoursesType } from './courses';
-import { getNextSemesterCode } from '../queries/semesterCode';
 
 import { getEventsWithTag } from '../data/events'
 import { getNewsWithTag } from '../data/news'
 import CoursesData from '../data/courses.js'
 import ProfileData from '../data/profile.js'
 import PublicationData from '../data/publications.js'
+import getCurrentSemesterCode from '../data/semesterCode';
 
 export const MemberType = new GraphQLObjectType({
   name: 'Member',
@@ -112,10 +112,11 @@ export const MemberType = new GraphQLObjectType({
     courses: {
       type: new GraphQLList(CoursesType),
       resolve: function(parent){
+        let semester_code = getCurrentSemesterCode();
         return CoursesData
           .find({
-            instructors: { $elemMatch: { scid: `${parent.scid}` } },
-            semesterCode: `${getNextSemesterCode}`
+            "sections.instructors.scid": `${parent.scid}`,
+            "semester_code": `${semester_code}`
           })
           .catch(err => err)
       }

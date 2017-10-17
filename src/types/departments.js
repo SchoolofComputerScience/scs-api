@@ -73,7 +73,7 @@ export const DepartmentContentType = new GraphQLObjectType({
         semesterCode: { type: GraphQLString }
       },
       resolve: function(parent, args) {
-        return CoursesData.count({semesterCode: `${args.semesterCode}`, department: `${parent.uid}`})
+        return CoursesData.count({semester_code: `${args.semesterCode}`, department: `${parent.uid}`})
           .then(res => res)
           .catch(err => err)
       }

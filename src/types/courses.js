@@ -13,59 +13,73 @@ export const CoursesType = new GraphQLObjectType({
   description: 'List of courses',
   fields: () => ({
     _id: { type: GraphQLString },
-    description: { type: GraphQLString },
-    courseNumber: { type: GraphQLString },
-    meetings: {
-      type: new GraphQLList(CourseMeetingType)
-    },
-    childCourses: {
-      type: new GraphQLList(CourseListType)
-    },
-    deliveryMode: { type: GraphQLString },
-    s3Department: { type: GraphQLString },
+    areas: { type: new GraphQLList(CourseAreaType)},
+    college: { type: GraphQLString },
+    course_id: { type: GraphQLString },
+    course_number: { type: GraphQLString },
     department: { type: GraphQLString },
-    courseCode: { type: GraphQLString },
-    title: { type: GraphQLString },
-    parentCourse: {
-      type: new GraphQLList(CourseListType)
-    },
-    programLocation: { type: GraphQLString },
-    level: { type: GraphQLString },
-    isStudentPresenceRequired: { type: GraphQLString },
-    crossListedCourses: {
-      type: new GraphQLList(CourseListType)
-    },
+    description: { type: GraphQLString },
+    graduate_level: { type: GraphQLString },
+    lecture_distinction: { type: GraphQLString },
+    long_title: { type: GraphQLString },
+    s3_department: { type: GraphQLString },
+    sections: { type: new GraphQLList(CourseSectionType) },
+    semester: { type: GraphQLString },
+    semester_code: { type: GraphQLString },
     units:  { type: GraphQLString },
-    longTitle:  { type: GraphQLString },
+    year: { type: GraphQLInt },
+   })
+})
+
+export const CourseAreaType = new GraphQLObjectType({
+  name: 'CourseAreas',
+  description: 'Course Areas',
+  fields: () => ({
+    area_id: { type: GraphQLString },
+    title: { type: GraphQLString }
+  })
+})
+
+export const CourseSectionType = new GraphQLObjectType({
+  name: 'CourseSection',
+  description: 'List of course sections',
+  fields: () => ({
+    course_section_id: { type: GraphQLString },
+    delivery_mode: { type: GraphQLString },
+    level: { type: GraphQLString },
+    location: { type: GraphQLString },
+    long_title: { type: GraphQLString },
+    presence_required: { type: GraphQLString },
+    section: { type: GraphQLString },
+    title: { type: GraphQLString },
+    child_courses: { type: new GraphQLList(CourseListType) },
+    cross_listed_courses: { type: new GraphQLList(CourseListType) },
     instructors: {
-      description: 'class instructors',
+      description: 'Course instructors',
       type: new GraphQLList(CourseInstructorType),
       resolve: (args) => args.instructors
     },
-    college: { type: GraphQLString },
-    section: { type: GraphQLString },
-    semesterCode: { type: GraphQLString },
-    semester: { type: GraphQLString },
-    year: { type: GraphQLInt }
-   })
+    meetings: { type: new GraphQLList(CourseMeetingType) },
+    parent_course: { type: CourseListType }
+  })
 })
 
 export const CourseInstructorType = new GraphQLObjectType({
   name: 'CourseInstructor',
   description: 'List of course instructors',
   fields: () => ({
-    andrewId: { type: GraphQLString },
-    scid: { type: GraphQLString },
-    lastName: { type: GraphQLString },
-    firstName: { type: GraphQLString },
+    andrew_id: { type: GraphQLString },
     email: { type: GraphQLString },
+    first_name: { type: GraphQLString },
+    last_name: { type: GraphQLString },
+    scid: { type: GraphQLString },
     valid: {
       type: GraphQLBoolean,
       resolve: function(instructor){
         return MemberData.findOne({'scid': `${instructor.scid}`}).then((data) => {
           if (data)
             return true;
-          else 
+          else
             return false;
         });
       }
@@ -77,10 +91,9 @@ export const CourseListType = new GraphQLObjectType({
   name: 'CourseList',
   description: 'Course list schema',
   fields: () => ({
+    course_number: { type: GraphQLString },
     section: { type: GraphQLString },
-    semesterCode: { type: GraphQLString },
-    detailUri: { type: GraphQLString },
-    courseNumber: { type: GraphQLString }
+    semester_code: { type: GraphQLString }
   })
 })
 
@@ -88,11 +101,11 @@ export const CourseMeetingType = new GraphQLObjectType({
   name: 'CourseMeeting',
   description: 'Course Meeting',
   fields: () => ({
-    endTime: { type: GraphQLString },
     building: { type: GraphQLString },
+    days: { type: GraphQLString },
+    end_time: { type: GraphQLString },
     room: { type: GraphQLString },
-    startTime: { type: GraphQLString },
-    days: { type: GraphQLString }
+    start_time: { type: GraphQLString },
   })
 })
 
