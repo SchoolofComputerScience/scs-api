@@ -1,6 +1,4 @@
 import pris from 'prismic.io';
-import dotenv from 'dotenv';
-dotenv.load({ path: '.env' });
 
 const prismicApi = process.env.PRISMIC;
 

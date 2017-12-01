@@ -6,6 +6,8 @@ import helmet from 'helmet';
 import { ScsApiSchema } from './schema.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
 dotenv.load({ path: '.env' });
 
 mongoose.connect(process.env.DB_CONNECT);
@@ -40,6 +42,22 @@ app.use('/graph', graph({
   graphiql: true,
   shouldBatch: true
 }))
+
+app.use('/content', function(req, res, next){
+  const pageName = req.query.page_name;
+  const contentFolder = './src/content';
+  let fileLoc = path.resolve(contentFolder);
+  fileLoc = path.join(fileLoc, pageName);
+  let stream = fs.createReadStream(fileLoc + '.md');
+
+  stream.on('error', function(error) {
+    res.writeHead(404, 'Not Found');
+    res.end();          
+  });
+
+  stream.pipe(res);
+});
+
 
 app.use('*', (req, res) => res.send('scs:cmu / api'))
 
