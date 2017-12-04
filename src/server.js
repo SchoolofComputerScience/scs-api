@@ -43,8 +43,8 @@ app.use('/graph', graph({
   shouldBatch: true
 }))
 
-app.use('/content', function(req, res, next){
-  const pageName = req.query.page_name;
+app.use('/content/:page_name', function(req, res, next){
+  const pageName = req.params.page_name;
   const contentFolder = './src/content';
   let fileLoc = path.resolve(contentFolder);
   fileLoc = path.join(fileLoc, pageName);
