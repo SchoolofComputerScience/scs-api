@@ -11,6 +11,7 @@ export default {
   description: 'Directory listing',
   args: {
     scid: { type: GraphQLString },
+    andrew_id: { type: GraphQLString },
     department: { type: GraphQLString },
     starts_with: { type: GraphQLString },
     research_area: { type: GraphQLString },
@@ -19,6 +20,8 @@ export default {
   resolve: function(parent, args) {
     if(args.scid){
       return MembersData.find({'scid': args.scid}).then((data) => data)
+    }else if(args.andrew_id){
+      return MembersData.find({'andrew_id': args.andrew_id}).then((data) => data)
     }else if(args.department) {
       return MembersData.find({'positions': {$elemMatch: {'department': args.department }}})
         .then((data) => data)
