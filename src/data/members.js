@@ -1,59 +1,53 @@
-import mongoose from 'mongoose';
-mongoose.Promise = Promise;
+import sequelize from 'sequelize';
 
-const Schema = mongoose.Schema
-
-const DirectorySchema = new Schema(
+const DirectorySchema =
   {
-    _id: mongoose.Schema.Types.ObjectId,
-    andrew_id: String,
-    biography: String,
-    display_email: String,
-    display_name: String,
-    email: String,
-    family_name: String,
-    fax_phone: String,
-    given_name: String,
-    homepage_url: String,
-    hr_relationship: String,
-    hr_relationship_class: String,
-    hr_relationship_desc: String,
-    image_url: String,
-    is_alum: Boolean,
-    middle_name: String,
-    name_suffix: String,
-    phone_area_code: Number,
-    phone_area_code_secondary: Number,
-    phone_exchange: Number,
-    phone_extension: String,
-    phone_extension_secondary: String,
-    positions: [{
-      building: String,
-      department: String,
-      department_name: String,
-      hr_department: String,
-      performance_supervisor: String,
-      performance_supervisor_scid: String,
-      primary_position: Boolean,
-      room: String,
-      scs_position_class: String,
-      scs_position_desc: String,
-      title: String
-    }],
-    research_areas: [
-      mongoose.Schema({
-        area_id: String,
-        title: String
-      })
-    ],
-    scid: String,
-    scs_id: String,
-    scs_email: String,
-    scs_relationship_class: String,
-    scs_relationship_subclass: String,
-    scs_relationship_desc: String
-  },
-  { collection : 'directory'}
-);
+    andrew_id: { type: sequelize.Sequelize.STRING },
+    biography: { type: sequelize.Sequelize.STRING },
+    display_email: { type: sequelize.Sequelize.STRING },
+    display_name: { type: sequelize.Sequelize.STRING },
+    email: { type: sequelize.Sequelize.STRING },
+    family_name: { type: sequelize.Sequelize.STRING },
+    fax_phone: { type: sequelize.Sequelize.STRING },
+    given_name: { type: sequelize.Sequelize.STRING },
+    homepage_url: { type: sequelize.Sequelize.STRING },
+    hr_relationship: { type: sequelize.Sequelize.STRING },
+    hr_relationship_class: { type: sequelize.Sequelize.STRING },
+    hr_relationship_desc: { type: sequelize.Sequelize.STRING },
+    image_url: { type: sequelize.Sequelize.STRING },
+    is_alum: { type: sequelize.Sequelize.BOOLEAN },
+    middle_name: { type: sequelize.Sequelize.STRING },
+    name_suffix: { type: sequelize.Sequelize.STRING },
+    phone_area_code: { type: sequelize.Sequelize.INTEGER },
+    phone_area_code_secondary: { type: sequelize.Sequelize.INTEGER },
+    phone_exchange: { type: sequelize.Sequelize.INTEGER },
+    phone_extension: { type: sequelize.Sequelize.STRING },
+    phone_extension_secondary: { type: sequelize.Sequelize.STRING },
+    // positions: [{
+    //   building: { type: sequelize.Sequelize.STRING },
+    //   department: { type: sequelize.Sequelize.STRING },
+    //   department_name: { type: sequelize.Sequelize.STRING },
+    //   hr_department: { type: sequelize.Sequelize.STRING },
+    //   performance_supervisor: { type: sequelize.Sequelize.STRING },
+    //   performance_supervisor_scid: { type: sequelize.Sequelize.STRING },
+    //   primary_position: Sequelize.BOOLEAN,
+    //   room: { type: sequelize.Sequelize.STRING },
+    //   scs_position_class: { type: sequelize.Sequelize.STRING },
+    //   scs_position_desc: { type: sequelize.Sequelize.STRING },
+    //   title: { type: sequelize.Sequelize.STRING }
+    // }],
+    // research_areas: [
+    //   mongoose.Schema({
+    //     area_id: { type: sequelize.Sequelize.STRING },
+    //     title: { type: sequelize.Sequelize.STRING }
+    //   })
+    // ],
+    scid: { type: sequelize.Sequelize.STRING },
+    scs_id: { type: sequelize.Sequelize.STRING },
+    scs_email: { type: sequelize.Sequelize.STRING },
+    scs_relationship_class: { type: sequelize.Sequelize.STRING },
+    scs_relationship_subclass: { type: sequelize.Sequelize.STRING },
+    scs_relationship_desc: { type: sequelize.Sequelize.STRING }
+  };
 
-export default mongoose.model('directory', DirectorySchema, 'directory');
+export default DirectorySchema;
