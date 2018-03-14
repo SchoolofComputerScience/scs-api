@@ -23,25 +23,6 @@ const DirectorySchema =
     phone_exchange: { type: sequelize.Sequelize.INTEGER },
     phone_extension: { type: sequelize.Sequelize.STRING },
     phone_extension_secondary: { type: sequelize.Sequelize.STRING },
-    // positions: [{
-    //   building: { type: sequelize.Sequelize.STRING },
-    //   department: { type: sequelize.Sequelize.STRING },
-    //   department_name: { type: sequelize.Sequelize.STRING },
-    //   hr_department: { type: sequelize.Sequelize.STRING },
-    //   performance_supervisor: { type: sequelize.Sequelize.STRING },
-    //   performance_supervisor_scid: { type: sequelize.Sequelize.STRING },
-    //   primary_position: Sequelize.BOOLEAN,
-    //   room: { type: sequelize.Sequelize.STRING },
-    //   scs_position_class: { type: sequelize.Sequelize.STRING },
-    //   scs_position_desc: { type: sequelize.Sequelize.STRING },
-    //   title: { type: sequelize.Sequelize.STRING }
-    // }],
-    // research_areas: [
-    //   mongoose.Schema({
-    //     area_id: { type: sequelize.Sequelize.STRING },
-    //     title: { type: sequelize.Sequelize.STRING }
-    //   })
-    // ],
     scid: { type: sequelize.Sequelize.STRING },
     scs_id: { type: sequelize.Sequelize.STRING },
     scs_email: { type: sequelize.Sequelize.STRING },

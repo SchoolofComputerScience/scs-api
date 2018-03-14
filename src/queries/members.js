@@ -9,6 +9,99 @@ import { MemberType } from '../types/member';
 const Member = Db.models['test_directory'];
 const Position = Db.models['test_positions'];
 
+function buildPosition(row) {
+  let position = {};
+  position.building_id = row["positions.building_id"];
+  position.department = row["positions.department"];
+  position.hr_department_id = row["positions.hr_department_id"];
+  position.performance_supervisor_scid = row["positions.performance_supervisor_scid"];
+  position.primary_position_indicator = row["positions.primary_position_indicator"];
+  position.room_id = row["positions.room_id"];
+  position.scs_position_class = row["positions.scs_position_class"];
+  position.scs_position_desc = row["positions.scs_position_desc"];
+  position.title = row["positions.title"];
+
+  return position;
+}
+
+function buildMember(row) {
+  let member = {};
+  member.andrew_id = row.andrew_id;
+  member.biography = row.biography;
+  member.display_email = row.display_email;
+  member.display_name = row.display_name;
+  member.email = row.email;
+  member.family_name = row.family_name;
+  member.fax_phone = row.fax_phone;
+  member.given_name = row.given_name;
+  member.homepage_url = row.homepage_url;
+  member.hr_relationship = row.hr_relationship;
+  member.hr_relationship_class = row.hr_relationship_class;
+  member.hr_relationship_desc = row.hr_relationship_desc;
+  member.image_url = row.image_url;
+  member.is_alum = row.is_alum;
+  member.middle_name = row.middle_name;
+  member.name_suffix = row.name_suffix;
+  member.phone_area_code = row.phone_area_code;
+  member.phone_area_code_secondary = row.phone_area_code_secondary;
+  member.phone_exchange = row.phone_exchange;
+  member.phone_extension = row.phone_extension;
+  member.phone_extension_secondary = row.phone_extension_secondary;
+  member.scid = row.scid;
+  member.scs_id = row.scs_id;
+  member.scs_email = row.scs_email;
+  member.scs_relationship_class = row.scs_relationship_class;
+  member.scs_relationship_subclass = row.scs_relationship_subclass;
+  member.scs_relationship_desc = row.scs_relationship_desc;
+
+  return member;
+}
+
+function queryMembers(args) {
+  let query_options = {
+    raw: true,
+    include: [{
+      model: Position,
+      as: 'positions'
+    }],
+    order: [['family_name', 'ASC']]
+  }
+
+  if (args.scid) {
+    query_options.where = { scid: args.scid };
+  } else if (args.andrew_id) {
+    query_options.where = { andrew_id: args.andrew_id };
+  } else if (args.department) {
+    query_options.where = { department: args.department };
+  }
+
+  return Member.findAll(query_options).then(data => {
+    const data_length = data.length;
+    let results = [];
+
+    for (let i = 0; i < data_length; i++) {
+      if (results[data[i].scid]) {
+        results[data[i].scid].positions.push(buildPosition(data[i]));
+      }
+      else {
+        let data_row = buildMember(data[i]);
+
+        data_row.positions = [];
+        data_row.positions.push(buildPosition(data[i]));
+
+        results[data[i].scid] = data_row;
+      }
+    }
+
+    let members = [];
+    for (const result in results) {
+      members.push(results[result]);
+    }
+
+    return members;
+  });
+}
+
 export default {
   type: new GraphQLList(MemberType),
   description: 'Directory listing',
@@ -22,100 +115,13 @@ export default {
   },
   resolve: function(parent, args) {
     if(args.scid) {
-      return Member.findAll({ where: { 'scid': args.scid } }).then((data) => data);
+      return queryMembers({ scid: args.scid });
     } else if(args.andrew_id) {
-      return Member.findAll({ where:{'andrew_id': args.andrew_id}}).then((data) => data);
-    // }else if(args.department) {
-    //   return MembersData.findAll({'positions': {$elemMatch: {'department': args.department }}})
-    //     .then((data) => data)
-    //     .catch(err => err)
-    // }else if(args.research_area) {
-    //   return MembersData.findAll({'research_areas': {$elemMatch: {'area_id': args.research_area }}})
-    //     .then((data) => data)
-    //     .catch(err => err)
+      return queryMembers({ andrew_id: args.andrew_id });
+    }else if(args.department) {
+      return queryMembers({ department: args.department });
     } else {
-      return Member.findAll({
-        raw: true,
-        include: [{
-          model: Position,
-          as: 'positions'
-        }],
-        order: [['family_name', 'ASC']]
-      }).then(data => {
-        const data_length = data.length;
-        let results = [];
-
-        for (let i = 0; i < data_length; i++) {
-          if (results[data[i].scid]) {
-            let position = {};
-            position.department = data[i]["positions.department"];
-            position.hr_department_id = data[i]["positions.hr_department_id"];
-            position.performance_supervisor_scid = data[i]["positions.performance_supervisor_scid"];
-            position.primary_position_indicator = data[i]["positions.primary_position_indicator"];
-            position.room_id = data[i]["positions.room_id"];
-            position.scs_position_class = data[i]["positions.scs_position_class"];
-            position.scs_position_desc = data[i]["positions.scs_position_desc"];
-            position.title = data[i]["positions.title"];
-
-
-            results[data[i].scid].positions.push(position);
-          }
-          else {
-            let data_row = {};
-            data_row.andrew_id = data[i].andrew_id;
-            data_row.biography = data[i].biography;
-            data_row.display_email = data[i].display_email;
-            data_row.display_name = data[i].display_name;
-            data_row.email = data[i].email;
-            data_row.family_name = data[i].family_name;
-            data_row.fax_phone = data[i].fax_phone;
-            data_row.given_name = data[i].given_name;
-            data_row.homepage_url = data[i].homepage_url;
-            data_row.hr_relationship = data[i].hr_relationship;
-            data_row.hr_relationship_class = data[i].hr_relationship_class;
-            data_row.hr_relationship_desc = data[i].hr_relationship_desc;
-            data_row.image_url = data[i].image_url;
-            data_row.is_alum = data[i].is_alum;
-            data_row.middle_name = data[i].middle_name;
-            data_row.name_suffix = data[i].name_suffix;
-            data_row.phone_area_code = data[i].phone_area_code;
-            data_row.phone_area_code_secondary = data[i].phone_area_code_secondary;
-            data_row.phone_exchange = data[i].phone_exchange;
-            data_row.phone_extension = data[i].phone_extension;
-            data_row.phone_extension_secondary = data[i].phone_extension_secondary;
-            data_row.scid = data[i].scid;
-            data_row.scs_id = data[i].scs_id;
-            data_row.scs_email = data[i].scs_email;
-            data_row.scs_relationship_class = data[i].scs_relationship_class;
-            data_row.scs_relationship_subclass = data[i].scs_relationship_subclass;
-            data_row.scs_relationship_desc = data[i].scs_relationship_desc;
-            data_row.positions = [];
-            
-            let position = {};
-            position.building_id = data[i]["positions.building_id"];
-            position.department = data[i]["positions.department"];
-            position.hr_department_id = data[i]["positions.hr_department_id"];
-            position.performance_supervisor_scid = data[i]["positions.performance_supervisor_scid"];
-            position.primary_position_indicator = data[i]["positions.primary_position_indicator"];
-            position.room_id = data[i]["positions.room_id"];
-            position.scs_position_class = data[i]["positions.scs_position_class"];
-            position.scs_position_desc = data[i]["positions.scs_position_desc"];
-            position.title = data[i]["positions.title"];
-
-            data_row.positions.push(position);
-
-            results[data[i].scid] = data_row;
-          }
-        }
-
-
-        let members = [];
-        for (const result in results) {
-          members.push(results[result]);
-        }
-
-        return members;
-      });
+      return queryMembers();
     }
   }
 }
