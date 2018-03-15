@@ -20,6 +20,7 @@ import publication from './publication';
 import publications from './publications';
 import researchAreas from './researchAreas';
 import semesterCode from './semesterCode';
+import positions from './positions';
 
 export default {
   biographies,
@@ -44,4 +45,5 @@ export default {
   publications,
   researchAreas,
   semesterCode,
+  positions
 }

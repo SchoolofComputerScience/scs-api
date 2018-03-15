@@ -11,6 +11,7 @@ import { PublicationType, ProfileType } from './publications';
 import { NewsType } from './news';
 import { EventsType } from './events';
 import { CoursesType } from './courses';
+import { MemberPositionType } from './position';
 
 import { getEventsWithTag } from '../data/events'
 import { getNewsWithTag } from '../data/news'
@@ -23,7 +24,6 @@ export const MemberType = new GraphQLObjectType({
   name: 'Member',
   description: 'Available properties for SCS members',
   fields: () => ({
-    _id: { type: GraphQLString },
     andrew_id: { type: GraphQLString },
     biography: { type: GraphQLString },
     display_email: { type: GraphQLString },
@@ -34,15 +34,17 @@ export const MemberType = new GraphQLObjectType({
     given_name: { type: GraphQLString },
     homepage_url: { type: GraphQLString },
     image_url: { type: GraphQLString },
-    is_alum: { type: GraphQLBoolean },
+    is_alum: { type: GraphQLString },
     middle_name: { type: GraphQLString },
     name_suffix: { type: GraphQLString },
-    phone_area_code: { type: GraphQLFloat },
-    phone_area_code_secondary: { type: GraphQLFloat  },
-    phone_exchange: { type: GraphQLFloat  },
+    phone_area_code: { type: GraphQLString },
+    phone_area_code_secondary: { type: GraphQLString  },
+    phone_exchange: { type: GraphQLString  },
     phone_extension: { type: GraphQLString },
     phone_extension_secondary: { type: GraphQLString },
-    positions: { type: new GraphQLList(MemberPositionType) },
+    positions: { 
+      type: new GraphQLList(MemberPositionType) 
+    },
     hr_relationship: { type: GraphQLString },
     hr_relationship_class: { type: GraphQLString },
     hr_relationship_desc: { type: GraphQLString },
@@ -121,24 +123,6 @@ export const MemberType = new GraphQLObjectType({
           .catch(err => err)
       }
     }
-  })
-})
-
-export const MemberPositionType = new GraphQLObjectType({
-  name: 'MemberPosition',
-  description: 'Positions of a Member Schema',
-  fields: () => ({
-    building: { type: GraphQLString },
-    department: { type: GraphQLString },
-    department_name: { type: GraphQLString },
-    hr_department: { type: GraphQLString },
-    performance_supervisor: { type: GraphQLString },
-    performance_supervisor_scid: { type: GraphQLString },
-    primary_position: { type: GraphQLBoolean },
-    room: { type: GraphQLString },
-    scs_position_class: { type: GraphQLString },
-    scs_position_desc: { type: GraphQLString },
-    title: { type: GraphQLString }
   })
 })
 
