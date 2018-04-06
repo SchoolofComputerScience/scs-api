@@ -2,9 +2,11 @@ title: SCS:CMU Undergraduate Admissions
 ---
 # Undergraduate Admissions
 
+*Interested in visiting SCS? Fill out [our visitor form](https://www.cs.cmu.edu/registration/node/2103 "visitor form") to get in touch with us.*
+
 ## Admission to Bachelor of Science Programs
 
-Admission to Bachelor of Science programs in the School of Computer Science are administered by the [Carnegie Mellon Office of Undergraduate Admissions](http://admission.enrollment.cmu.edu/). For application requirements, deadlines and information, please refer to the Undergraduate Admissions [website](http://admission.enrollment.cmu.edu/).
+Admission to Bachelor of Science programs in the School of Computer Science are administered by the [Carnegie Mellon Office of Undergraduate Admissions](http://admission.enrollment.cmu.edu/ "Carnegie Mellon Office of Undergraduate Admissions" ). For application requirements, deadlines and information, please refer to the Undergraduate Admissions [website](http://admission.enrollment.cmu.edu/).
 
 For a complete list of undergraduate program offerings at the School of Computer Science, please see the Undergraduate Programs page.
 
