@@ -2,8 +2,6 @@ title: SCS:CMU Undergraduate Programs
 ---
 # Undergraduate Programs
 
-[Undergraduate Admissions](/undergraduate-admissions)
-
 ## Undergraduate Majors
 
 The School of Computer Science offers bachelor's degrees in both [computer science](http://www.csd.cs.cmu.edu/education/bscs/index.html) and, beginning in fall 2017, [computational biology](http://www.cbd.cmu.edu/education/bs-in-computational-biology/). Interdisciplinary majors in [computer science and the arts](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html), and [music and technology](http://www.cs.cmu.edu/~music/mat/bachelor.html) are also available.
@@ -26,25 +24,39 @@ Carnegie Mellon’s diverse and top-ranked departments in computing, engineering
 
 ## All Undergraduate Programs by Department
 
-### [Computer Science](http://www.csd.cs.cmu.edu/)
-* [Bachelor of Science in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/)
-| [More Info](http://www.csd.cs.cmu.edu/education/bscs/)
-| [Apply](http://admission.enrollment.cmu.edu)
-* [Bachelor of Science and Arts](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html)
-| [More Info](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html)
-| [Apply](http://www.cmu.edu/interdisciplinary/admisns/index.html)
-* [Bachelor of Science in Music and Technology](http://www.cs.cmu.edu/~music/mat/bachelor.html)
-| [More Info](http://www.cs.cmu.edu/~music/mat/bachelor.html)
-| [Apply](http://www.cs.cmu.edu/~music/mat/bachelor-apply.html)
-* [Additional Major in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)
-| [More Info](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)
-| [Apply](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)
-* [Minor in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)
-| [More Info](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)
-| [Apply](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)
-* [Minor in Neural Computation](http://www.cnbc.cmu.edu/upnc/nc_minor/)
-| [More Info](http://www.cnbc.cmu.edu/upnc/nc_minor/)
-| [Apply](http://www.cnbc.cmu.edu/upnc/nc_minor/)
+#### Computer Science
+<table class="tbl">
+  <tr>
+    <td>[Bachelor of Science in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/)</td> 
+    <td>[More Info](http://www.csd.cs.cmu.edu/education/bscs/)</td> 
+    <td>[Apply](http://admission.enrollment.cmu.edu)</td>
+  </tr>
+  <tr>
+    <td>[Bachelor of Science and Arts](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html)</td> 
+    <td>[More Info](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html)</td> 
+    <td>[Apply](http://www.cmu.edu/interdisciplinary/admisns/index.html)</td>
+  </tr>
+  <tr>
+    <td>[Bachelor of Science in Music and Technology](http://www.cs.cmu.edu/~music/mat/bachelor.html)</td> 
+    <td>[More Info](http://www.cs.cmu.edu/~music/mat/bachelor.html)</td> 
+    <td>[Apply](http://www.cs.cmu.edu/~music/mat/bachelor-apply.html)</td>
+  </tr>
+  <tr>
+    <td>[Additional Major in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)</td> 
+    <td>[More Info](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)</td> 
+    <td>[Apply](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)</td> 
+    <td>[More Info](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)</td> 
+    <td>[Apply](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Neural Computation](http://www.cnbc.cmu.edu/upnc/nc_minor/)</td> 
+    <td>[More Info](http://www.cnbc.cmu.edu/upnc/nc_minor/)</td> 
+    <td>[Apply](http://www.cnbc.cmu.edu/upnc/nc_minor/)</td>
+  </tr>
+</table>
 
 ### [Human-Computer Interaction Institute](http://www.hcii.cmu.edu/)
 * [Additional Major in Human-Computer Interaction](http://www.hcii.cmu.edu/academics/hci-undergraduate/major/applying)

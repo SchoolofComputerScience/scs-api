@@ -26,8 +26,7 @@ export const CoursesType = new GraphQLObjectType({
     sections: { type: new GraphQLList(CourseSectionType) },
     semester: { type: GraphQLString },
     semester_code: { type: GraphQLString },
-    units:  { type: GraphQLString },
-    year: { type: GraphQLInt },
+    units:  { type: GraphQLString }
    })
 })
 
@@ -46,7 +45,6 @@ export const CourseSectionType = new GraphQLObjectType({
   fields: () => ({
     course_section_id: { type: GraphQLString },
     delivery_mode: { type: GraphQLString },
-    level: { type: GraphQLString },
     location: { type: GraphQLString },
     long_title: { type: GraphQLString },
     presence_required: { type: GraphQLString },
