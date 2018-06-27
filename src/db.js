@@ -15,10 +15,10 @@ const config = {
   }
 };
 
-const DB_Connection = new Sequelize(config);
-const exlusion_list = ['id', 'updatedAt', 'createdAt']
+const DB_CONNECTION = new Sequelize(config);
+const EXCLUSION_LIST = ['id', 'updatedAt', 'createdAt'];
 
-DB_Connection.authenticate()
+DB_CONNECTION.authenticate()
 .then(() => {
   console.log('Connection has been established successfully.');
 })
@@ -27,51 +27,67 @@ DB_Connection.authenticate()
 });
 
 //Models
-// const Member = DB_Connection.define('directory', Models.members, 
+// const Member = DB_CONNECTION.define('directory', Models.members, 
 // { 
 //   freezeTableName: true,
 //   defaultScope: {
-//     attributes: { exclude: exlusion_list }
+//     attributes: { exclude: EXCLUSION_LIST }
 //   }
 // });
 
-// const Position = DB_Connection.define('positions', Models.positions, 
+// const Position = DB_CONNECTION.define('positions', Models.positions, 
 // {
 //   freezeTableName: true,
 //   defaultScope: {
-//     attributes: { exclude: exlusion_list }
+//     attributes: { exclude: EXCLUSION_LIST }
 //   }
 // });
 
-const CoursesBySemester = DB_Connection.define('courses_by_semester', Models.courses, 
+const CoursesBySemester = DB_CONNECTION.define('courses_by_semester', Models.courses, 
 { 
   freezeTableName: true,
   defaultScope: {
-    attributes: { exclude: exlusion_list }
+    attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const CoursesSection = DB_Connection.define('course_sections', Models.courseSections,
+const CoursesSection = DB_CONNECTION.define('course_sections', Models.courseSections,
 {
   freezeTableName: true,
   defaultScope: {
-    attributes: { exclude: exlusion_list }
+    attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const CrossListedCourses = DB_Connection.define('cross_listed_courses', Models.courseCrossListings,
+const CrossListedCourses = DB_CONNECTION.define('cross_listed_courses', Models.courseCrossListings,
 {
   freezeTableName: true,
   defaultScope: {
-    attributes: { exclude: exlusion_list }
+    attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const ClassMeetings = DB_Connection.define('class_meetings', Models.classMeetings,
+const ClassMeetings = DB_CONNECTION.define('class_meetings', Models.classMeetings,
 {
   freezeTableName: true,
   defaultScope: {
-    attributes: { exclude: exlusion_list }
+    attributes: { exclude: EXCLUSION_LIST }
+  }
+});
+
+const ChildCourses = DB_CONNECTION.define('child_courses', Models.childCourses,
+{
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: EXCLUSION_LIST }
+  }
+});
+
+const ParentCourses = DB_CONNECTION.define('parent_courses', Models.parentCourses,
+{
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
@@ -86,9 +102,9 @@ CoursesSection.hasMany(CrossListedCourses, { foreignKey: 'course_section_id', so
 CrossListedCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', sourceKey: 'course_section_id' });
 CoursesSection.hasMany(ClassMeetings, { foreignKey: 'course_section_id', sourceKey: 'course_section_id', as: 'class_meetings' });
 ClassMeetings.belongsTo(CoursesSection, { foreignKey: 'course_section_id', sourceKey: 'course_section_id' });
+CoursesSection.hasMany(ChildCourses, { foreignKey: 'course_section_id', sourceKey: 'course_section_id', as: 'child_courses' });
+ChildCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', sourceKey: 'course_section_id' });
+CoursesSection.hasMany(ParentCourses, { foreignKey: 'course_section_id', sourceKey: 'course_section_id', as: 'parent_courses' });
+ParentCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', sourceKey: 'course_section_id' });
 
-
-
-
-
-export default DB_Connection;
+export default DB_CONNECTION;

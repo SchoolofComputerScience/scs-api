@@ -6,8 +6,8 @@ import Db from './../db';
 
 import { MemberType } from '../types/member';
 
-const Member = Db.models['test_directory'];
-const Position = Db.models['test_positions'];
+const Member = Db.models['directory'];
+const Position = Db.models['positions'];
 
 function buildPosition(row) {
   let position = {};
@@ -22,6 +22,47 @@ function buildPosition(row) {
   position.title = row["positions.title"];
 
   return position;
+}
+
+function buildPublication(row) {
+  let publication = {};
+  publication.authors = row["gs_publications.authors"];
+  publication.description = row["gs_publications.description"];
+  publication.gs_citation_count = row["gs_publications.gs_citation_count"];
+  publication.gs_citation_guid = row["gs_publications.gs_citation_guid"];
+  publication.gs_citation_url = row["gs_publications.gs_citation_url"];
+  publication.gs_profile_guid = row["gs_publications.gs_profile_guid"];
+  publication.pages = row["gs_publications.pages"];
+  publication.pub_date = row["gs_publications.pub_date"];
+  publication.pub_format = row["gs_publications.pub_format"];
+  publication.pub_url = row["gs_publications.pub_url"];
+  publication.pub_year = row["gs_publications.pub_year"];
+  publication.publisher = row["gs_publications.publisher"];
+  publication.title = row["gs_publications.title"];
+  publication.scid = row["gs_publications.scid"];
+
+  return publication;
+}
+
+function buildGSProfile(row) {
+  let profile = {};
+  profile.authors = row["gs_profiles.authors"];
+  profile.gs_affiliation = row["gs_profiles.gs_affiliation"];
+  profile.gs_citation_count = row["gs_profiles.gs_citation_count"];
+  profile.gs_fullname = row["gs_profiles.gs_fullname"];
+  profile.gs_citation_url = row["gs_profiles.gs_citation_url"];
+  profile.gs_profile_guid = row["gs_profiles.gs_profile_guid"];
+  profile.gs_hindex = row["gs_profiles.gs_hindex"];
+  profile.gs_hindex_five_year = row["gs_profiles.gs_hindex_five_year"];
+  profile.gs_homepage_url = row["gs_profiles.gs_homepage_url"];
+  profile.gs_i10index = row["gs_profiles.gs_i10index"];
+  profile.gs_i10index_five_year = row["gs_profiles.gs_i10index_five_year"];
+  profile.gs_image_url = row["gs_profiles.gs_image_url"];
+  profile.gs_areas = row["gs_profiles.gs_areas"];
+  profile.scid = row["gs_profiles.scid"];
+  profile.gs_citation_count_five_year = row["gs_profiles.gs_citation_count_five_year"];
+
+  return profile;
 }
 
 function buildMember(row) {

@@ -16,7 +16,7 @@ export const PublicationType = new GraphQLObjectType({
   fields: () => ({
     _id: { type: GraphQLString },
     authors: { type: GraphQLString },
-    desc: { type: GraphQLString },
+    description: { type: GraphQLString },
     gs_citation_count: { type: GraphQLInt },
     gs_citation_guid: { type: GraphQLString },
     gs_citation_url: { type: GraphQLString },

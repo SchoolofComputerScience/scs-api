@@ -1,27 +1,25 @@
-import mongoose from 'mongoose';
-mongoose.Promise = Promise;
+import sequelize from 'sequelize';
 
-const Schema = mongoose.Schema
+const ProfileSchema =
+{
+  scid: { type: sequelize.Sequelize.STRING },
+  cmu_email: { type: sequelize.Sequelize.STRING },
+  cmu_firstname: { type: sequelize.Sequelize.STRING },
+  cmu_lastname: { type: sequelize.Sequelize.STRING },
+  cmu_fullname: { type: sequelize.Sequelize.STRING },
+  cmu_username: { type: sequelize.Sequelize.STRING },
+  gs_affiliation: { type: sequelize.Sequelize.STRING },
+  gs_citation_count: { type: sequelize.Sequelize.STRING },
+  gs_citation_count_five_year: { type: sequelize.Sequelize.STRING },
+  gs_fullname: { type: sequelize.Sequelize.STRING },
+  gs_hindex: { type: sequelize.Sequelize.STRING },
+  gs_hindex_five_year: { type: sequelize.Sequelize.STRING },
+  gs_homepage_url: { type: sequelize.Sequelize.STRING },
+  gs_i10index: { type: sequelize.Sequelize.STRING },
+  gs_i10index_five_year: { type: sequelize.Sequelize.STRING },
+  gs_image_url: { type: sequelize.Sequelize.STRING },
+  gs_profile_guid: { type: sequelize.Sequelize.STRING },
+  gs_profile_url: { type: sequelize.Sequelize.STRING }
+};
 
-const ProfileSchema = new Schema(
-  {
-    _id: mongoose.Schema.Types.ObjectId,
-    scid: String,
-    gs_affiliation: String,
-    gs_areas: String,
-    gs_citation_count: Number,
-    gs_citation_count_five_year: Number,
-    gs_fullname: String,
-    gs_hindex: Number,
-    gs_hindex_five_year: Number,
-    gs_homepage_url: String,
-    gs_i10index: Number,
-    gs_i10index_five_year: Number,
-    gs_image_url: String,
-    gs_profile_guid: String,
-    gs_profile_url: String,
-  },
-  { collection : 'gs_profile'}
-)
-
-export default mongoose.model('gs_profiles', ProfileSchema, 'gs_profiles');
+export default ProfileSchema;
