@@ -1,28 +1,3 @@
-// import {
-//   GraphQLList,
-//   GraphQLString
-// } from 'graphql'
-
-// import { CoursesType } from '../types/courses'
-// import CoursesData from '../data/courses.js'
-
-// export default {
-//   type: new GraphQLList(CoursesType),
-//   description: 'course listing',
-//   args: {
-//     course_number: { type: GraphQLString },
-//     department: { type: GraphQLString },
-//     semester_code: { type: GraphQLString }
-//   },
-//   resolve: function(parent, args){
-//     let semCode = args.semester_code || "F17"
-//     return CoursesData.find({
-//       semester_code: `${semCode}`
-//     })
-//     .catch(err => err)
-//   }
-// }
-
 import {
   GraphQLList,
   GraphQLString
@@ -35,6 +10,8 @@ const CoursesBySemester = Db.models['courses_by_semester'];
 const CourseSections = Db.models['course_sections'];
 const CrossListedCourses = Db.models['cross_listed_courses'];
 const ClassMeetings = Db.models['class_meetings'];
+const ChildCourses = Db.models['child_courses'];
+const ParentCourses = Db.models['parent_courses'];
 
 
 function buildCourse(row) {
@@ -90,6 +67,24 @@ function buildClassMeeting(row) {
   class_meeting.end_time = row.end_time || row["class_meetings.end_time"];
 
   return class_meeting;
+}
+
+function buildParentCourses(row) {
+  let parent_course = {};
+  parent_course.course_number = row.course_num || row["parent_courses.course_num"];
+  parent_course.section = row.section || row["parent_courses.section"];
+  parent_course.semester_code = row.semester || row["parent_courses.semester"];
+
+  return parent_course;
+}
+
+function buildChildCourses(row) {
+  let child_course = {};
+  child_course.course_number = row.course_num || row["child_courses.course_num"];
+  child_course.section = row.section || row["child_courses.section"];
+  child_course.semester_code = row.semester || row["child_courses.semester"];
+
+  return child_course;
 }
 
 function queryCourses(args) {
@@ -157,6 +152,62 @@ function queryCourses(args) {
     let query_options = {
       raw: true,
       include: [{
+        model: ChildCourses,
+        as: 'child_courses'
+      }],
+      required: false
+    }
+
+    return CourseSections.findAll(query_options).then(data => {
+      const data_length = data.length;
+
+      for (let i = 0; i < data_length; i++) {
+        let child_course = buildChildCourses(data[i]);
+        let has_child_course = child_course.course_number ? true : false;
+        if (course_sections[data[i].course_section_id].child_courses && has_child_course) {
+          course_sections[data[i].course_section_id].child_courses.push(child_course);
+        }
+        else {
+          course_sections[data[i].course_section_id].child_courses = [];
+          if (has_child_course)
+            course_sections[data[i].course_section_id].child_courses.push(child_course);
+        }
+      }
+
+      return course_sections;
+    });
+  }).then(course_sections => {
+    let query_options = {
+      raw: true,
+      include: [{
+        model: ParentCourses,
+        as: 'parent_courses'
+      }],
+      required: false
+    }
+
+    return CourseSections.findAll(query_options).then(data => {
+      const data_length = data.length;
+
+      for (let i = 0; i < data_length; i++) {
+        let parent_course = buildParentCourses(data[i]);
+        let has_parent_course = parent_course.course_number ? true : false;
+        if (course_sections[data[i].course_section_id].parent_courses && has_parent_course) {
+          course_sections[data[i].course_section_id].parent_courses.push(parent_course);
+        }
+        else {
+          course_sections[data[i].course_section_id].parent_courses = [];
+          if (has_parent_course)
+            course_sections[data[i].course_section_id].parent_courses.push(parent_course);
+        }
+      }
+
+      return course_sections;
+    });
+  }).then(course_sections => {
+    let query_options = {
+      raw: true,
+      include: [{
         model: CourseSections,
         as: 'course_sections'
       }],
@@ -201,58 +252,8 @@ function queryCourses(args) {
       return courses;
     });
   });
+  
 }
-
-// function queryCourses(args) {
-//   let query_options = {
-//     raw: true,
-//     include: [{
-//       model: CourseSections,
-//       as: 'course_sections'
-//     }],
-//     required: false,
-//     order: [['course_number', 'ASC']]
-//   }
-
-//   if (args && args.course_id) {
-//     query_options.where = { course_id: args.course_id };
-//   // } else if (args.andrew_id) {
-//   //   query_options.where = { andrew_id: args.andrew_id };
-//   // } else if (args.department) {
-//   //   query_options.where = { department: args.department };
-//   }
-
-//   //return CoursesBySemester.findAll(query_options);
-
-//   return CoursesBySemester.findAll(query_options).then(data => {
-//     const data_length = data.length;
-//     let results = [];
-
-//     for (let i = 0; i < data_length; i++) {
-//       if (results[data[i].course_id]) {
-//         if (setions[data[i].course_section_id])
-//           results[data[i].course_id].sections.push(setions[data[i].course_section_id]);
-//       }
-//       else {
-//         let data_row = buildCourse(data[i]);
-
-//         if (setions[data[i].course_section_id]) {
-//           data_row.sections = [];
-//           data_row.sections.push(setions[data[i].course_section_id]);
-//         }
-
-//         results[data[i].course_id] = data_row;
-//       }
-//     }
-
-//     let courses = [];
-//     for (const result in results) {
-//       courses.push(results[result]);
-//     }
-
-//     return courses;
-//   });
-// }
 
 export default {
   type: new GraphQLList(CoursesType),
