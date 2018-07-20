@@ -28,22 +28,6 @@ In Adventures in Computing students will explore a range of creative technologie
 
 ***
 
-### Alice Institute
-
-Contact: [Don Slater](dslater@cmu.edu)
-
-[http://www.alice.org](http://www.alice.org)
-
-Carnegie Mellon will host the Alice Institute for interested high school and college instructors. This Institute will consist of two workshops. The first workshop will be focused on Alice 2.2 and will be held July 18–22. This workshop will explore the Alice 2.2 programming environment as an effective and engaging tool to introduce students from middle school through college level to programming and Computer Science, perhaps in preparation for a CS 1 course.
-
-The second workshop will be focused on Alice 3, and will be held July 25–29. This workshop will explore the Alice 3 programming environment as an effective and engaging tool for students in a Computer Science 1 or Advanced Placement course in Java.
-
-Working with nationally recognized experts in Alice, a tool developed at Carnegie Mellon, teachers in both workshops will develop an understanding of Alice, and teaching methods suitable for presenting Alice in their own unique environment. The workshop is appropriate for any instructor who is considering or currently using Alice in a pre-CS1 or CS1 course.
-
-Learn more about the workshops or register at [Alice.org](http://www.alice.org/index.php?page=summer2016/workshops).
-
-***
-
 ### ARTSI Alliance: Advancing Robotics Technology for Societal Impact
 
 Contact: [David Touretzky](/directory/david_touretzky)
@@ -51,14 +35,6 @@ Contact: [David Touretzky](/directory/david_touretzky)
 [http://artsialliance.org](http://artsialliance.org)
 
 The ARTSI Alliance is an NSF-funded consortium of 17 Historically Black Colleges and Universities (HBCUs) and 8 major research universities that encourages students from under-represented groups, particularly African Americans, to pursue advanced training in computer science and robotics. Hampton University, an HBCU, is the lead institution; Carnegie Mellon is the lead research university. ARTSI schools offer robotics courses using Carnegie Mellon's Tekkotsu Robotics curriculum, and ARTSI students do summer internship in robotics labs at Carnegie Mellon and the other research universities in the Alliance. Other ARTSI activities include an annual student research conference and robotics competition, an annual summer faculty workshop, and K-12 outreach programs targeting local schools serving minority populations.
-
-***
-
-### Classroom Salon
-
-[http://www.classroomsalon.org](http://www.classroomsalon.org)
-
-Classroom Salon is a digital environment that transforms individual work like annotations and comments into dynamic communities. It helps teachers, authors and group leaders to gauge perspectives and camps of opinion through aggregation and rich visualizations. Classroom Salon is used by thousands of users from schools across US, India, China, and Brazil and other countries. Among Pittsburgh Schools using Classroom Salon are The Ellis School, South Fayette School District, Quaker Valley School District and Grove City College. Classroom Salon is funded by National Science Foundation, Gates Foundations Next Generation Learning Challenges Grant, Innovation Works and Heinz Endowment. To request free accounts to use classroom salon see contact information below.
 
 ***
 
