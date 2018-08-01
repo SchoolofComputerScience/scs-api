@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { DepartmentContentType } from '../types/departments'
-import { getDepartmentWithId } from '../data/departmentContent'
+import { getDepartmentWithId } from '../models/departmentContent'
 
 export default {
   type: DepartmentContentType,

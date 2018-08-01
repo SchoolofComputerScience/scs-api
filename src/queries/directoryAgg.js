@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { DirectoryAggregateType } from '../types/member'
-import MembersData from '../data/members'
+import MembersData from '../models/members'
 
 export default {
   type: new GraphQLList(DirectoryAggregateType),

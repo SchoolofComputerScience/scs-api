@@ -6,6 +6,8 @@ import courseCrossListings from './courseCrossListings';
 import classMeetings from './classMeetings';
 import childCourses from './childCourses';
 import parentCourses from './parentCourses';
+import profile from './profile';
+import publications from './publications';
 
 export default {
   members,
@@ -15,5 +17,7 @@ export default {
   courseCrossListings,
   classMeetings,
   childCourses,
-  parentCourses
+  parentCourses,
+  profile,
+  publications
 }

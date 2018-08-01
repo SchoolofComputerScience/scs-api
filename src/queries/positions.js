@@ -14,9 +14,9 @@ export default {
   },
   resolve: function (parent, args) {
     if (args.scid) {
-      return Db.models['test_positions'].findAll({ where: { 'scid': args.scid } }).then((data) => data);
+      return Db.models['positions'].findAll({ where: { 'scid': args.scid } }).then((data) => data);
     } else {
-      return Db.models['test_positions'].findAll().then((data) => data);
+      return null;
     }
   }
 }

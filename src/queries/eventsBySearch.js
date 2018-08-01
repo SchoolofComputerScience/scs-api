@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { EventsType } from '../types/events'
-import { getEventsWithSearch } from '../data/events'
+import { getEventsWithSearch } from '../models/events'
 
 export default {
   type: new GraphQLList(EventsType),

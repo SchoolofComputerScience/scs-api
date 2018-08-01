@@ -5,7 +5,7 @@ import {
   GraphQLInt
 } from 'graphql';
 
-import PublicationData from '../data/publications.js'
+import PublicationData from '../models/publications.js'
 
 export const PublicationType = new GraphQLObjectType({
   name: 'Publications',
@@ -14,10 +14,9 @@ export const PublicationType = new GraphQLObjectType({
     name: { type: GraphQLString }
   },
   fields: () => ({
-    _id: { type: GraphQLString },
     authors: { type: GraphQLString },
     description: { type: GraphQLString },
-    gs_citation_count: { type: GraphQLInt },
+    gs_citation_count: { type: GraphQLString },
     gs_citation_guid: { type: GraphQLString },
     gs_citation_url: { type: GraphQLString },
     gs_profile_guid: { type: GraphQLString },
@@ -26,7 +25,7 @@ export const PublicationType = new GraphQLObjectType({
     pub_date: { type: GraphQLString },
     pub_format: { type: GraphQLString },
     pub_url: { type: GraphQLString },
-    pub_year: { type: GraphQLInt },
+    pub_year: { type: GraphQLString },
     publisher: { type: GraphQLString },
     timestamp: { type: GraphQLString },
     title: { type: GraphQLString },
@@ -41,19 +40,17 @@ export const ProfileType = new GraphQLObjectType({
     name: { type: GraphQLString }
   },
   fields: () => ({
-    _id: { type: GraphQLString },
-    authors: { type: GraphQLString },
     scid: { type: GraphQLString },
     gs_affiliation: { type: GraphQLString },
     gs_areas: { type: GraphQLString },
-    gs_citation_count: { type: GraphQLInt },
-    gs_citation_count_five_year: { type: GraphQLInt },
+    gs_citation_count: { type: GraphQLString },
+    gs_citation_count_five_year: { type: GraphQLString },
     gs_fullname: { type: GraphQLString },
-    gs_hindex: { type: GraphQLInt },
-    gs_hindex_five_year: { type: GraphQLInt },
+    gs_hindex: { type: GraphQLString },
+    gs_hindex_five_year: { type: GraphQLString },
     gs_homepage_url: { type: GraphQLString },
-    gs_i10index: { type: GraphQLInt },
-    gs_i10index_five_year: { type: GraphQLInt },
+    gs_i10index: { type: GraphQLString },
+    gs_i10index_five_year: { type: GraphQLString },
     gs_image_url: { type: GraphQLString },
     gs_profile_guid: { type: GraphQLString },
     gs_profile_url: { type: GraphQLString },

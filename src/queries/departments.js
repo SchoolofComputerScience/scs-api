@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { DepartmentsType } from '../types/departments'
-import DepartmentsData from '../data/departments.js'
+import DepartmentsData from '../models/departments.js'
 
 export default {
   type: new GraphQLList(DepartmentsType),

@@ -9,11 +9,11 @@ import { FieldCounts } from './utils'
 import { EventsType } from './events'
 import { NewsType } from './news'
 
-import CoursesData from '../data/courses'
-import MemberData from '../data/members'
-import ProgramsData from '../data/programs'
-import { getEventsWithTag } from '../data/events'
-import { getNewsWithTag } from '../data/news'
+import CoursesData from '../models/courses'
+import MemberData from '../models/members'
+import ProgramsData from '../models/programs'
+import { getEventsWithTag } from '../models/events'
+import { getNewsWithTag } from '../models/news'
 
 export const DepartmentContentType = new GraphQLObjectType({
   name: 'DepartmentInfo',

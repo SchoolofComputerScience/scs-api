@@ -5,7 +5,7 @@ import {
 
 import { ResearchAreasType } from '../types/research'
 
-import ResearchData from '../data/research.js'
+import ResearchData from '../models/research.js'
 
 export default {
   type: new GraphQLList(ResearchAreasType),
