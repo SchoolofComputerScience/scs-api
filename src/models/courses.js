@@ -16,4 +16,4 @@ const CoursesSchema =
     lecture_distinction: { type: sequelize.Sequelize.STRING }
   };
 
-export default CoursesSchema;
+export default CoursesSchema; 

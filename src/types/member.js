@@ -2,23 +2,18 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
-  GraphQLFloat,
-  GraphQLBoolean,
-  GraphQLInt
 } from 'graphql';
+import Db from './../db';
 
 import { PublicationType, ProfileType } from './publications';
-import { NewsType } from './news';
-import { EventsType } from './events';
-import { CoursesType } from './courses';
 import { MemberPositionType } from './position';
 
-import { getEventsWithTag } from '../data/events'
-import { getNewsWithTag } from '../data/news'
-import CoursesData from '../data/courses.js'
-import ProfileData from '../data/profile.js'
-import PublicationData from '../data/publications.js'
-import getCurrentSemesterCode from '../data/semesterCode';
+import { getEventsWithTag } from '../models/events'
+import { getNewsWithTag } from '../models/news'
+import CoursesData from '../models/courses.js'
+import ProfileQuery from '../queries/profile.js'
+import PublicationsQuery from '../queries/publications.js'
+import getCurrentSemesterCode from '../models/semesterCode';
 
 export const MemberType = new GraphQLObjectType({
   name: 'Member',
@@ -42,9 +37,7 @@ export const MemberType = new GraphQLObjectType({
     phone_exchange: { type: GraphQLString  },
     phone_extension: { type: GraphQLString },
     phone_extension_secondary: { type: GraphQLString },
-    positions: { 
-      type: new GraphQLList(MemberPositionType) 
-    },
+    positions: { type: new GraphQLList(MemberPositionType) },
     hr_relationship: { type: GraphQLString },
     hr_relationship_class: { type: GraphQLString },
     hr_relationship_desc: { type: GraphQLString },
@@ -69,60 +62,66 @@ export const MemberType = new GraphQLObjectType({
     scs_relationship_subclass: { type: GraphQLString },
     profile: {
       type: new GraphQLList(ProfileType),
-      resolve: function(args) {
-        if(args.scid)
-          return ProfileData
-            .find({
-              scid :`${args.scid}`
-            })
+      resolve: function(member) {
+        if (member.args && member.args.scid) {
+          return ProfileQuery.resolve(member.args)
             .then((data) => data)
             .catch(err =>  err)
+        } 
+        else if (member.args && member.scid) {
+          return ProfileQuery.resolve(member)
+            .then((data) => data)
+            .catch(err => err)
+        }
+        else {
+          return [];
+        }
       }
     },
     publications: {
       type: new GraphQLList(PublicationType),
-      resolve: function(args) {
-        if(args.scid)
-          return PublicationData
-            .find({
-              scid :`${args.scid}`,
-              pub_year: { $exists: true },
-              authors: { $exists: true }
-            })
+      resolve: function(member) {
+        if (member.args && member.args.scid) {
+          return PublicationsQuery
+            .resolve(member.args)
             .then((data) => data)
             .catch(err =>  err)
+        }
+        else {
+          return [];
+        }
       }
     },
-    news: {
-      type: new GraphQLList(NewsType),
-      args: {
-        limit: { type: GraphQLInt }
-      },
-      resolve: function(parent, args) {
-        return getNewsWithTag(parent.scid, args);
-      }
-    },
-    events: {
-      type: new GraphQLList(EventsType),
-      args: {
-        limit: { type: GraphQLInt }
-      },
-      resolve: function(parent, args){
-        return getEventsWithTag(parent.scid, args);
-      }
-    },
-    courses: {
-      type: new GraphQLList(CoursesType),
-      resolve: function(parent){
-        let semester_code = getCurrentSemesterCode();
-        return CoursesData
-          .find({
-            "sections.instructors.scid": `${parent.scid}`,
-            "semester_code": `${semester_code}`
-          })
-          .catch(err => err)
-      }
-    }
+    // news: {
+    //   type: new GraphQLList(NewsType),
+    //   args: {
+    //     limit: { type: GraphQLInt }
+    //   },
+    //   resolve: function(parent, args) {
+    //     return getNewsWithTag(parent.scid, args);
+    //   }
+    // },
+    // events: {
+    //   type: new GraphQLList(EventsType),
+    //   args: {
+    //     limit: { type: GraphQLInt }
+    //   },
+    //   resolve: function(parent, args){
+    //     return getEventsWithTag(parent.scid, args);
+    //   }
+    // },
+    // courses: {
+    //   type: new GraphQLList(CoursesType),
+    //   resolve: function(parent){
+    //     let semester_code = getCurrentSemesterCode();
+    //     return CoursesData
+    //       .find({
+    //         "sections.instructors.scid": `${parent.scid}`,
+    //         "semester_code": `${semester_code}`
+    //       })
+    //       .catch(err => err)
+    //   }
+    // }
   })
 })
 

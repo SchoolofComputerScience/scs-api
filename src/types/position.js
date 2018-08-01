@@ -19,7 +19,6 @@ export const MemberPositionType = new GraphQLObjectType({
     room_id: { type: GraphQLString },
     scs_position_class: { type: GraphQLString },
     scs_position_desc: { type: GraphQLString },
-    title: { type: GraphQLString },
-    scid: { type: GraphQLString }
+    title: { type: GraphQLString }
   })
 })

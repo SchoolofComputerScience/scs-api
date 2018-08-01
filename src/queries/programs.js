@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { ProgramType } from '../types/programs'
-import ProgramsData from '../data/programs.js'
+import ProgramsData from '../models/programs.js'
 
 export default {
   type: new GraphQLList(ProgramType),

@@ -24,47 +24,6 @@ function buildPosition(row) {
   return position;
 }
 
-function buildPublication(row) {
-  let publication = {};
-  publication.authors = row["gs_publications.authors"];
-  publication.description = row["gs_publications.description"];
-  publication.gs_citation_count = row["gs_publications.gs_citation_count"];
-  publication.gs_citation_guid = row["gs_publications.gs_citation_guid"];
-  publication.gs_citation_url = row["gs_publications.gs_citation_url"];
-  publication.gs_profile_guid = row["gs_publications.gs_profile_guid"];
-  publication.pages = row["gs_publications.pages"];
-  publication.pub_date = row["gs_publications.pub_date"];
-  publication.pub_format = row["gs_publications.pub_format"];
-  publication.pub_url = row["gs_publications.pub_url"];
-  publication.pub_year = row["gs_publications.pub_year"];
-  publication.publisher = row["gs_publications.publisher"];
-  publication.title = row["gs_publications.title"];
-  publication.scid = row["gs_publications.scid"];
-
-  return publication;
-}
-
-function buildGSProfile(row) {
-  let profile = {};
-  profile.authors = row["gs_profiles.authors"];
-  profile.gs_affiliation = row["gs_profiles.gs_affiliation"];
-  profile.gs_citation_count = row["gs_profiles.gs_citation_count"];
-  profile.gs_fullname = row["gs_profiles.gs_fullname"];
-  profile.gs_citation_url = row["gs_profiles.gs_citation_url"];
-  profile.gs_profile_guid = row["gs_profiles.gs_profile_guid"];
-  profile.gs_hindex = row["gs_profiles.gs_hindex"];
-  profile.gs_hindex_five_year = row["gs_profiles.gs_hindex_five_year"];
-  profile.gs_homepage_url = row["gs_profiles.gs_homepage_url"];
-  profile.gs_i10index = row["gs_profiles.gs_i10index"];
-  profile.gs_i10index_five_year = row["gs_profiles.gs_i10index_five_year"];
-  profile.gs_image_url = row["gs_profiles.gs_image_url"];
-  profile.gs_areas = row["gs_profiles.gs_areas"];
-  profile.scid = row["gs_profiles.scid"];
-  profile.gs_citation_count_five_year = row["gs_profiles.gs_citation_count_five_year"];
-
-  return profile;
-}
-
 function buildMember(row) {
   let member = {};
   member.andrew_id = row.andrew_id;
@@ -99,22 +58,29 @@ function buildMember(row) {
 }
 
 function queryMembers(args) {
-  let query_options = {
-    raw: true,
-    include: [{
-      model: Position,
-      as: 'positions'
-    }],
-    order: [['family_name', 'ASC']]
+  let position_model = {
+    model: Position,
+    as: 'positions'
+  };
+
+  if (args && args.department) {
+    position_model.where = { hr_department_id: args.department }
   }
 
-  if (args.scid) {
-    query_options.where = { scid: args.scid };
-  } else if (args.andrew_id) {
-    query_options.where = { andrew_id: args.andrew_id };
-  } else if (args.department) {
-    query_options.where = { department: args.department };
+  let query_options = {
+    raw: true,
+    include: [position_model]
   }
+
+  let where = {};
+
+  if (args && args.scid) {
+    where.scid = args.scid;
+  } else if (args && args.andrew_id) {
+    where.andrew_id = args.andrew_id;
+  }
+
+  query_options.where = where;
 
   return Member.findAll(query_options).then(data => {
     const data_length = data.length;
@@ -132,14 +98,16 @@ function queryMembers(args) {
 
         results[data[i].scid] = data_row;
       }
+
+      results[data[i].scid].args = args;
     }
 
-    let members = [];
+    let final_members = [];
     for (const result in results) {
-      members.push(results[result]);
+      final_members.push(results[result]);
     }
 
-    return members;
+    return final_members;
   });
 }
 
@@ -149,10 +117,7 @@ export default {
   args: {
     scid: { type: GraphQLString },
     andrew_id: { type: GraphQLString },
-    department: { type: GraphQLString },
-    starts_with: { type: GraphQLString },
-    research_area: { type: GraphQLString },
-    sortBy: { type: GraphQLString }
+    department: { type: GraphQLString }
   },
   resolve: function(parent, args) {
     if(args.scid) {

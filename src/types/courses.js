@@ -6,13 +6,12 @@ import {
   GraphQLBoolean
 } from 'graphql';
 
-import MemberData from '../data/members';
+import MemberData from '../models/members';
 
 export const CoursesType = new GraphQLObjectType({
   name: 'Courses',
   description: 'List of courses',
   fields: () => ({
-    _id: { type: GraphQLString },
     areas: { type: new GraphQLList(CourseAreaType)},
     college: { type: GraphQLString },
     course_id: { type: GraphQLString },
