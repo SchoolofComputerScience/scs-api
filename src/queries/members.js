@@ -120,11 +120,11 @@ export default {
     department: { type: GraphQLString }
   },
   resolve: function(parent, args) {
-    if(args.scid) {
+    if(args && args.scid) {
       return queryMembers({ scid: args.scid });
-    } else if(args.andrew_id) {
+    } else if(args && args.andrew_id) {
       return queryMembers({ andrew_id: args.andrew_id });
-    }else if(args.department) {
+    } else if(args && args.department) {
       return queryMembers({ department: args.department });
     } else {
       return queryMembers();

@@ -53,7 +53,7 @@ export default {
     scid: { type: GraphQLString }
   },
   resolve: function (args) {
-    if (args.scid) {
+    if (args && args.scid) {
       return queryProfiles(args);
     } else {
       return queryProfiles();

@@ -19,6 +19,7 @@ import programs from './programs';
 import publication from './publication';
 import publications from './publications';
 import researchAreas from './researchAreas';
+import researchAreaCourses from './researchAreaCourses';
 import semesterCode from './semesterCode';
 import positions from './positions';
 
@@ -44,6 +45,7 @@ export default {
   publication,
   publications,
   researchAreas,
+  researchAreaCourses,
   semesterCode,
   positions
 }

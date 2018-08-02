@@ -5,15 +5,7 @@ import {
   GraphQLFloat
 } from 'graphql';
 
-const ResearchAreasCourseType = new GraphQLObjectType({
-  name: 'ResearchAreasCourse',
-  description: 'Course that has an association with an area',
-  fields: () => ({
-    course_id: { type: GraphQLString },
-    course_number: { type: GraphQLString },
-    title: { type: GraphQLString }
-  })
-});
+import ResearchCoursesQuery from '../queries/researchAreaCourses'
 
 const ResearchAreasDescriptionSourceType = new GraphQLObjectType({
   name: 'ResearchAreasDescriptionSource',
@@ -64,16 +56,38 @@ const ResearchAreasProgramType = new GraphQLObjectType({
 });
 
 
+export const ResearchAreasCourseType = new GraphQLObjectType({
+  name: 'ResearchAreasCourse',
+  description: 'Course that has an association with an area',
+  fields: () => ({
+    course_id: { type: GraphQLString },
+    course_number: { type: GraphQLString },
+    title: { type: GraphQLString }
+  })
+});
+
 export const ResearchAreasType = new GraphQLObjectType({
   name: 'ResearchAreas',
   description: 'List of research areas',
   fields: () => ({
     area_id: { type: GraphQLString },
-    courses: { type: new GraphQLList(ResearchAreasCourseType) },
+    courses: { 
+      type: new GraphQLList(ResearchAreasCourseType),
+      resolve: function (area) {
+        if (area.args && area.args.area_id) {
+          return ResearchCoursesQuery.resolve(member.args)
+            .then((data) => data)
+            .catch(err => err)
+        }
+        else {
+          return [];
+        } 
+      }
+    },
     description: { type: ResearchAreasDescriptionType },
     title: { type: GraphQLString },
-    gs_count: { type: GraphQLFloat },
-    members: { type: new GraphQLList(ResearchAreasMemberType) },
-    programs: { type: new GraphQLList(ResearchAreasProgramType) }
+    gs_count: { type: GraphQLFloat }
+    // members: { type: new GraphQLList(ResearchAreasMemberType) },
+    // programs: { type: new GraphQLList(ResearchAreasProgramType) }
   })
 });
