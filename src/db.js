@@ -115,6 +115,14 @@ const ResearchAreas = DB_CONNECTION.define('research_areas', Models.researchArea
   }
 });
 
+const ResearchAreaCourses = DB_CONNECTION.define('research_courses', Models.researchAreaCourses,
+{
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: EXCLUSION_LIST }
+  }
+});
+
 
 //Relationships
 
@@ -144,5 +152,12 @@ ChildCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', source
 
 CoursesSection.hasMany(ParentCourses, { foreignKey: 'course_section_id', sourceKey: 'course_section_id', as: 'parent_courses' });
 ParentCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', sourceKey: 'course_section_id' });
+
+
+//------RESEARCH AREAS------//
+ResearchAreaCourses.hasMany(CoursesBySemester, { foreignKey: 'course_id', sourceKey: 'course_id', as: 'research_courses' });
+CoursesBySemester.belongsTo(ResearchAreaCourses, { foreignKey: 'course_id', sourceKey: 'course_id' });
+
+
 
 export default DB_CONNECTION;
