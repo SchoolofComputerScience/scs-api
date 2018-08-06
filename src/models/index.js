@@ -10,6 +10,7 @@ import profile from './profile';
 import publications from './publications';
 import researchAreas from './research';
 import researchAreaCourses from './researchCourses';
+import researchAreaMembers from './researchMembers';
 
 export default {
   members,
@@ -23,5 +24,6 @@ export default {
   profile,
   publications,
   researchAreas,
-  researchAreaCourses
+  researchAreaCourses,
+  researchAreaMembers
 }

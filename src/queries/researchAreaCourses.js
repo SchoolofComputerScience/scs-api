@@ -4,7 +4,7 @@ import {
 } from 'graphql';
 import Db from './../db';
 
-import { ResearchAreasCourseType } from '../types/research';
+import { ResearchAreasCourseType } from '../types/researchAreaCourses';
 
 const ResearchAreaCourses = Db.models['research_courses'];
 const CoursesBySemester = Db.models['courses_by_semester'];
@@ -13,7 +13,8 @@ function buildResearchAreaCourse(row) {
   let research_area_course = {};
   research_area_course.course_id = row.course_id;
   research_area_course.course_number = row.course_number;
-  research_area_course.title = row['courses_by_semester.long_title'];
+  research_area_course.description = row.description;
+  research_area_course.title = row['research_area_courses.long_title'];
 
   return research_area_course;
 }
@@ -23,7 +24,7 @@ function queryResearchAreaCourses(args) {
     raw: true,
     include: [{
       model: CoursesBySemester,
-      as: 'research_courses'
+      as: 'research_area_courses'
     }],
     required: true
   }

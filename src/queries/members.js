@@ -16,7 +16,7 @@ function buildPosition(row) {
   position.hr_department_id = row["positions.hr_department_id"];
   position.performance_supervisor_scid = row["positions.performance_supervisor_scid"];
   position.primary_position_indicator = row["positions.primary_position_indicator"];
-  position.room_id = row["positions.room_id"];
+  position.room = row["positions.room"];
   position.scs_position_class = row["positions.scs_position_class"];
   position.scs_position_desc = row["positions.scs_position_desc"];
   position.title = row["positions.title"];
