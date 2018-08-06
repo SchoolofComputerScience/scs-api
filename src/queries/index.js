@@ -20,6 +20,7 @@ import publication from './publication';
 import publications from './publications';
 import researchAreas from './researchAreas';
 import researchAreaCourses from './researchAreaCourses';
+import researchAreaMembers from './researchAreaMembers';
 import semesterCode from './semesterCode';
 import positions from './positions';
 
@@ -46,6 +47,7 @@ export default {
   publications,
   researchAreas,
   researchAreaCourses,
+  researchAreaMembers,
   semesterCode,
   positions
 }

@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.load({ path: '.env' });
 import Sequelize from 'sequelize';
 import Models from './models';
 
@@ -123,6 +125,15 @@ const ResearchAreaCourses = DB_CONNECTION.define('research_courses', Models.rese
   }
 });
 
+const ResearchAreaMembers = DB_CONNECTION.define('research_members', Models.researchAreaMembers,
+{
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: EXCLUSION_LIST }
+  }
+});
+
+
 
 //Relationships
 
@@ -155,8 +166,11 @@ ParentCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', sourc
 
 
 //------RESEARCH AREAS------//
-ResearchAreaCourses.hasMany(CoursesBySemester, { foreignKey: 'course_id', sourceKey: 'course_id', as: 'research_courses' });
+ResearchAreaCourses.hasMany(CoursesBySemester, { foreignKey: 'course_id', sourceKey: 'course_id', as: 'research_area_courses' });
 CoursesBySemester.belongsTo(ResearchAreaCourses, { foreignKey: 'course_id', sourceKey: 'course_id' });
+
+ResearchAreaMembers.hasMany(Member, { foreignKey: 'scid', sourceKey: 'scid', as: 'research_area_members' });
+Member.belongsTo(ResearchAreaMembers, { foreignKey: 'scid', sourceKey: 'scid' });
 
 
 
