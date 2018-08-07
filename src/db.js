@@ -133,6 +133,14 @@ const ResearchAreaMembers = DB_CONNECTION.define('research_members', Models.rese
   }
 });
 
+const Instructors = DB_CONNECTION.define('instructors', Models.instructors,
+{
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: EXCLUSION_LIST }
+  }
+});
+
 
 
 //Relationships
@@ -152,6 +160,9 @@ Publications.belongsTo(Member, { foreignKey: 'scid', sourceKey: 'scid' });
 CoursesBySemester.hasMany(CoursesSection, { foreignKey: 'course_id', sourceKey: 'course_id', as: 'course_sections' });
 CoursesSection.belongsTo(CoursesBySemester, { foreignKey: 'course_id', sourceKey: 'course_id' });
 
+CoursesSection.hasMany(CoursesBySemester, { foreignKey: 'course_id', sourceKey: 'course_id', as: 'course_section_courses' });
+CoursesBySemester.belongsTo(CoursesSection, { foreignKey: 'course_id', sourceKey: 'course_id' });
+
 CoursesSection.hasMany(CrossListedCourses, { foreignKey: 'course_section_id', sourceKey: 'course_section_id', as: 'cross_listed_courses' });
 CrossListedCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', sourceKey: 'course_section_id' });
 
@@ -163,6 +174,9 @@ ChildCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', source
 
 CoursesSection.hasMany(ParentCourses, { foreignKey: 'course_section_id', sourceKey: 'course_section_id', as: 'parent_courses' });
 ParentCourses.belongsTo(CoursesSection, { foreignKey: 'course_section_id', sourceKey: 'course_section_id' });
+
+Instructors.hasMany(CoursesSection, { foreignKey: 'course_section_id', sourceKey: 'course_section_id', as: 'instructor_course_sections' });
+CoursesSection.belongsTo(Instructors, { foreignKey: 'course_section_id', sourceKey: 'course_section_id' });
 
 
 //------RESEARCH AREAS------//

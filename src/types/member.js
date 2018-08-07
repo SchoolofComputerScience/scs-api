@@ -7,10 +7,11 @@ import Db from './../db';
 
 import { PublicationType, ProfileType } from './publications';
 import { MemberPositionType } from './position';
+import { CoursesType } from './courses';
 
 import { getEventsWithTag } from '../models/events'
 import { getNewsWithTag } from '../models/news'
-import CoursesData from '../models/courses.js'
+import InstructorsQuery from '../queries/instructors.js'
 import ProfileQuery from '../queries/profile.js'
 import PublicationsQuery from '../queries/publications.js'
 import getCurrentSemesterCode from '../models/semesterCode';
@@ -110,18 +111,31 @@ export const MemberType = new GraphQLObjectType({
     //     return getEventsWithTag(parent.scid, args);
     //   }
     // },
-    // courses: {
-    //   type: new GraphQLList(CoursesType),
-    //   resolve: function(parent){
-    //     let semester_code = getCurrentSemesterCode();
-    //     return CoursesData
-    //       .find({
-    //         "sections.instructors.scid": `${parent.scid}`,
-    //         "semester_code": `${semester_code}`
-    //       })
-    //       .catch(err => err)
-    //   }
-    // }
+    courses: {
+      type: new GraphQLList(CoursesType),
+      resolve: function (member){
+        //let semester_code = getCurrentSemesterCode();
+        // return CoursesData
+        //   .find({
+        //     "sections.instructors.scid": `${parent.scid}`,
+        //     "semester_code": `${semester_code}`
+        //   })
+        //   .catch(err => err)
+        if (member.args && member.args.scid) {
+          return InstructorsQuery.resolve(member.args)
+            .then((data) => data)
+            .catch(err => err)
+        }
+        else if (member.args && member.scid) {
+          return InstructorsQuery.resolve(member)
+            .then((data) => data)
+            .catch(err => err)
+        }
+        else {
+          return [];
+        }
+      }
+    }
   })
 })
 

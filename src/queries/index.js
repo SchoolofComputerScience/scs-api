@@ -23,6 +23,7 @@ import researchAreaCourses from './researchAreaCourses';
 import researchAreaMembers from './researchAreaMembers';
 import semesterCode from './semesterCode';
 import positions from './positions';
+import instructors from './instructors';
 
 export default {
   biographies,
@@ -37,17 +38,18 @@ export default {
   event,
   events,
   eventsBySearch,
+  instructors,
   members,
   news,
   newsArticle,
   newsBySearch,
   newsByTag,
+  positions,
   programs,
   publication,
   publications,
   researchAreas,
   researchAreaCourses,
   researchAreaMembers,
-  semesterCode,
-  positions
+  semesterCode
 }
