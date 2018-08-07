@@ -11,6 +11,7 @@ import publications from './publications';
 import researchAreas from './research';
 import researchAreaCourses from './researchCourses';
 import researchAreaMembers from './researchMembers';
+import instructors from './instructors';
 
 export default {
   members,
@@ -25,5 +26,6 @@ export default {
   publications,
   researchAreas,
   researchAreaCourses,
-  researchAreaMembers
+  researchAreaMembers,
+  instructors
 }
