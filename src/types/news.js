@@ -8,26 +8,20 @@ import { TagScids } from './utils';
 
 export const NewsType = new GraphQLObjectType({
   name: 'News',
-  description: 'News feed from Prismic.io',
+  description: 'SCS News',
   fields: () => ({
     id:{ type:GraphQLString },
-    uid: { type: GraphQLString},
-    tags: {
-      type: new GraphQLList(TagScids),
-      resolve: (parent, args) => parent.tags
-    },
-    image: {
-      type: GraphQLString,
-      resolve: (parent, args) => parent.data['news.image'].value.main.url
-    },
-    date: {
-      type: GraphQLString,
-      resolve: (parent, args) => parent.data['news.publish_date'].value
-    },
-    title: {
-      type: GraphQLString,
-      resolve: (parent, args) => parent.data['news.title'].value[0].text
-    }
+    //tags: { type: new GraphQLList(TagScids) },
+    image: { type: GraphQLString },
+    image_alt: { type: GraphQLString },
+    image_caption: { type: GraphQLString },
+    date: { type: GraphQLString },
+    author: { type: GraphQLString },
+    contact_person_scid: { type: GraphQLString },
+    headline: { type: GraphQLString },
+    copy: { type: GraphQLString },
+    summary: { type: GraphQLString },
+    subheading: { type: GraphQLString }
   })
 })
 

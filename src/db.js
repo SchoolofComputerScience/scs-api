@@ -149,6 +149,14 @@ const Events = DB_CONNECTION.define('events', Models.events,
   }
 });
 
+const News = DB_CONNECTION.define('news', Models.news,
+{
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: ['updatedAt', 'createdAt'] }
+  }
+});
+
 
 
 //Relationships
