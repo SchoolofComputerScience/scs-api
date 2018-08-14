@@ -1,21 +1,15 @@
-import mongoose from 'mongoose';
-mongoose.Promise = Promise;
+import sequelize from 'sequelize';
 
-const Schema = mongoose.Schema
+const DepartmentsSchema =
+{
+  dept_id: { type: sequelize.Sequelize.STRING },
+  dept_name: { type: sequelize.Sequelize.STRING },
+  college_id: { type: sequelize.Sequelize.STRING },
+  college_name: { type: sequelize.Sequelize.STRING },
+  scs_relationship: { type: sequelize.Sequelize.STRING },
+  scs_type: { type: sequelize.Sequelize.STRING },
+  cmu_type: { type: sequelize.Sequelize.STRING },
+  dept_url: { type: sequelize.Sequelize.STRING }
+};
 
-const DepartmentsSchema = new Schema(
-  {
-    _id: mongoose.Schema.Types.ObjectId,
-    department_id: String,
-    department_name: String,
-    college_id: String,
-    college_name: String,
-    scs_relationship: String,
-    scs_type: String,
-    cmu_type: String,
-    url: String
-  },
-  { collection : 'departments'}
-)
-
-export default mongoose.model('departments', DepartmentsSchema, 'departments')
+export default DepartmentsSchema;

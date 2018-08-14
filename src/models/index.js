@@ -14,6 +14,7 @@ import researchAreaMembers from './researchMembers';
 import instructors from './instructors';
 import events from './events';
 import news from './news';
+import departments from './departments';
 
 export default {
   members,
@@ -23,13 +24,14 @@ export default {
   courseCrossListings,
   classMeetings,
   childCourses,
+  departments,
+  events,
+  instructors,
+  news,
   parentCourses,
   profile,
   publications,
   researchAreas,
   researchAreaCourses,
-  researchAreaMembers,
-  instructors,
-  events,
-  news
+  researchAreaMembers
 }

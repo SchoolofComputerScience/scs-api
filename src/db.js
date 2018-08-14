@@ -157,6 +157,14 @@ const News = DB_CONNECTION.define('news', Models.news,
   }
 });
 
+const Departments = DB_CONNECTION.define('departments', Models.departments,
+{
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: EXCLUSION_LIST }
+  }
+});
+
 
 
 //Relationships
