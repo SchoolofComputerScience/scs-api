@@ -141,6 +141,14 @@ const Instructors = DB_CONNECTION.define('instructors', Models.instructors,
   }
 });
 
+const Events = DB_CONNECTION.define('events', Models.events,
+{
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: ['updatedAt', 'createdAt'] }
+  }
+});
+
 
 
 //Relationships

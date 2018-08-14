@@ -12,6 +12,7 @@ import researchAreas from './research';
 import researchAreaCourses from './researchCourses';
 import researchAreaMembers from './researchMembers';
 import instructors from './instructors';
+import events from './events';
 
 export default {
   members,
@@ -27,5 +28,6 @@ export default {
   researchAreas,
   researchAreaCourses,
   researchAreaMembers,
-  instructors
+  instructors,
+  events
 }
