@@ -1,53 +1,18 @@
-import pris from 'prismic.io';
+import sequelize from 'sequelize';
 
-const prismicApi = process.env.PRISMIC;
+const NewsSchema =
+{
+  id: { type: sequelize.Sequelize.STRING, primaryKey: true },
+  image: { type: sequelize.Sequelize.STRING },
+  image_alt: { type: sequelize.Sequelize.STRING },
+  image_caption: { type: sequelize.Sequelize.STRING },
+  copy: { type: sequelize.Sequelize.STRING },
+  headline: { type: sequelize.Sequelize.STRING },
+  subheading: { type: sequelize.Sequelize.STRING },
+  summary: { type: sequelize.Sequelize.STRING },
+  date: { type: sequelize.Sequelize.DATE },
+  author: { type: sequelize.Sequelize.STRING },
+  contact_person_scid: { type: sequelize.Sequelize.STRING }
+};
 
-export function getNews(limit){
-  return pris.api(prismicApi)
-    .then(function(api) {
-      return api.query(
-        pris.Predicates.at('document.type', 'news'),
-        { pageSize : limit, orderings : '[my.news.publish_date desc]' }
-      )
-    })
-    .then(res => res.results)
-    .catch(err => err)
-}
-
-export function getNewsWithTag(tag, args){
-  let limit = args ? args.limit : 20
-  return pris.api(prismicApi)
-    .then(function(api) {
-      return api.query(
-        [ pris.Predicates.at('document.type', 'news'),
-          pris.Predicates.at("document.tags", [tag]) ],
-        { pageSize: limit, orderings :'[my.news.publish_date desc]' }
-      )
-    })
-    .then(res => res.results)
-    .catch(err => err)
-}
-
-export function getNewsWithSearch(topic){
-  return pris.api(prismicApi)
-    .then(function(api) {
-      return api.query(
-        [ pris.Predicates.at('document.type', 'news'),
-          pris.Predicates.fulltext('document', `${topic}`) ],
-        { pageSize: 20, orderings :'[my.news.publish_date desc]' }
-      )
-    })
-    .then(res => res.results)
-    .catch(err => err)
-}
-
-export function getNewsWithId(uid){
-  return pris.api(prismicApi)
-    .then(function(api) {
-      return api.query(
-        `[[:d = at(my.news.uid,"${uid}")]]`
-      )
-    })
-    .then(res => [res])
-    .catch(err => err)
-}
+export default NewsSchema;
