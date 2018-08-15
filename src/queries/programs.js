@@ -2,9 +2,40 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql'
+import Db from './../db';
 
-import { ProgramType } from '../types/programs'
-import ProgramsData from '../models/programs.js'
+import { ProgramType } from '../types/programs';
+const Programs = Db.models['programs'];
+
+function buildPrograms(row) {
+  let program = {};
+  program.additional_degree = row.additional_degree;
+  program.active = row.active;
+  program.degree_level = row.degree_level;
+  program.description = row.description;
+  program.departments = row.department;
+  program.url = row.url;
+  program.graduate_level = row.graduate_level;
+  program.program_id = row.program_id;
+  program.program_name = row.program_name;
+
+  return program;
+}
+
+function queryPrograms() {
+  return Programs.findAll().then(data => {
+    const data_length = data.length;
+    let results = [];
+
+    for (let i = 0; i < data_length; i++) {
+      let program = buildPrograms(data[i]);
+      program.departments = program.departments.split(',');
+      results.push(program);
+    }
+
+    return results;
+  });
+}
 
 export default {
   type: new GraphQLList(ProgramType),
@@ -14,20 +45,10 @@ export default {
     degree_level: { type: GraphQLString },
     graduate_level: { type: GraphQLString }
   },
-  description: 'List of Programs',
-  resolve: function(_, args){
-    let query = {};
-    if (args.program_id)
-      query.program_id = args.program_id;
-    if (args.department)
-      query.department = args.department;
-    if (args.degree_level)
-      query.degree_level = args.degree_level;
-    if (args.graduate_level)
-      query.graduate_level = args.graduate_level;
-
-    return ProgramsData.find(query)
-      .then(data => data)
-      .catch(err =>  err)
+  description: 'List Of Programs',
+  resolve: function () {
+    return queryPrograms();
   }
 }
+
+

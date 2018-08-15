@@ -29,136 +29,126 @@ DB_CONNECTION.authenticate()
 });
 
 //Models
-const Member = DB_CONNECTION.define('directory', Models.members, 
-{ 
+const Member = DB_CONNECTION.define('directory', Models.members, { 
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const Position = DB_CONNECTION.define('positions', Models.positions, 
-{
+const Position = DB_CONNECTION.define('positions', Models.positions, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const Profile = DB_CONNECTION.define('gs_profiles', Models.profile,
-{
+const Profile = DB_CONNECTION.define('gs_profiles', Models.profile, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const Publications = DB_CONNECTION.define('gs_publications', Models.publications,
-{
+const Publications = DB_CONNECTION.define('gs_publications', Models.publications, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const CoursesBySemester = DB_CONNECTION.define('courses_by_semester', Models.courses, 
-{ 
+const CoursesBySemester = DB_CONNECTION.define('courses_by_semester', Models.courses, { 
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const CoursesSection = DB_CONNECTION.define('course_sections', Models.courseSections,
-{
+const CoursesSection = DB_CONNECTION.define('course_sections', Models.courseSections, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const CrossListedCourses = DB_CONNECTION.define('cross_listed_courses', Models.courseCrossListings,
-{
+const CrossListedCourses = DB_CONNECTION.define('cross_listed_courses', Models.courseCrossListings, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const ClassMeetings = DB_CONNECTION.define('class_meetings', Models.classMeetings,
-{
+const ClassMeetings = DB_CONNECTION.define('class_meetings', Models.classMeetings, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const ChildCourses = DB_CONNECTION.define('child_courses', Models.childCourses,
-{
+const ChildCourses = DB_CONNECTION.define('child_courses', Models.childCourses, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const ParentCourses = DB_CONNECTION.define('parent_courses', Models.parentCourses,
-{
+const ParentCourses = DB_CONNECTION.define('parent_courses', Models.parentCourses, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const ResearchAreas = DB_CONNECTION.define('research_areas', Models.researchAreas,
-{
+const ResearchAreas = DB_CONNECTION.define('research_areas', Models.researchAreas, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const ResearchAreaCourses = DB_CONNECTION.define('research_courses', Models.researchAreaCourses,
-{
+const ResearchAreaCourses = DB_CONNECTION.define('research_courses', Models.researchAreaCourses, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const ResearchAreaMembers = DB_CONNECTION.define('research_members', Models.researchAreaMembers,
-{
+const ResearchAreaMembers = DB_CONNECTION.define('research_members', Models.researchAreaMembers, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const Instructors = DB_CONNECTION.define('instructors', Models.instructors,
-{
+const Instructors = DB_CONNECTION.define('instructors', Models.instructors, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
 
-const Events = DB_CONNECTION.define('events', Models.events,
-{
+const Events = DB_CONNECTION.define('events', Models.events, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: ['updatedAt', 'createdAt'] }
   }
 });
 
-const News = DB_CONNECTION.define('news', Models.news,
-{
+const News = DB_CONNECTION.define('news', Models.news, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: ['updatedAt', 'createdAt'] }
   }
 });
 
-const Departments = DB_CONNECTION.define('departments', Models.departments,
-{
+const Departments = DB_CONNECTION.define('departments', Models.departments, {
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: EXCLUSION_LIST }
+  }
+});
+
+const Programs = DB_CONNECTION.define('programs', Models.programs, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }

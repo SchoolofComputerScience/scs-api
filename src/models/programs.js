@@ -1,41 +1,18 @@
-import mongoose from 'mongoose';
-mongoose.Promise = Promise;
+import sequelize from 'sequelize';
 
-const Schema = mongoose.Schema
+const ProgramsSchema =
+{
+  additional_degree: { type: sequelize.Sequelize.BOOLEAN },
+  active: { type: sequelize.Sequelize.BOOLEAN },
+  degree_level: { type: sequelize.Sequelize.STRING },
+  description: { type: sequelize.Sequelize.STRING },
+  department: { type: sequelize.Sequelize.STRING },
+  graduate_level: { type: sequelize.Sequelize.STRING },
+  program_alias: { type: sequelize.Sequelize.STRING },
+  program_id: { type: sequelize.Sequelize.STRING },
+  program_name: { type: sequelize.Sequelize.STRING },
+  url: { type: sequelize.Sequelize.STRING }
+};
 
-const ProgramsSchema = new Schema(
-  {
-    _id: mongoose.Schema.Types.ObjectId,
-    additional_degree: Boolean,
-    degree_level: String,
-    department: [String],
-    description: String,
-    graduate_level: String,
-    program_alias: String,
-    program_id: String,
-    program_name: String,
-    url: String,
-    goals: [{
-      track_id: String,
-      goal: String
-    }],
-    tracks: [{
-      track_id: String,
-      track_name: String
-    }],
-    learning_outcomes: [{
-      track_id: String,
-      outcomes: [String]
-    }],
-    areas: [{
-      track_id: String,
-      areas: [{
-        title: String,
-        area_id: String
-      }]
-    }]
-  },
-  { collection : 'programs'}
-)
+export default ProgramsSchema;
 
-export default mongoose.model('programs', ProgramsSchema, 'programs')
