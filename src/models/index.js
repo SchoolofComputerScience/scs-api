@@ -15,6 +15,7 @@ import instructors from './instructors';
 import events from './events';
 import news from './news';
 import departments from './departments';
+import programs from './programs';
 
 export default {
   members,
@@ -30,6 +31,7 @@ export default {
   news,
   parentCourses,
   profile,
+  programs,
   publications,
   researchAreas,
   researchAreaCourses,
