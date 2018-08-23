@@ -3,7 +3,7 @@ import {
   GraphQLString,
   GraphQLList,
 } from 'graphql';
-import Db from './../db';
+import Db from '../db';
 
 import { PublicationType, ProfileType } from './publications';
 import { MemberPositionType } from './position';
@@ -11,9 +11,9 @@ import { CoursesType } from './courses';
 
 import { getEventsWithTag } from '../models/events'
 import { getNewsWithTag } from '../models/news'
-import InstructorsQuery from '../queries/instructors.js'
-import ProfileQuery from '../queries/profile.js'
-import PublicationsQuery from '../queries/publications.js'
+import InstructorsQuery from '../queries/instructors'
+import ProfileQuery from '../queries/profile'
+import PublicationsQuery from '../queries/publications'
 import getCurrentSemesterCode from '../models/semesterCode';
 
 export const MemberType = new GraphQLObjectType({
@@ -87,6 +87,12 @@ export const MemberType = new GraphQLObjectType({
             .resolve(member.args)
             .then((data) => data)
             .catch(err =>  err)
+        }
+        else if (member.args && member.scid) {
+          return PublicationsQuery
+            .resolve(member)
+            .then((data) => data)
+            .catch(err => err)
         }
         else {
           return [];

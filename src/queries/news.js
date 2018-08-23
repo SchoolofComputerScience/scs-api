@@ -29,6 +29,7 @@ function buildNews(row) {
 
 function queryNews(args) {
   let query_options = {};
+  query_options.order = [['date', 'DESC']];
   query_options.where = {
     date: {
       [Op.gt]: moment("2017-1-1", "YYYY-MM-DD")
@@ -57,7 +58,7 @@ export default {
   args: {
     id: { type: GraphQLString }
   },
-  resolve: function (args) {
+  resolve: function (parent, args) {
     if (args && args.id) {
       return queryNews(args);
     } else {

@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { CoursesType } from '../types/courses'
-import CoursesData from '../models/courses.js'
+import CoursesData from '../models/courses'
 
 export default {
   type: CoursesType,

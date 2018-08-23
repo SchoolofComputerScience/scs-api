@@ -2,35 +2,21 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql';
-import Db from './../db';
+import Db from '../db';
 
-import { ResearchAreasMemberType } from '../types/researchAreaMembers';
+import { ScidType } from '../types/utils';
 
 const ResearchAreaMembers = Db.models['research_members'];
-const Members = Db.models['directory'];
 
 function buildResearchAreaMember(row) {
   let research_area_member = {};
-  if (row['research_area_members.display_name']) {
-    research_area_member.scid = row.scid;
-    research_area_member.display_name = row['research_area_members.display_name'];
+  research_area_member.scid = row.scid;
 
-    return research_area_member;  
-  }
-  else {
-    return false;
-  }
+  return research_area_member;
 }
 
 function queryResearchAreaMembers(args) {
-  let query_options = {
-    raw: true,
-    include: [{
-      model: Members,
-      as: 'research_area_members'
-    }],
-    required: true
-  }
+  let query_options = {};
 
   if (args && args.area_id) {
     query_options.where = { area_id: args.area_id }
@@ -52,12 +38,12 @@ function queryResearchAreaMembers(args) {
 }
 
 export default {
-  type: new GraphQLList(ResearchAreasMemberType),
+  type: new GraphQLList(ScidType),
   description: 'List of Members For an Area',
   args: {
     area_id: { type: GraphQLString }
   },
-  resolve: function (args) {
+  resolve: function (parent, args) {
     if (args && args.area_id) {
       return queryResearchAreaMembers(args);
     }

@@ -2,7 +2,7 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql';
-import Db from './../db';
+import Db from '../db';
 
 import { ProfileType } from '../types/publications';
 const Profile = Db.models['gs_profiles'];

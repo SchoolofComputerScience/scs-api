@@ -2,7 +2,7 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql';
-import Db from './../db';
+import Db from '../db';
 
 import { ResearchAreasCourseType } from '../types/researchAreaCourses';
 
@@ -24,9 +24,9 @@ function queryResearchAreaCourses(args) {
     raw: true,
     include: [{
       model: CoursesBySemester,
-      as: 'research_area_courses'
-    }],
-    required: true
+      as: 'research_area_courses',
+      required: true
+    }]
   }
 
   if (args && args.area_id) {
@@ -51,7 +51,7 @@ export default {
   args: {
     area_id: { type: GraphQLString }
   },
-  resolve: function (args) {
+  resolve: function (parent, args) {
     if (args && args.area_id) {
       return queryResearchAreaCourses(args);
     }
