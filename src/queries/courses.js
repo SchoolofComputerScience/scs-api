@@ -2,7 +2,7 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql';
-import Db from './../db';
+import Db from '../db';
 
 import { CoursesType } from '../types/courses';
 
@@ -93,8 +93,7 @@ function queryCourses(args) {
     include: [{
       model: CrossListedCourses,
       as: 'cross_listed_courses'
-    }],
-    required: false
+    }]
   }
 
   return CourseSections.findAll(query_options).then(data => {
@@ -126,8 +125,7 @@ function queryCourses(args) {
       include: [{
         model: ClassMeetings,
         as: 'class_meetings'
-      }],
-      required: false
+      }]
     }
 
     return CourseSections.findAll(query_options).then(data => {
@@ -154,8 +152,7 @@ function queryCourses(args) {
       include: [{
         model: ChildCourses,
         as: 'child_courses'
-      }],
-      required: false
+      }]
     }
 
     return CourseSections.findAll(query_options).then(data => {
@@ -182,8 +179,7 @@ function queryCourses(args) {
       include: [{
         model: ParentCourses,
         as: 'parent_courses'
-      }],
-      required: false
+      }]
     }
 
     return CourseSections.findAll(query_options).then(data => {
@@ -209,16 +205,16 @@ function queryCourses(args) {
       raw: true,
       include: [{
         model: CourseSections,
-        as: 'course_sections'
+        as: 'course_sections',
+        required: true
       }],
-      required: false,
       order: [['course_number', 'ASC']]
     }
 
     if (args && args.course_id) {
       query_options.where = { course_id: args.course_id };
-      // } else if (args.andrew_id) {
-      //   query_options.where = { andrew_id: args.andrew_id };
+    } else if (args && args.semester_code) {
+      query_options.where = { semester_code: args.semester_code };
       // } else if (args.department) {
       //   query_options.where = { department: args.department };
     }
@@ -260,12 +256,13 @@ export default {
   description: 'Courses listing',
   args: {
     course_id: { type: GraphQLString },
+    semester_code: { type: GraphQLString }
   },
   resolve: function (parent, args) {
-    if (args.course_id) {
+    if (args && args.course_id) {
       return queryCourses({ course_id: args.course_id });
-    // } else if (args.andrew_id) {
-    //   return queryCourses({ andrew_id: args.andrew_id });
+    } else if (args.semester_code) {
+      return queryCourses({ semester_code: args.semester_code });
     // } else if (args.department) {
     //   return queryCourses({ department: args.department });
     } else {

@@ -2,7 +2,7 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql'
-import Db from './../db';
+import Db from '../db';
 
 import { ProgramType } from '../types/programs';
 const Programs = Db.models['programs'];

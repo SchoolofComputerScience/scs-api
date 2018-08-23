@@ -19,12 +19,14 @@ function buildEvent(row) {
   event.date = row.date;
   event.speakerName = row.speaker_name;
   event.eventUrl = row.speaker_url;
+  event.description = row.description;
 
   return event;
 }
 
 function queryEvents(args) {
   let query_options = {};
+  query_options.order = [['date', 'ASC']];
   query_options.where = { 
     date: { 
       [Op.gt]: moment("2018-7-1", "YYYY-MM-DD")
@@ -53,7 +55,7 @@ export default {
   args: {
     id: { type: GraphQLString }
   },
-  resolve: function (args) {
+  resolve: function (parent, args) {
     if (args && args.id) {
       return queryEvents(args);
     } else {

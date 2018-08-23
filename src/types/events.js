@@ -14,6 +14,7 @@ export const EventsType = new GraphQLObjectType({
     name: { type: GraphQLString },
     date: { type: GraphQLString },
     speakerName: { type: GraphQLString },
+    description: { type: GraphQLString },
     // type: { type: GraphQLString },
     // tags: { type: new GraphQLList(GraphQLString) },
     eventUrl: { type: GraphQLString }

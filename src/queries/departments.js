@@ -1,5 +1,5 @@
-import { GraphQLList } from 'graphql';
-import Db from './../db';
+import { GraphQLList, GraphQLString } from 'graphql';
+import Db from '../db';
 
 import { DepartmentsType } from '../types/departments';
 const Departments = Db.models['departments'];
@@ -18,8 +18,14 @@ function buildDepartment(row) {
   return department;
 }
 
-function queryDepartments() {
-  return Departments.findAll().then(data => {
+function queryDepartments(args) {
+  let query_options = {};
+
+  if (args && args.college_id) {
+    query_options.where = { college_id: args.college_id };
+  }
+
+  return Departments.findAll(query_options).then(data => {
     const data_length = data.length;
     let results = [];
 
@@ -33,9 +39,13 @@ function queryDepartments() {
 
 export default {
   type: new GraphQLList(DepartmentsType),
+  args: {
+    college_id: { type: GraphQLString }
+  },
   description: 'List Of Departments',
-  resolve: function() { 
-    return queryDepartments(); 
+  resolve: function(parent, args) { 
+    console.log(args);
+    return queryDepartments(args); 
   }
 }
 

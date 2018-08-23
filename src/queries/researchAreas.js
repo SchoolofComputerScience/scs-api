@@ -2,7 +2,7 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql';
-import Db from './../db';
+import Db from '../db';
 
 import { ResearchAreasType } from '../types/research';
 const ResearchAreas = Db.models['research_areas'];
@@ -11,7 +11,7 @@ function buildResearchArea(row) {
   let research_area = {};
   research_area.area_id = row.area_id;
   research_area.description = row.description;
-  research_area.gs_count = row.gs_count;
+  research_area.gs_count = row.gs_count || 0;
   research_area.title = row.title;
 
   return research_area;

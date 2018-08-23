@@ -2,7 +2,7 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql';
-import Db from './../db';
+import Db from '../db';
 
 import { MemberType } from '../types/member';
 
@@ -60,7 +60,8 @@ function buildMember(row) {
 function queryMembers(args) {
   let position_model = {
     model: Position,
-    as: 'positions'
+    as: 'positions',
+    required: true
   };
 
   if (args && args.department) {
@@ -69,7 +70,8 @@ function queryMembers(args) {
 
   let query_options = {
     raw: true,
-    include: [position_model]
+    include: [position_model],
+    order: [['family_name', 'ASC']]
   }
 
   let where = {};

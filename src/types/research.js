@@ -5,8 +5,8 @@ import {
   GraphQLFloat
 } from 'graphql';
 
-import { ResearchAreasCourseType } from '../types/researchAreaCourses';
-import { ResearchAreasMemberType } from '../types/researchAreaMembers';
+import { ResearchAreasCourseType } from './researchAreaCourses';
+import { ScidType } from './utils';
 import ResearchCoursesQuery from '../queries/researchAreaCourses'
 import ResearchMembersQuery from '../queries/researchAreaMembers'
 
@@ -69,7 +69,7 @@ export const ResearchAreasType = new GraphQLObjectType({
     title: { type: GraphQLString },
     gs_count: { type: GraphQLFloat },
     members: { 
-      type: new GraphQLList(ResearchAreasMemberType),
+      type: new GraphQLList(ScidType),
       resolve: function (area) {
         if (area.args && area.args.area_id) {
           return ResearchMembersQuery.resolve(area.args);

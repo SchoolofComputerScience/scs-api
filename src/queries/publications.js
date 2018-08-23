@@ -2,7 +2,7 @@ import {
   GraphQLList,
   GraphQLString
 } from 'graphql';
-import Db from './../db';
+import Db from '../db';
 
 import { PublicationType } from '../types/publications';
 const Publications = Db.models['gs_publications'];
@@ -36,6 +36,10 @@ function queryPublications(args) {
     query_options.where = { scid: args.scid };
   }
 
+  if (args && args.gs_citation_guid) {
+    query_options.where = { gs_citation_guid: args.gs_citation_guid };
+  }
+
   return Publications.findAll(query_options).then(data => {
     const data_length = data.length;
     let results = [];
@@ -54,8 +58,10 @@ export default {
   args: {
     scid: { type: GraphQLString }
   },
-  resolve: function (args) {
-    if (args.scid) {
+  resolve: function (parent, args) {
+    if (parent && parent.scid) {
+      return queryPublications(parent);
+    } else if (args && args.gs_citation_guid) {
       return queryPublications(args);
     } else {
       return queryPublications();
