@@ -16,19 +16,23 @@ function buildEvent(row) {
   event.room = row.room_number;
   event.building = row.building_id;
   event.name = row.name;
-  event.date = row.date;
+  event.start_date = row.start_date;
+  event.end_date = row.end_date;
   event.speakerName = row.speaker_name;
   event.eventUrl = row.speaker_url;
+  event.event_type = row.event_type;
   event.description = row.description;
+  event.poster_text = row.poster_text;
+  event.poster_url = row.poster_url;
 
   return event;
 }
 
 function queryEvents(args) {
   let query_options = {};
-  query_options.order = [['date', 'ASC']];
+  query_options.order = [['start_date', 'ASC']];
   query_options.where = { 
-    date: { 
+    start_date: { 
       [Op.gt]: moment("2018-7-1", "YYYY-MM-DD")
     }
   }

@@ -44,7 +44,6 @@ export default {
   },
   description: 'List Of Departments',
   resolve: function(parent, args) { 
-    console.log(args);
     return queryDepartments(args); 
   }
 }
