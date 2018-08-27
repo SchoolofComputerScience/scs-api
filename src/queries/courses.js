@@ -88,167 +88,186 @@ function buildChildCourses(row) {
 }
 
 function queryCourses(args) {
-  let query_options = {
-    raw: true,
-    include: [{
-      model: CrossListedCourses,
-      as: 'cross_listed_courses'
-    }]
-  }
-
-  return CourseSections.findAll(query_options).then(data => {
-    const data_length = data.length;
-    let results = [];
-
-    for (let i = 0; i < data_length; i++) {
-      let cross_listed_course = buildCrossListedCourse(data[i]);
-      let has_cross_listing = cross_listed_course.course_number ? true : false;
-      if (results[data[i].course_section_id] && has_cross_listing) {
-        results[data[i].course_section_id].cross_listed_courses.push(cross_listed_course);
-      }
-      else {
-        let data_row = buildCourseSection(data[i]);
-
-        data_row.cross_listed_courses = [];
-        if (has_cross_listing)
-          data_row.cross_listed_courses.push(cross_listed_course);
-
-        results[data[i].course_section_id] = data_row;
-      }
-    }
-
-    return results;
-
-  }).then(course_sections => {
+  if(args && args.course_id) {
     let query_options = {
       raw: true,
       include: [{
-        model: ClassMeetings,
-        as: 'class_meetings'
+        model: CrossListedCourses,
+        as: 'cross_listed_courses'
       }]
     }
 
     return CourseSections.findAll(query_options).then(data => {
       const data_length = data.length;
+      let results = [];
 
       for (let i = 0; i < data_length; i++) {
-        let class_meeting = buildClassMeeting(data[i]);
-        let has_class_meeting = class_meeting.building ? true : false;
-        if (course_sections[data[i].course_section_id].meetings && has_class_meeting) {
-          course_sections[data[i].course_section_id].meetings.push(class_meeting);
+        let cross_listed_course = buildCrossListedCourse(data[i]);
+        let has_cross_listing = cross_listed_course.course_number ? true : false;
+        if (results[data[i].course_section_id] && has_cross_listing) {
+          results[data[i].course_section_id].cross_listed_courses.push(cross_listed_course);
         }
         else {
-          course_sections[data[i].course_section_id].meetings = [];
-          if (has_class_meeting)
+          let data_row = buildCourseSection(data[i]);
+
+          data_row.cross_listed_courses = [];
+          if (has_cross_listing)
+            data_row.cross_listed_courses.push(cross_listed_course);
+
+          results[data[i].course_section_id] = data_row;
+        }
+      }
+
+      return results;
+
+    }).then(course_sections => {
+      let query_options = {
+        raw: true,
+        include: [{
+          model: ClassMeetings,
+          as: 'class_meetings'
+        }]
+      }
+
+      return CourseSections.findAll(query_options).then(data => {
+        const data_length = data.length;
+
+        for (let i = 0; i < data_length; i++) {
+          let class_meeting = buildClassMeeting(data[i]);
+          let has_class_meeting = class_meeting.building ? true : false;
+          if (course_sections[data[i].course_section_id].meetings && has_class_meeting) {
             course_sections[data[i].course_section_id].meetings.push(class_meeting);
+          }
+          else {
+            course_sections[data[i].course_section_id].meetings = [];
+            if (has_class_meeting)
+              course_sections[data[i].course_section_id].meetings.push(class_meeting);
+          }
         }
+
+        return course_sections;
+      });
+    }).then(course_sections => {
+      let query_options = {
+        raw: true,
+        include: [{
+          model: ChildCourses,
+          as: 'child_courses'
+        }]
       }
 
-      return course_sections;
-    });
-  }).then(course_sections => {
-    let query_options = {
-      raw: true,
-      include: [{
-        model: ChildCourses,
-        as: 'child_courses'
-      }]
-    }
+      return CourseSections.findAll(query_options).then(data => {
+        const data_length = data.length;
 
-    return CourseSections.findAll(query_options).then(data => {
-      const data_length = data.length;
-
-      for (let i = 0; i < data_length; i++) {
-        let child_course = buildChildCourses(data[i]);
-        let has_child_course = child_course.course_number ? true : false;
-        if (course_sections[data[i].course_section_id].child_courses && has_child_course) {
-          course_sections[data[i].course_section_id].child_courses.push(child_course);
-        }
-        else {
-          course_sections[data[i].course_section_id].child_courses = [];
-          if (has_child_course)
+        for (let i = 0; i < data_length; i++) {
+          let child_course = buildChildCourses(data[i]);
+          let has_child_course = child_course.course_number ? true : false;
+          if (course_sections[data[i].course_section_id].child_courses && has_child_course) {
             course_sections[data[i].course_section_id].child_courses.push(child_course);
+          }
+          else {
+            course_sections[data[i].course_section_id].child_courses = [];
+            if (has_child_course)
+              course_sections[data[i].course_section_id].child_courses.push(child_course);
+          }
         }
+
+        return course_sections;
+      });
+    }).then(course_sections => {
+      let query_options = {
+        raw: true,
+        include: [{
+          model: ParentCourses,
+          as: 'parent_courses'
+        }]
       }
 
-      return course_sections;
-    });
-  }).then(course_sections => {
-    let query_options = {
-      raw: true,
-      include: [{
-        model: ParentCourses,
-        as: 'parent_courses'
-      }]
-    }
+      return CourseSections.findAll(query_options).then(data => {
+        const data_length = data.length;
 
-    return CourseSections.findAll(query_options).then(data => {
-      const data_length = data.length;
-
-      for (let i = 0; i < data_length; i++) {
-        let parent_course = buildParentCourses(data[i]);
-        let has_parent_course = parent_course.course_number ? true : false;
-        if (course_sections[data[i].course_section_id].parent_courses && has_parent_course) {
-          course_sections[data[i].course_section_id].parent_courses.push(parent_course);
-        }
-        else {
-          course_sections[data[i].course_section_id].parent_courses = [];
-          if (has_parent_course)
+        for (let i = 0; i < data_length; i++) {
+          let parent_course = buildParentCourses(data[i]);
+          let has_parent_course = parent_course.course_number ? true : false;
+          if (course_sections[data[i].course_section_id].parent_courses && has_parent_course) {
             course_sections[data[i].course_section_id].parent_courses.push(parent_course);
+          }
+          else {
+            course_sections[data[i].course_section_id].parent_courses = [];
+            if (has_parent_course)
+              course_sections[data[i].course_section_id].parent_courses.push(parent_course);
+          }
         }
+
+        return course_sections;
+      });
+    }).then(course_sections => {
+      let query_options = {
+        raw: true,
+        include: [{
+          model: CourseSections,
+          as: 'course_sections',
+          required: true
+        }],
+        order: [['course_number', 'ASC']]
       }
+      let where = {};
+      where.course_id = args.course_id;
+      query_options.where = where;
 
-      return course_sections;
+      return CoursesBySemester.findAll(query_options).then(data => {
+        const data_length = data.length;
+        let results = [];
+
+        for (let i = 0; i < data_length; i++) {
+          if (results[data[i].course_id]) {
+            if (course_sections[data[i]['course_sections.course_section_id']])
+              results[data[i].course_id].sections.push(course_sections[data[i]['course_sections.course_section_id']]);
+          }
+          else {
+            let data_row = buildCourse(data[i]);
+
+            if (course_sections[data[i]['course_sections.course_section_id']]) {
+              data_row.sections = [];
+              data_row.sections.push(course_sections[data[i]['course_sections.course_section_id']]);
+            }
+
+            results[data[i].course_id] = data_row;
+          }
+        }
+
+        let courses = [];
+        for (const result in results) {
+          courses.push(results[result]);
+        }
+
+        return courses;
+      });
     });
-  }).then(course_sections => {
-    let query_options = {
-      raw: true,
-      include: [{
-        model: CourseSections,
-        as: 'course_sections',
-        required: true
-      }],
-      order: [['course_number', 'ASC']]
-    }
-
-    if (args && args.course_id) {
-      query_options.where = { course_id: args.course_id };
-    } else if (args && args.semester_code) {
-      query_options.where = { semester_code: args.semester_code };
+  }
+  else {
+    let query_options = {};
+    let where = {};
+    if (args.semester_code) {
+      where.semester_code = args.semester_code;
       // } else if (args.department) {
       //   query_options.where = { department: args.department };
     }
+
+    where.college = "SCS";
+    query_options.where = where;
 
     return CoursesBySemester.findAll(query_options).then(data => {
       const data_length = data.length;
       let results = [];
 
       for (let i = 0; i < data_length; i++) {
-        if (results[data[i].course_id]) {
-          if (course_sections[data[i]['course_sections.course_section_id']])
-            results[data[i].course_id].sections.push(course_sections[data[i]['course_sections.course_section_id']]);
-        }
-        else {
-          let data_row = buildCourse(data[i]);
-
-          if (course_sections[data[i]['course_sections.course_section_id']]) {
-            data_row.sections = [];
-            data_row.sections.push(course_sections[data[i]['course_sections.course_section_id']]);
-          }
-
-          results[data[i].course_id] = data_row;
-        }
+        results.push(buildCourse(data[i]));
       }
 
-      let courses = [];
-      for (const result in results) {
-        courses.push(results[result]);
-      }
-
-      return courses;
+      return results;
     });
-  });
-  
+  }
 }
 
 export default {
