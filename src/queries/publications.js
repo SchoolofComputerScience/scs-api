@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import {
   GraphQLList,
   GraphQLString
 } from 'graphql';
 import Db from '../db';
+=======
+import { GraphQLString, GraphQLList } from 'graphql'
+import { PublicationType } from '../types/publications'
+>>>>>>> d392fe1406203be3f3783d5eb6d3334f00563b03
 
 import { PublicationType } from '../types/publications';
 const Publications = Db.models['gs_publications'];
