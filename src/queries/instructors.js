@@ -3,6 +3,7 @@ import {
   GraphQLString
 } from 'graphql';
 import Db from '../db';
+import _ from 'lodash';
 
 import { CoursesType } from '../types/courses';
 
@@ -59,7 +60,7 @@ function queryInstructorCourses(args) {
       }
     }
 
-    return results;
+    return _.uniqBy(results, 'course_id');
   });
 }
 
