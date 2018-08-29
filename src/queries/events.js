@@ -16,8 +16,8 @@ function buildEvent(row) {
   event.room = row.room_number;
   event.building = row.building_id;
   event.name = row.name;
-  event.start_date = row.start_date;
-  event.end_date = row.end_date;
+  event.start_date = moment(row.start_date);
+  event.end_date = moment(row.end_date);
   event.speakerName = row.speaker_name;
   event.eventUrl = row.speaker_url;
   event.event_type = row.event_type;
