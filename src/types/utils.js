@@ -4,7 +4,7 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import MembersData from '../data/members'
+import MembersData from '../models/members'
 
 export const TagScids = new GraphQLObjectType({
   name: 'TagScids',
@@ -38,7 +38,7 @@ export const TagScids = new GraphQLObjectType({
       }
     }
   })
-})
+});
 
 export const FieldCounts = new GraphQLObjectType({
   name: 'FieldCounts',
@@ -49,4 +49,12 @@ export const FieldCounts = new GraphQLObjectType({
       resolve: (parent, args) => parent
     }
   })
-})
+});
+
+export const ScidType = new GraphQLObjectType({
+  name: 'Scid',
+  description: 'Scid Of Person',
+  fields: () => ({
+    scid: { type: GraphQLString }
+  })
+});

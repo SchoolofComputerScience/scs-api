@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { BiographiesType } from '../types/member'
-import BiographiesData from '../data/biographies.js'
+import BiographiesData from '../models/biographies.js'
 
 export default {
   type: new GraphQLList(BiographiesType),

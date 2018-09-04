@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { CourseAggregateIntType } from '../types/courses'
-import CoursesData from '../data/courses.js'
+import CoursesData from '../models/courses.js'
 
 export default {
   type: new GraphQLList(CourseAggregateIntType),

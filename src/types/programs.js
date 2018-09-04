@@ -49,12 +49,13 @@ export const ProgramType = new GraphQLObjectType({
     program_name: { type: GraphQLString },
     url: { type: GraphQLString },
     description: { type: GraphQLString },
-    department: { type: new GraphQLList(GraphQLString) },
+    departments: { type: new GraphQLList(GraphQLString) },
     graduate_level: { type: GraphQLString },
     degree_level: { type: GraphQLString },
     additional_degree: { type: GraphQLBoolean },
-    areas: { type: new GraphQLList(ProgramAreasType) },
-    goals: { type: new GraphQLList(ProgramGoalsType) },
-    learning_outcomes: { type: new GraphQLList(ProgramOutcomesType) }
+    active: { type: GraphQLBoolean }
+    // areas: { type: new GraphQLList(ProgramAreasType) },
+    // goals: { type: new GraphQLList(ProgramGoalsType) },
+    // learning_outcomes: { type: new GraphQLList(ProgramOutcomesType) }
   })
 });

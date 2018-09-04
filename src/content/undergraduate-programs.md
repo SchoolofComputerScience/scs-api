@@ -2,8 +2,6 @@ title: SCS:CMU Undergraduate Programs
 ---
 # Undergraduate Programs
 
-[Undergraduate Admissions](/undergraduate-admissions)
-
 ## Undergraduate Majors
 
 The School of Computer Science offers bachelor's degrees in both [computer science](http://www.csd.cs.cmu.edu/education/bscs/index.html) and, beginning in fall 2017, [computational biology](http://www.cbd.cmu.edu/education/bs-in-computational-biology/). Interdisciplinary majors in [computer science and the arts](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html), and [music and technology](http://www.cs.cmu.edu/~music/mat/bachelor.html) are also available.
@@ -26,64 +24,110 @@ Carnegie Mellon’s diverse and top-ranked departments in computing, engineering
 
 ## All Undergraduate Programs by Department
 
-### [Computer Science](http://www.csd.cs.cmu.edu/)
-* [Bachelor of Science in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/)
-| [More Info](http://www.csd.cs.cmu.edu/education/bscs/)
-| [Apply](http://admission.enrollment.cmu.edu)
-* [Bachelor of Science and Arts](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html)
-| [More Info](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html)
-| [Apply](http://www.cmu.edu/interdisciplinary/admisns/index.html)
-* [Bachelor of Science in Music and Technology](http://www.cs.cmu.edu/~music/mat/bachelor.html)
-| [More Info](http://www.cs.cmu.edu/~music/mat/bachelor.html)
-| [Apply](http://www.cs.cmu.edu/~music/mat/bachelor-apply.html)
-* [Additional Major in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)
-| [More Info](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)
-| [Apply](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)
-* [Minor in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)
-| [More Info](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)
-| [Apply](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)
-* [Minor in Neural Computation](http://www.cnbc.cmu.edu/upnc/nc_minor/)
-| [More Info](http://www.cnbc.cmu.edu/upnc/nc_minor/)
-| [Apply](http://www.cnbc.cmu.edu/upnc/nc_minor/)
+#### Computer Science
+<table class="tbl">
+  <tr>
+    <td>[Bachelor of Science in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/)</td> 
+    <td>[More Info](http://www.csd.cs.cmu.edu/education/bscs/)</td> 
+    <td>[Apply](http://admission.enrollment.cmu.edu)</td>
+  </tr>
+  <tr>
+    <td>[Bachelor of Science and Arts](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html)</td> 
+    <td>[More Info](http://www.cmu.edu/interdisciplinary/programs/bcsaprogram.html)</td> 
+    <td>[Apply](http://www.cmu.edu/interdisciplinary/admisns/index.html)</td>
+  </tr>
+  <tr>
+    <td>[Bachelor of Science in Music and Technology](http://www.cs.cmu.edu/~music/mat/bachelor.html)</td> 
+    <td>[More Info](http://www.cs.cmu.edu/~music/mat/bachelor.html)</td> 
+    <td>[Apply](http://www.cs.cmu.edu/~music/mat/bachelor-apply.html)</td>
+  </tr>
+  <tr>
+    <td>[Additional Major in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)</td> 
+    <td>[More Info](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)</td> 
+    <td>[Apply](http://www.csd.cs.cmu.edu/education/bscs/second.html#major)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)</td> 
+    <td>[More Info](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)</td> 
+    <td>[Apply](http://www.csd.cs.cmu.edu/education/bscs/second.html#minor)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Neural Computation](http://www.cnbc.cmu.edu/upnc/nc_minor/)</td> 
+    <td>[More Info](http://www.cnbc.cmu.edu/upnc/nc_minor/)</td> 
+    <td>[Apply](http://www.cnbc.cmu.edu/upnc/nc_minor/)</td>
+  </tr>
+</table>
 
-### [Human-Computer Interaction Institute](http://www.hcii.cmu.edu/)
-* [Additional Major in Human-Computer Interaction](http://www.hcii.cmu.edu/academics/hci-undergraduate/major/applying)
-| [More Info](http://www.hcii.cmu.edu/academics/hci-undergraduate/major/applying)
-| [Apply](http://www.hcii.cmu.edu/applying-undergraduate-major)
-* [Minor in Human-Computer Interaction](http://www.hcii.cmu.edu/undergraduate-minor-program)
-| [More Info](http://www.hcii.cmu.edu/undergraduate-minor-program)
-| [Apply](http://www.hcii.cmu.edu/undergraduate-minor-program)
+#### Human-Computer Interaction Institute
+<table class="tbl">
+  <tr>
+    <td>[Additional Major in Human-Computer Interaction](http://www.hcii.cmu.edu/academics/hci-undergraduate/major/applying)</td> 
+    <td>[More Info](http://www.hcii.cmu.edu/academics/hci-undergraduate/major/applying)</td> 
+    <td>[Apply](http://www.hcii.cmu.edu/applying-undergraduate-major)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Human-Computer Interaction](http://www.hcii.cmu.edu/undergraduate-minor-program)</td> 
+    <td>[More Info](http://www.hcii.cmu.edu/undergraduate-minor-program)</td> 
+    <td>[Apply](http://www.hcii.cmu.edu/undergraduate-minor-program)</td>
+  </tr>
+</table>
 
-### [Institute for Software Research](http://www.isri.cmu.edu/)
-* [Minor in Software Engineering](http://isri.cmu.edu/education/undergrad/)
-| [More Info](http://isri.cmu.edu/education/undergrad/)
-| [Apply](http://isri.cmu.edu/education/undergrad/)
+#### Institute for Software Research
+<table class="tbl">
+  <tr>
+    <td>[Minor in Software Engineering](http://isri.cmu.edu/education/undergrad/)</td> 
+    <td>[More Info](http://isri.cmu.edu/education/undergrad/)</td> 
+    <td>[Apply](http://isri.cmu.edu/education/undergrad/)</td>
+  </tr>
+</table>
 
-### [Computational Biology Department](http://www.cbd.cmu.edu/)
-* [Bachelor of Science in Computational Biology](http://www.cbd.cmu.edu/education/bs-in-computational-biology/)
-| [More Info](http://www.cbd.cmu.edu/education/bs-in-computational-biology/)
-| [Apply](http://www.cbd.cmu.edu/join-us/apply-to-undergraduate-program/)
-* [Minor in Computational Biology](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)
-| [More Info](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)
-| [Apply](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)
+#### Computational Biology Department
+<table class="tbl">
+  <tr>
+    <td>[Bachelor of Science in Computational Biology](http://www.cbd.cmu.edu/education/bs-in-computational-biology/)</td> 
+    <td>[More Info](http://www.cbd.cmu.edu/education/bs-in-computational-biology/)</td> 
+    <td>[Apply](http://www.cbd.cmu.edu/join-us/apply-to-undergraduate-program/)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Computational Biology](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)</td> 
+    <td>[More Info](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)</td> 
+    <td>[Apply](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)</td>
+  </tr>
+</table>
 
-### [Language Technologies Institute](http://www.lti.cs.cmu.edu/)
-* [Minor in Language Technologies](http://lti.cs.cmu.edu/intranet/education/undergraduateminor)
-| [More Info](http://lti.cs.cmu.edu/intranet/education/undergraduateminor)
-| [Apply](https://www.lti.cs.cmu.edu/apply-lti)
+#### Language Technologies Institute
+<table class="tbl">
+  <tr>
+    <td>[Minor in Language Technologies](http://lti.cs.cmu.edu/intranet/education/undergraduateminor)</td> 
+    <td>[More Info](http://lti.cs.cmu.edu/intranet/education/undergraduateminor)</td> 
+    <td>[Apply](https://www.lti.cs.cmu.edu/apply-lti)</td>
+  </tr>
+</table>
 
-### [Machine Learning Department](http://www.ml.cmu.edu/)
-* [Bachelor of Science in Statistics and Machine Learning](http://www.stat.cmu.edu/new-majors-launch/program/stat-ml.html)
-| [More Info](http://www.stat.cmu.edu/new-majors-launch/program/stat-ml.html)
-| [Apply](http://www.stat.cmu.edu/new-majors-launch/program/stat-ml.html)
-* [Minor in Machine Learning](http://www.ml.cmu.edu/prospective-students/minor-in-machine-learning.html)
-| [More Info](http://www.ml.cmu.edu/prospective-students/minor-in-machine-learning.html)
-| [Apply](http://www.ml.cmu.edu/prospective-students/minor-in-machine-learning.html)
+#### Machine Learning Department
+<table class="tbl">
+  <tr>
+    <td>[Bachelor of Science in Statistics and Machine Learning](http://www.stat.cmu.edu/new-majors-launch/program/stat-ml.html)</td> 
+    <td>[More Info](http://www.stat.cmu.edu/new-majors-launch/program/stat-ml.html)</td> 
+    <td>[Apply](http://www.stat.cmu.edu/new-majors-launch/program/stat-ml.html)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Machine Learning](http://www.ml.cmu.edu/prospective-students/minor-in-machine-learning.html)</td> 
+    <td>[More Info](http://www.ml.cmu.edu/prospective-students/minor-in-machine-learning.html)</td> 
+    <td>[Apply](http://www.ml.cmu.edu/prospective-students/minor-in-machine-learning.html)</td>
+  </tr>
+</table>
 
-### [Robotics Institute](http://www.ri.cmu.edu/)
-* [Additional Major in Robotics](http://major.ri.cmu.edu)
-| [More Info](http://major.ri.cmu.edu)
-| [Apply](http://major.ri.cmu.edu/?q=node/9)
-* [Minor in Robotics](http://www.ri.cmu.edu/ri_static_content.html?menu_id=323)
-| [More Info](http://www.ri.cmu.edu/ri_static_content.html?menu_id=323)
-| [Apply](http://www.ri.cmu.edu/ri_static_content.html?menu_id=342)
+#### Robotics Institute
+<table class="tbl">
+  <tr>
+    <td>[Additional Major in Robotics](http://major.ri.cmu.edu)</td> 
+    <td>[More Info](http://major.ri.cmu.edu)</td> 
+    <td>[Apply](http://major.ri.cmu.edu/?q=node/9)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Robotics](http://www.ri.cmu.edu/ri_static_content.html?menu_id=323)</td> 
+    <td>[More Info](http://www.ri.cmu.edu/ri_static_content.html?menu_id=323)</td> 
+    <td>[Apply](http://www.ri.cmu.edu/ri_static_content.html?menu_id=342)</td>
+  </tr>
+</table>

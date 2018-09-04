@@ -5,7 +5,7 @@ import {
 } from 'graphql'
 
 import { NewsArticleType } from '../types/news'
-import { getNewsWithId } from '../data/news'
+import { getNewsWithId } from '../models/news'
 
 export default {
   type: new GraphQLList(NewsArticleType),

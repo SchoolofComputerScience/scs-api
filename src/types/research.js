@@ -5,15 +5,10 @@ import {
   GraphQLFloat
 } from 'graphql';
 
-const ResearchAreasCourseType = new GraphQLObjectType({
-  name: 'ResearchAreasCourse',
-  description: 'Course that has an association with an area',
-  fields: () => ({
-    course_id: { type: GraphQLString },
-    course_number: { type: GraphQLString },
-    title: { type: GraphQLString }
-  })
-});
+import { ResearchAreasCourseType } from './researchAreaCourses';
+import { ScidType } from './utils';
+import ResearchCoursesQuery from '../queries/researchAreaCourses'
+import ResearchMembersQuery from '../queries/researchAreaMembers'
 
 const ResearchAreasDescriptionSourceType = new GraphQLObjectType({
   name: 'ResearchAreasDescriptionSource',
@@ -44,15 +39,6 @@ const ResearchAreasProgramTrackType = new GraphQLObjectType({
   })
 });
 
-const ResearchAreasMemberType = new GraphQLObjectType({
-  name: 'ResearchAreasMember',
-  description: 'Member of each area',
-  fields: () => ({
-    scid: { type: GraphQLString },
-    display_name: { type: GraphQLString }
-  })
-});
-
 const ResearchAreasProgramType = new GraphQLObjectType({
   name: 'ResearchAreasProgram',
   description: 'Program for areas',
@@ -63,17 +49,36 @@ const ResearchAreasProgramType = new GraphQLObjectType({
   })
 });
 
-
 export const ResearchAreasType = new GraphQLObjectType({
   name: 'ResearchAreas',
   description: 'List of research areas',
   fields: () => ({
     area_id: { type: GraphQLString },
-    courses: { type: new GraphQLList(ResearchAreasCourseType) },
-    description: { type: ResearchAreasDescriptionType },
+    courses: { 
+      type: new GraphQLList(ResearchAreasCourseType),
+      resolve: function (area) {
+        if (area.args && area.args.area_id) {
+          return ResearchCoursesQuery.resolve(area.args);
+        }
+        else {
+          return [];
+        } 
+      }
+    },
+    description: { type: GraphQLString },
     title: { type: GraphQLString },
     gs_count: { type: GraphQLFloat },
-    members: { type: new GraphQLList(ResearchAreasMemberType) },
-    programs: { type: new GraphQLList(ResearchAreasProgramType) }
+    members: { 
+      type: new GraphQLList(ScidType),
+      resolve: function (area) {
+        if (area.args && area.args.area_id) {
+          return ResearchMembersQuery.resolve(area.args);
+        }
+        else {
+          return [];
+        }
+      }
+    }
+    // programs: { type: new GraphQLList(ResearchAreasProgramType) }
   })
 });
