@@ -7,16 +7,6 @@ Careers in the so-called “STEM” fields—science, technology, engineering an
 
 * * *
 
-### ACTIVATE: Advancing Computing and Technology Interest and innoVAtion through Teacher Education (2009-2012)
-
-Contact: [Tom Cortina](/directory/thomas_cortina)
-
-[http://www.cs.cmu.edu/activate](http://www.cs.cmu.edu/activate)
-
-ACTIVATE is a series of three free workshops offered for high-school teachers in STEM (Science, Technology, Engineering and Mathematics) in the northern Appalachian region surrounding Pittsburgh, including Pennsylvania, Ohio, West Virginia and western Maryland. The workshops will cover computing with Alice, Computational Thinking with Python, and Java programming for math and science. Accepted teachers will learn how to integrate computing topics and skills into their STEM classes to increase student interest in computing as a field of study in college and as a potential career path. All costs will be paid for by a grant from the National Science Foundation. These workshops will provide modest stipends for participating teachers to complete surveys during and after the workshop to evaluate the use of the presented material in the classroom. (This work is supported by a grant from the National Science Foundation - DRL-0833496.)
-
-***
-
 
 ### Adventures in Computing
 
@@ -91,14 +81,6 @@ This free weekly workshops organized by Women@SCS provides hands-on technology s
 * TechNights Tour of ETC
 * Make A Video Game! Graphics Processing
 * Cartoon Animation
-
-***
-
-### CS4HS (2006-2013)
-
-Contact: [Tom Cortina](/directory/thomas_cortina)
-
-The Computer Science for High School (CS4HS) program at Carnegie Mellon is a half-week summer workshop to disseminate curriculum modules that high school teachers (teaching primarily AP computer science and introductory programming courses) can implement in the classroom that provide students with an exposure to the versatility and applicability of the programming skills they have learned throughout the school year. Educators can use the modules from the workshop to show students that computer science is much more than computer programming. This workshop is also open to K-8 teachers and college instructors teaching introductory computer science. ACT 48 credit is available for Pennsylvania teachers.
 
 ***
 
