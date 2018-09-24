@@ -7,17 +7,6 @@ Careers in the so-called “STEM” fields—science, technology, engineering an
 
 * * *
 
-
-### Adventures in Computing
-
-Contact: [Kenny Joseph](josephkena@gmail.com)
-
-[http://www.women.cs.cmu.edu/What/Outreach/adventures/](http://www.women.cs.cmu.edu/What/Outreach/adventures/)
-
-In Adventures in Computing students will explore a range of creative technologies and tackle puzzles and problems -- sometimes involving computers and sometimes unplugged. Students will develop their ideas using web design, programming, robotics, and interactive medias. In the process they will discover some fundamental principles relating to computer science, such as the concepts of binary, sorting, and algorithms. With Adventures in Computing we hope to encourage a future generation of problem solvers and creators of new technologies. The long-term goals of this program are to increase and to broaden participation in the field of computing.
-
-***
-
 ### ARTSI Alliance: Advancing Robotics Technology for Societal Impact
 
 Contact: [David Touretzky](/directory/david_touretzky)
@@ -89,18 +78,6 @@ This free weekly workshops organized by Women@SCS provides hands-on technology s
 [http://www.cs.cmu.edu/~mattkam/lab/](http://www.cs.cmu.edu/~mattkam/lab/)
 
 The Human Development Lab is housed in Carnegie Mellon University's Human-Computer Interaction Institute, a world leader in the design and evaluation of computing technologies in support of human activity and society. We engage in participatory design with stakeholders in underserved communities to design, implement and deploy appropriate learning technologies that promote critical skills essential for economic empowerment in the 21st century. These skills might include, for example, reading literacy, second language learning, math and science proficiency, healthcare knowledge as well as adult vocational skills. Our learning technologies revolve around affordable platforms such as the cellphone. Much of our work has taken place with rural and urban slums communities in South Asia and sub-Saharan Africa, and we are excited to learn from low-resource communities in the US.
-
-***
-
-### Leap@CMU (formerly Andrew's Leap)
-
-Contact: [Mary Widom](/directory/mary_widom)
-
-<leap@cs.cmu.edu>
-
-[http://www.cs.cmu.edu/~leap/](http://www.cs.cmu.edu/~leap/)
-
-Leap@CMU (formerly Andrew's Leap) is a summer enrichment program run by the Carnegie Mellon University School of Computer Science. All local area high school students are encouraged to apply (and occasional middle school students). Through special classes and guest faculty seminars, students will be exposed to the frontiers of computer science. They will "leap" ahead approximately ten years. Students will have an opportunity to interact with some of the country's leading scientists, and will emerge from the program with a vivid overview of Computer Science at Carnegie Mellon. Leap@CMU has been run every summer since 1991. Leap is not for academic credit. We do not evaluate or grade the participants. We want students who want to do it for the fun of it.
 
 ***
 
@@ -202,3 +179,53 @@ Contact: [Carol Frieze](/directory/carol_frieze)
 Women@SCS is a professional organization of faculty, graduate and undergraduate students in the School of Computer Science at Carnegie Mellon University. We work to create, encourage, and support academic, social and professional opportunities for women in computer science...and to promote the breadth of the field and its diverse community.
 
 ***
+
+<style>
+.content-body a {
+  text-decoration: underline;
+  color: #900;
+}
+
+.content-body img {
+  width: 100%
+}
+
+.content-title a {
+  transition: color .3s ease;
+}
+
+.content-title a:hover{
+  text-decoration: none;
+}
+
+.content-meta {
+  margin-top: .5em;
+  margin-bottom: 0;
+}
+
+.content-body h1 {
+  font-weight: bold;
+  background: #eee;
+  margin: -2rem -1.5rem 1rem -1.5rem;
+  padding: 3rem 1.5rem 1.5rem 1.5rem;
+}
+
+.content-body input {
+  margin-bottom: 1rem;
+}
+
+.content-body table {
+  width: 100%;
+  border: 1px solid #000;
+  margin-bottom: 1rem;
+}
+
+.tbl td {
+  padding: 0.5rem;
+  border: 1px solid #000;
+}
+
+.tbl tr:nth-child(2n + 1) {
+  background: #efefef;
+}
+</style>

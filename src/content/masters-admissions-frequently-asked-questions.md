@@ -355,3 +355,53 @@ Our programs make their decisions at various times during January and February. 
 ### How do I track the status of my application?
 
 Do NOT send email to ask the status of your application. Use your user ID and password to access the submitted online application form. Receipt of the required uploaded documents (score reports, transcripts, and letters of recommendation) will be indicated in the corresponding section. Allow two to three weeks past the deadline for all documents to be recorded, as it does take time to process each application. Our offices are closed during the Winter Holiday Break (Dec. 20–Jan. 6) which may further delay processing.
+
+<style>
+.content-body a {
+  text-decoration: underline;
+  color: #900;
+}
+
+.content-body img {
+  width: 100%
+}
+
+.content-title a {
+  transition: color .3s ease;
+}
+
+.content-title a:hover{
+  text-decoration: none;
+}
+
+.content-meta {
+  margin-top: .5em;
+  margin-bottom: 0;
+}
+
+.content-body h1 {
+  font-weight: bold;
+  background: #eee;
+  margin: -2rem -1.5rem 1rem -1.5rem;
+  padding: 3rem 1.5rem 1.5rem 1.5rem;
+}
+
+.content-body input {
+  margin-bottom: 1rem;
+}
+
+.content-body table {
+  width: 100%;
+  border: 1px solid #000;
+  margin-bottom: 1rem;
+}
+
+.tbl td {
+  padding: 0.5rem;
+  border: 1px solid #000;
+}
+
+.tbl tr:nth-child(2n + 1) {
+  background: #efefef;
+}
+</style>

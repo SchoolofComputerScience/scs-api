@@ -56,3 +56,54 @@ The Engagement and Annual Giving Office offers numerous ways to become involved 
 * [Become a Mentor](https://cmu.firsthand.co/) and provide professional advice or support for the CMU journey by becoming a mentor.
 * [Visit our Events Page](/events) to check out upcoming opportunities for professional development or to network with current students and alumni.
 * [Email us](mailto:engagement@cs.cmu.edu) to let us know where you are and how we can connect you. Be sure to follow us on [Facebook](https://www.facebook.com/SCSatCMU/) and [Twitter](https://twitter.com/SCSatCMU).
+
+
+<style>
+.content-body a {
+  text-decoration: underline;
+  color: #900;
+}
+
+.content-body img {
+  width: 100%
+}
+
+.content-title a {
+  transition: color .3s ease;
+}
+
+.content-title a:hover{
+  text-decoration: none;
+}
+
+.content-meta {
+  margin-top: .5em;
+  margin-bottom: 0;
+}
+
+.content-body h1 {
+  font-weight: bold;
+  background: #eee;
+  margin: -2rem -1.5rem 1rem -1.5rem;
+  padding: 3rem 1.5rem 1.5rem 1.5rem;
+}
+
+.content-body input {
+  margin-bottom: 1rem;
+}
+
+.content-body table {
+  width: 100%;
+  border: 1px solid #000;
+  margin-bottom: 1rem;
+}
+
+.tbl td {
+  padding: 0.5rem;
+  border: 1px solid #000;
+}
+
+.tbl tr:nth-child(2n + 1) {
+  background: #efefef;
+}
+</style>
