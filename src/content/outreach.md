@@ -7,8 +7,7 @@ Careers in the so-called “STEM” fields—science, technology, engineering an
 
 * * *
 
-### ARTSI Alliance: Advancing Robotics Technology for Societal Impact
-
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/artsi.jpg "ARTSI Logo")  ARTSI Alliance: Advancing Robotics Technology for Societal Impact
 Contact: [David Touretzky](/directory/david_touretzky)
 
 [http://artsialliance.org](http://artsialliance.org)
@@ -17,7 +16,7 @@ The ARTSI Alliance is an NSF-funded consortium of 17 Historically Black Colleges
 
 ***
 
-### CMU-Qatar Outreach (including Botball, CS4Qatar for Students and for teachers, and High School Programming Competitions)
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/botball.jpg "Botball Image")  CMU-Qatar Outreach (including Botball, CS4Qatar for Students and for teachers, and High School Programming Competitions)
 
 Contact: [Khaled A. Harras](/directory/khaled_harras)
 
@@ -51,7 +50,7 @@ To learn more about the newest Botball, visit [http://qatar.cmu.edu/botball](htt
 
 ***
 
-### Creative Technology Nights (also known as "TechNights")
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/technights.jpg "Tech Nights Logo")  Creative Technology Nights (also known as "TechNights")
 
 Contact: [Carol Frieze](/directory/carol_frieze)
 
@@ -73,7 +72,7 @@ This free weekly workshops organized by Women@SCS provides hands-on technology s
 
 ***
 
-### Human Development Lab
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/hdlab.jpg "Human Development Lab Logo")  Human Development Lab
 
 [http://www.cs.cmu.edu/~mattkam/lab/](http://www.cs.cmu.edu/~mattkam/lab/)
 
@@ -81,7 +80,7 @@ The Human Development Lab is housed in Carnegie Mellon University's Human-Comput
 
 ***
 
-### Let's Go Lab
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/dialrc-corner.jpg "Let's Go Lab Logo")  Let's Go Lab
 
 Contact: [Maxine Eskenazi](/directory/maxine_eskenazi)
 
@@ -91,7 +90,7 @@ Let's Go Lab is a research project on speech interfaces and dialog systems condu
 
 ***
 
-### Linguistics Olympiad
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/naclologo.jpg "Linguistics Olympiad Logo")  Linguistics Olympiad
 
 Contact: [Dr. Lori Levin](/directory/lorraine_levin)
 
@@ -101,7 +100,7 @@ This olympiad is a contest in which high-school students solve linguistic puzzle
 
 ***
 
-### OurCS: Opportunities for Undergraduate Research in Computer Science
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/ourcs.jpg "Our CS Logo")  OurCS: Opportunities for Undergraduate Research in Computer Science
 
 Contact: [Carol Frieze](/directory/carol_frieze)
 
@@ -118,7 +117,7 @@ present a talk and/or a poster: great for first timers!
 
 ***
 
-### Outreach Roadshow
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/roadshow.jpg "Outreach Roadshow Logo")  Outreach Roadshow
 
 Contact: [Carol Frieze](/directory/carol_frieze)
 
@@ -128,7 +127,7 @@ The School of Computer Science Outreach Roadshow is a presentation aimed at broa
 
 ***
 
-### Project LISTEN
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/listen_no_text.gif "Project LISTEN Logo")  Project LISTEN
 
 Contact: [Jack Mostow](/directory/jack_mostow)
 
@@ -138,7 +137,7 @@ Project LISTEN (Literacy Innovation that Speech Technology Enables) is an inter-
 
 ***
 
-### Robotics Academy
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/roboticsacademy.jpg "Robotics Academy Logo")  Robotics Academy
 
 [http://www.education.rec.ri.cmu.edu/](http://www.education.rec.ri.cmu.edu/)
 
@@ -148,7 +147,7 @@ In keeping with CMU’s mission as an academic leader, NREC also operates fun, e
 
 ***
 
-### Robotics Education Lab
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/rel.jpg "Robotics Education Lab Logo")  Robotics Education Lab
 
 Contact: [directory/illah_nourbakhsh](directory/illah_nourbakhsh)
 
@@ -160,7 +159,7 @@ Anyone affiliated with CMU and interested in robotics is welcome. Stop by and se
 
 ***
 
-### SCS4ALL
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/scs4all_0.jpg "SCS For All Logo")
 
 Contact: [Carol Frieze](/directory/carol_frieze)
 
@@ -170,7 +169,7 @@ SCS4ALL is a student-run initiative working to develop social and professional a
 
 ***
 
-### Women@SCS
+### ![alt text](https://storage.cloud.google.com/scs-static/pages/content/wscs_logo2.jpg "Women At SCS Logo")  Women@SCS
 
 Contact: [Carol Frieze](/directory/carol_frieze)
 
@@ -187,7 +186,7 @@ Women@SCS is a professional organization of faculty, graduate and undergraduate 
 }
 
 .content-body img {
-  width: 100%
+  width: 100px;
 }
 
 .content-title a {
@@ -205,7 +204,6 @@ Women@SCS is a professional organization of faculty, graduate and undergraduate 
 
 .content-body h1 {
   font-weight: bold;
-  background: #eee;
   margin: -2rem -1.5rem 1rem -1.5rem;
   padding: 3rem 1.5rem 1.5rem 1.5rem;
 }

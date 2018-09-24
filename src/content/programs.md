@@ -235,7 +235,6 @@ Admission to master's and doctoral degree programs are handled by the seven degr
 
 .content-body h1 {
   font-weight: bold;
-  background: #eee;
   margin: -2rem -1.5rem 1rem -1.5rem;
   padding: 3rem 1.5rem 1.5rem 1.5rem;
 }

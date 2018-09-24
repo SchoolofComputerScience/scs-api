@@ -46,7 +46,6 @@ For more information regarding Diversity and Inclusion at Carnegie Mellon Univer
 
 .content-body h1 {
   font-weight: bold;
-  background: #eee;
   margin: -2rem -1.5rem 1rem -1.5rem;
   padding: 3rem 1.5rem 1.5rem 1.5rem;
 }
