@@ -4,17 +4,19 @@ title: SCS:CMU Undergraduate Admissions
 
 *Interested in visiting SCS? Fill out [our visitor form](https://www.cs.cmu.edu/registration/node/2103 "visitor form") to get in touch with us.*
 
-## Admission to Bachelor of Science Programs
+## Admission to SCS Bachelor of Science Programs (non-CMU applicants)
 
-Admission to Bachelor of Science programs in the School of Computer Science are administered by the [Carnegie Mellon Office of Undergraduate Admissions](http://admission.enrollment.cmu.edu/ "Carnegie Mellon Office of Undergraduate Admissions" ). For application requirements, deadlines and information, please refer to the Undergraduate Admissions [website](http://admission.enrollment.cmu.edu/).
+Admission to Bachelor of Science programs in the School of Computer Science are administered by the [Carnegie Mellon Office of Undergraduate Admissions](http://admission.enrollment.cmu.edu/ "Carnegie Mellon Office of Undergraduate Admissions" ). For application requirements, deadlines and information, please refer to the Undergraduate Admissions [website](http://admission.enrollment.cmu.edu/). For a complete list of undergraduate program offerings at the School of Computer Science, please see the [Undergraduate Programs](/undergraduate-programs) page.
 
-For a complete list of undergraduate program offerings at the School of Computer Science, please see the Undergraduate Programs page.
+## Admission to SCS Bachelor of Science Programs (CMU applicants)
 
-## Admission to Undergraduate Second Major Programs
+Students who have already been admitted to Carnegie Mellon can apply for our dual-degree offerings in computational biology or computer science, or can apply to transfer into the School of Computer Science. Students interested in either a dual degree programs or in transferring into SCS must [complete our transfer form](https://www.cs.cmu.edu/registration/scs-internal-transfer). Note that students outside SCS may not apply for transfer into our programs in computatational biology or computer science and then request admission into the artificial intelligence program.
 
-The School of Computer Science offers Second Major Programs in [Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#major), [Human-Computer Interaction](http://www.hcii.cmu.edu/applying-undergraduate-major), and [Robotics](http://major.ri.cmu.edu/). Students interested in these programs must already be accepted and enrolled in another undergraduate program at Carnegie Mellon University. Admissions to a second major program are administered within the program's home department. Admissions requirements and application deadlines vary. Interested students should refer to the appropriate departmental program page for more information.
+## Admission to SCS Undergraduate Additional Major Programs (CMU applicants)
 
-## Undergraduate Minors
+The School of Computer Science offers additional major programs in [Computational Biology](http://www.cbd.cmu.edu/education/bs-in-computational-biology/additional-major-in-computational-biology/), [Computer Science](http://www.csd.cs.cmu.edu/education/bscs/second.html#major), [Human-Computer Interaction](http://www.hcii.cmu.edu/applying-undergraduate-major), and [Robotics](http://major.ri.cmu.edu/). Students interested in these programs must already be accepted and enrolled in another undergraduate program at Carnegie Mellon University. Admissions for additional major programs are administered within the program's home department. Admission requirements and application deadlines vary. Interested students should refer to the appropriate departmental program page for more information.
+
+## SCS Undergraduate Minors
 
 The School of Computer Science offers eight undergraduate minors. Accepted and enrolled undergraduate students interested in a minor should contact their academic advisor for more information. For a complete list of undergraduate minors, please see the [Undergraduate Programs](/undergraduate-programs) page.
 
