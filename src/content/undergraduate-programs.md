@@ -24,6 +24,34 @@ Carnegie Mellon’s diverse and top-ranked departments in computing, engineering
 
 ## All Undergraduate Programs by Department
 
+#### College-Wide Program
+<table class="tbl">
+  <tr>
+    <td>[Bachelor of Science in Artificial Intelligence](https://www.cs.cmu.edu/bs-in-artificial-intelligence/)</td> 
+    <td>[More Info](https://www.cs.cmu.edu/bs-in-artificial-intelligence/)</td> 
+    <td>[Apply](https://www.cs.cmu.edu/bs-in-artificial-intelligence/admissions)</td>
+  </tr>
+</table>
+
+#### Computational Biology Department
+<table class="tbl">
+  <tr>
+    <td>[Bachelor of Science in Computational Biology](http://www.cbd.cmu.edu/education/bs-in-computational-biology/)</td> 
+    <td>[More Info](http://www.cbd.cmu.edu/education/bs-in-computational-biology/additional-major-in-computational-biology/)</td> 
+    <td>[Apply](http://www.cbd.cmu.edu/education/bs-in-computational-biology/apply-to-undergraduate-program/)</td>
+  </tr>
+  <tr>
+    <td>[Additional Major in Computational Biology](http://www.cbd.cmu.edu/education/bs-in-computational-biology/additional-major-in-computational-biology/)</td> 
+    <td>[More Info](http://www.cbd.cmu.edu/education/bs-in-computational-biology/additional-major-in-computational-biology/)</td> 
+    <td>[Apply](http://www.cbd.cmu.edu/education/bs-in-computational-biology/apply-to-undergraduate-program/)</td>
+  </tr>
+  <tr>
+    <td>[Minor in Computational Biology](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)</td> 
+    <td>[More Info](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)</td> 
+    <td>[Apply](http://www.cbd.cmu.edu/education/bs-in-computational-biology/apply-to-undergraduate-program/)</td>
+  </tr>
+</table>
+
 #### Computer Science
 <table class="tbl">
   <tr>
@@ -81,20 +109,6 @@ Carnegie Mellon’s diverse and top-ranked departments in computing, engineering
   </tr>
 </table>
 
-#### Computational Biology Department
-<table class="tbl">
-  <tr>
-    <td>[Bachelor of Science in Computational Biology](http://www.cbd.cmu.edu/education/bs-in-computational-biology/)</td> 
-    <td>[More Info](http://www.cbd.cmu.edu/education/bs-in-computational-biology/)</td> 
-    <td>[Apply](http://www.cbd.cmu.edu/join-us/apply-to-undergraduate-program/)</td>
-  </tr>
-  <tr>
-    <td>[Minor in Computational Biology](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)</td> 
-    <td>[More Info](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)</td> 
-    <td>[Apply](http://www.cbd.cmu.edu/education/minor-in-computational-biology/)</td>
-  </tr>
-</table>
-
 #### Language Technologies Institute
 <table class="tbl">
   <tr>
@@ -132,6 +146,9 @@ Carnegie Mellon’s diverse and top-ranked departments in computing, engineering
   </tr>
 </table>
 
+## Course Catalog
+To find out more information about courses for The School Of Computer Science, please visit our [Course Catalog](http://coursecatalog.web.cmu.edu/schoolofcomputerscience/).
+
 <style>
 .content-body a {
   text-decoration: underline;
@@ -168,15 +185,26 @@ Carnegie Mellon’s diverse and top-ranked departments in computing, engineering
 .content-body table {
   width: 100%;
   border: 1px solid #000;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .tbl td {
   padding: 0.5rem;
   border: 1px solid #000;
+  width: 25%;
+  text-align: center;
+}
+
+.tbl td:first-child {
+  width: 50%;
+  text-align: left;
 }
 
 .tbl tr:nth-child(2n + 1) {
   background: #efefef;
+}
+
+.tbl a {
+  text-decoration: none;
 }
 </style>
