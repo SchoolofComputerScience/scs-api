@@ -33,7 +33,7 @@ function queryEvents(args) {
   query_options.order = [['start_date', 'ASC']];
   query_options.where = { 
     start_date: { 
-      [Op.gt]: moment("2018-7-1", "YYYY-MM-DD")
+      [Op.gt]: moment(new Date(), "YYYY-MM-DD")
     }
   }
 
