@@ -36,8 +36,11 @@ function queryPublications(args) {
     query_options.where = { scid: args.scid };
   }
 
-  if (args && args.gs_citation_guid) {
-    query_options.where = { gs_citation_guid: args.gs_citation_guid };
+  if (args && args.gs_citation_guid && args.scid) {
+    query_options.where = { 
+      gs_citation_guid: args.gs_citation_guid,
+      scid: args.scid
+    };
   }
 
   return Publications.findAll(query_options).then(data => {
@@ -56,12 +59,13 @@ export default {
   type: new GraphQLList(PublicationType),
   description: 'Google Scholar Publications',
   args: {
-    scid: { type: GraphQLString }
+    scid: { type: GraphQLString },
+    gs_citation_guid: { type: GraphQLString }
   },
   resolve: function (parent, args) {
     if (parent && parent.scid) {
       return queryPublications(parent);
-    } else if (args && args.gs_citation_guid) {
+    } else if (args && args.gs_citation_guid && args.scid) {
       return queryPublications(args);
     } else {
       return queryPublications();
