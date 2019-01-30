@@ -17,13 +17,17 @@ import programs from './programs';
 import publication from './publication';
 import publications from './publications';
 import researchAreas from './researchAreas';
+import allResearchFields from './allResearchFields';
+import researchField from './researchField';
 import researchAreaCourses from './researchAreaCourses';
 import researchAreaMembers from './researchAreaMembers';
+import researchAreaMembersAll from './researchAreaMembersAll';
 import semesterCode from './semesterCode';
 import positions from './positions';
 import instructors from './instructors';
 
 export default {
+  allResearchFields,
   biographies,
   course,
   courseIntAgg,
@@ -45,7 +49,9 @@ export default {
   publication,
   publications,
   researchAreas,
+  researchField,
   researchAreaCourses,
   researchAreaMembers,
+  researchAreaMembersAll,
   semesterCode
 }

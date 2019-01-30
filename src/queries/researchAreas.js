@@ -4,14 +4,13 @@ import {
 } from 'graphql';
 import Db from '../db';
 
-import { ResearchAreasType } from '../types/research';
+import { ResearchAreaType } from '../types/research';
 const ResearchAreas = Db.models['research_areas'];
 
 function buildResearchArea(row) {
   let research_area = {};
   research_area.area_id = row.area_id;
   research_area.description = row.description;
-  research_area.gs_count = row.gs_count || 0;
   research_area.title = row.title;
 
   return research_area;
@@ -39,7 +38,7 @@ function queryResearchAreas(args) {
 }
 
 export default {
-  type: new GraphQLList(ResearchAreasType),
+  type: new GraphQLList(ResearchAreaType),
   description: 'List of Research Areas',
   args: {
     area_id: { type: GraphQLString }
@@ -52,4 +51,3 @@ export default {
     }
   }
 }
-

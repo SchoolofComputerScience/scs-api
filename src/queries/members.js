@@ -118,16 +118,13 @@ export default {
   description: 'Directory listing',
   args: {
     scid: { type: GraphQLString },
-    andrew_id: { type: GraphQLString },
-    department: { type: GraphQLString }
+    andrew_id: { type: GraphQLString }
   },
   resolve: function(parent, args) {
     if(args && args.scid) {
       return queryMembers({ scid: args.scid });
     } else if(args && args.andrew_id) {
       return queryMembers({ andrew_id: args.andrew_id });
-    } else if(args && args.department) {
-      return queryMembers({ department: args.department });
     } else {
       return queryMembers();
     }

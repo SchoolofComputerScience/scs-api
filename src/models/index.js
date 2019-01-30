@@ -8,7 +8,8 @@ import childCourses from './childCourses';
 import parentCourses from './parentCourses';
 import profile from './profile';
 import publications from './publications';
-import researchAreas from './research';
+import researchAreas from './researchAreas';
+import researchFieldDisciplines from './researchFieldDisciplines';
 import researchAreaCourses from './researchCourses';
 import researchAreaMembers from './researchMembers';
 import instructors from './instructors';
@@ -35,5 +36,6 @@ export default {
   publications,
   researchAreas,
   researchAreaCourses,
-  researchAreaMembers
+  researchAreaMembers,
+  researchFieldDisciplines
 }

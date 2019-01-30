@@ -99,12 +99,20 @@ const ParentCourses = DB_CONNECTION.define('parent_courses', Models.parentCourse
   }
 });
 
-const ResearchAreas = DB_CONNECTION.define('research_areas', Models.researchAreas, {
+const ResearchAreas = DB_CONNECTION.define('research_area_field', Models.researchAreas, {
   freezeTableName: true,
   defaultScope: {
     attributes: { exclude: EXCLUSION_LIST }
   }
 });
+
+const ResearchFieldDisciplines = DB_CONNECTION.define('research_field_discipline', Models.researchFieldDisciplines, {
+  freezeTableName: true,
+  defaultScope: {
+    attributes: { exclude: EXCLUSION_LIST }
+  }
+});
+
 
 const ResearchAreaCourses = DB_CONNECTION.define('research_courses', Models.researchAreaCourses, {
   freezeTableName: true,
@@ -194,12 +202,25 @@ CoursesSection.belongsTo(Instructors, { foreignKey: 'course_section_id', sourceK
 
 
 //------RESEARCH AREAS------//
-ResearchAreaCourses.hasMany(CoursesBySemester, { foreignKey: 'course_id', sourceKey: 'course_id', as: 'research_area_courses' });
+
+
+//Research Area Fields
+ResearchFieldDisciplines.hasMany(ResearchAreas, { foreignKey: 'field', sourceKey: 'field', as: 'field_research_areas' });
+ResearchAreas.belongsTo(ResearchFieldDisciplines, { foreignKey: 'field', sourceKey: 'field' });
+
+//Research Area Courses
+ResearchAreas.hasMany(ResearchAreaCourses, { foreignKey: 'area_id', sourceKey: 'area_id', as: 'research_area_courses' });
+ResearchAreaCourses.belongsTo(ResearchAreas, { foreignKey: 'area_id', sourceKey: 'area_id' });
+
+ResearchAreaCourses.hasMany(CoursesBySemester, { foreignKey: 'course_id', sourceKey: 'course_id', as: 'course_research_areas' });
 CoursesBySemester.belongsTo(ResearchAreaCourses, { foreignKey: 'course_id', sourceKey: 'course_id' });
+
+//Research Area Members
+ResearchAreaMembers.hasMany(ResearchAreas, { foreignKey: 'area_id', sourceKey: 'area_id', as: 'member_research_areas' });
+ResearchAreas.belongsTo(ResearchAreaMembers, { foreignKey: 'area_id', sourceKey: 'area_id' });
 
 ResearchAreaMembers.hasMany(Member, { foreignKey: 'scid', sourceKey: 'scid', as: 'research_area_members' });
 Member.belongsTo(ResearchAreaMembers, { foreignKey: 'scid', sourceKey: 'scid' });
-
 
 
 export default DB_CONNECTION;
