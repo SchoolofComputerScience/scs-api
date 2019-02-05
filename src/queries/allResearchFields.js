@@ -35,7 +35,7 @@ function queryResearchFields(args) {
     raw: true,
     include: [{
       model: ResearchAreas,
-      as: 'research_area_fields',
+      as: 'field_research_areas',
       required: true
     }]
   }
