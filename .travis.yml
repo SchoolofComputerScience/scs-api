@@ -18,8 +18,10 @@ before_install:
 - if [ ! -d $HOME/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash;
   fi
 - gcloud auth activate-service-account --key-file gce-key.json
-- echo "  PRISMIC:" $PRISMIC >> app.yaml
-- echo "  DB_CONNECT:" $ATLAS >> app.yaml
+- echo "  SQL_DATABASE:" $SQL_DATABASE >> app.yaml
+- echo "  SQL_HOST:" $SQL_HOST >> app.yaml
+- echo "  SQL_PASSWORD:" $SQL_PASSWORD >> app.yaml
+- echo "  SQL_USER:" $SQL_USER >> app.yaml
 - npm install
 - npm run build
 install:

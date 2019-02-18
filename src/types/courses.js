@@ -6,13 +6,12 @@ import {
   GraphQLBoolean
 } from 'graphql';
 
-import MemberData from '../data/members';
+import MemberData from '../models/members';
 
 export const CoursesType = new GraphQLObjectType({
   name: 'Courses',
   description: 'List of courses',
   fields: () => ({
-    _id: { type: GraphQLString },
     areas: { type: new GraphQLList(CourseAreaType)},
     college: { type: GraphQLString },
     course_id: { type: GraphQLString },
@@ -26,8 +25,7 @@ export const CoursesType = new GraphQLObjectType({
     sections: { type: new GraphQLList(CourseSectionType) },
     semester: { type: GraphQLString },
     semester_code: { type: GraphQLString },
-    units:  { type: GraphQLString },
-    year: { type: GraphQLInt },
+    units:  { type: GraphQLString }
    })
 })
 
@@ -46,7 +44,6 @@ export const CourseSectionType = new GraphQLObjectType({
   fields: () => ({
     course_section_id: { type: GraphQLString },
     delivery_mode: { type: GraphQLString },
-    level: { type: GraphQLString },
     location: { type: GraphQLString },
     long_title: { type: GraphQLString },
     presence_required: { type: GraphQLString },

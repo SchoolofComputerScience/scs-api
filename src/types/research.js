@@ -5,15 +5,7 @@ import {
   GraphQLFloat
 } from 'graphql';
 
-const ResearchAreasCourseType = new GraphQLObjectType({
-  name: 'ResearchAreasCourse',
-  description: 'Course that has an association with an area',
-  fields: () => ({
-    course_id: { type: GraphQLString },
-    course_number: { type: GraphQLString },
-    title: { type: GraphQLString }
-  })
-});
+import { ScidType } from './utils';
 
 const ResearchAreasDescriptionSourceType = new GraphQLObjectType({
   name: 'ResearchAreasDescriptionSource',
@@ -24,56 +16,55 @@ const ResearchAreasDescriptionSourceType = new GraphQLObjectType({
   })
 });
 
-const ResearchAreasDescriptionType = new GraphQLObjectType({
-  name: 'ResearchAreasDescription',
-  description: 'Description for areas',
+const ResearchAreasCourseType = new GraphQLObjectType({
+  name: 'ResearchAreasCourseType',
+  description: 'Courses For Research Areas',
   fields: () => ({
-    contributors: { type: new GraphQLList(GraphQLString) },
-    sources: { type: new GraphQLList(ResearchAreasDescriptionSourceType) },
-    text: { type: GraphQLString },
+    course_id: { type: GraphQLString },
+    course_number: { type: GraphQLString },
+    long_title: { type: GraphQLString }
+  })
+});
+
+// const ResearchAreasProgramType = new GraphQLObjectType({
+//   name: 'ResearchAreasProgram',
+//   description: 'Program for areas',
+//   fields: () => ({
+//     program_id: { type: GraphQLString },
+//     program_name: { type: GraphQLString },
+//     tracks: { type: new GraphQLList(ResearchAreasProgramTrackType) }
+//   })
+// });
+
+export const ResearchAreaType = new GraphQLObjectType({
+  name: 'ResearchAreas',
+  description: 'Research Areas',
+  fields: () => ({
+    area_id: { type: GraphQLString },
     title: { type: GraphQLString }
   })
 });
 
-const ResearchAreasProgramTrackType = new GraphQLObjectType({
-  name: 'ResearchAreasProgramTrack',
-  description: 'Program track for areas',
-  fields: () => ({
-    track_id: { type: GraphQLString },
-    track_name: { type: GraphQLString }
-  })
-});
-
-const ResearchAreasMemberType = new GraphQLObjectType({
-  name: 'ResearchAreasMember',
-  description: 'Member of each area',
-  fields: () => ({
-    scid: { type: GraphQLString },
-    display_name: { type: GraphQLString }
-  })
-});
-
-const ResearchAreasProgramType = new GraphQLObjectType({
-  name: 'ResearchAreasProgram',
-  description: 'Program for areas',
-  fields: () => ({
-    program_id: { type: GraphQLString },
-    program_name: { type: GraphQLString },
-    tracks: { type: new GraphQLList(ResearchAreasProgramTrackType) }
-  })
-});
-
-
-export const ResearchAreasType = new GraphQLObjectType({
-  name: 'ResearchAreas',
-  description: 'List of research areas',
+export const MemberResearchType = new GraphQLObjectType({
+  name: 'MemberResearch',
+  description: 'Research Areas For Members',
   fields: () => ({
     area_id: { type: GraphQLString },
+    scid: { type: GraphQLString }
+  })
+});
+
+export const ResearchAreaFieldsType = new GraphQLObjectType({
+  name: 'ResearchAreaFields',
+  description: 'List of Research Area Fields',
+  fields: () => ({
+    field: { type: GraphQLString },
+    field_text: { type: GraphQLString },
+    description: { type: GraphQLString },
+    discipline: { type: GraphQLString },
+    areas: { type: new GraphQLList(ResearchAreaType) },
     courses: { type: new GraphQLList(ResearchAreasCourseType) },
-    description: { type: ResearchAreasDescriptionType },
-    title: { type: GraphQLString },
-    gs_count: { type: GraphQLFloat },
-    members: { type: new GraphQLList(ResearchAreasMemberType) },
-    programs: { type: new GraphQLList(ResearchAreasProgramType) }
+    members: { type: new GraphQLList(ScidType) }
+    // programs: { type: new GraphQLList(ResearchAreasProgramType) }
   })
 });

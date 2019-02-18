@@ -1,5 +1,5 @@
 import { GraphQLString } from 'graphql'
-import currentSemesterCode from "../data/semesterCode"
+import currentSemesterCode from "../models/semesterCode"
 
 export default {
   type: GraphQLString,

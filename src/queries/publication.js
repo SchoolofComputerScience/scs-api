@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { PublicationType } from '../types/publications'
-import PublicationData from '../data/publications.js'
+import PublicationData from '../models/publications.js'
 
 export default {
   type: PublicationType,

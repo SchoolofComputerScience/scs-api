@@ -3,9 +3,7 @@ import course from './course';
 import courseIntAgg from './courseIntAgg';
 import courses from './courses';
 import courseStringAgg from './courseStringAgg';
-import department from './department';
 import departments from './departments';
-import departmentsContent from './departmentsContent';
 import directoryAgg from './directoryAgg';
 import event from './event';
 import events from './events';
@@ -19,29 +17,41 @@ import programs from './programs';
 import publication from './publication';
 import publications from './publications';
 import researchAreas from './researchAreas';
+import allResearchFields from './allResearchFields';
+import researchField from './researchField';
+import researchAreaCourses from './researchAreaCourses';
+import researchAreaMembers from './researchAreaMembers';
+import researchAreaMembersAll from './researchAreaMembersAll';
 import semesterCode from './semesterCode';
+import positions from './positions';
+import instructors from './instructors';
 
 export default {
+  allResearchFields,
   biographies,
   course,
   courseIntAgg,
   courses,
   courseStringAgg,
-  department,
   departments,
-  departmentsContent,
   directoryAgg,
   event,
   events,
   eventsBySearch,
+  instructors,
   members,
   news,
   newsArticle,
   newsBySearch,
   newsByTag,
+  positions,
   programs,
   publication,
   publications,
   researchAreas,
-  semesterCode,
+  researchField,
+  researchAreaCourses,
+  researchAreaMembers,
+  researchAreaMembersAll,
+  semesterCode
 }
