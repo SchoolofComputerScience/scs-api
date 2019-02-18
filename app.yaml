@@ -1,4 +1,4 @@
-service: scs-api
+service: stage-scs-api
 runtime: nodejs
 env: flex
 resources:
