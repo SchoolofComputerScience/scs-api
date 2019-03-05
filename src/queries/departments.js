@@ -9,8 +9,7 @@ function buildDepartment(row) {
   department.department_id = row.dept_id;
   department.college_id = row.college_id;
   department.department_name = row.dept_name;
-  department.college_name = row.college_name;
-  department.url = row.dept_url;
+  department.url = row.url;
   department.scs_relationship = row.gs_hindex;
   department.scs_type = row.scs_type;
   department.cmu_type = row.cmu_type;
