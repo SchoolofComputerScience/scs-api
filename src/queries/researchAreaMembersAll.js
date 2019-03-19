@@ -12,8 +12,8 @@ const ResearchAreaField = Db.models['research_area_field'];
 
 function buildResearchArea(row) {
   let research_area = {};
-  research_area.area_id = row["members_research_fields.area_id"];
-  research_area.title = row["members_research_fields.area_text"];
+  research_area.area_id = row["member_research_areas.area_id"];
+  research_area.title = row["member_research_areas.area_text"];
 
   return research_area;
 }
@@ -56,7 +56,7 @@ function queryResearchAreaMembers(args) {
     raw: true,
     include: [{
       model: ResearchAreaField,
-      as: 'members_research_fields',
+      as: 'member_research_areas',
       required: true
     },
     {
