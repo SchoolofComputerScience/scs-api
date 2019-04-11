@@ -3,7 +3,7 @@ node_modules/
 logs
 *.log
 dist
-
+.idea/
 # google build and environment variables
 .env
 
