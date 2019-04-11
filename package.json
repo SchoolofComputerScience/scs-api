@@ -35,7 +35,7 @@
     "mongoose": "4.11.4",
     "mysql2": "^1.5.2",
     "prismic.io": "^3.5.7",
-    "sequelize": "^4.33.4"
+    "sequelize": "^5.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
