@@ -19,6 +19,19 @@ Welcome to the GraphQL API Endpoint from the School Of Computer Science
 
 navigate to `localhost:5000/graph`
 
+## Upgrading package dependencies
+1. First install npm-check-updates
+`npm i -g npm-check-updates`
+
+2. Check for updates
+`ncu`
+
+3. Add the update in package.json
+`ncu -u [packageName]`
+
+4. Install the update
+`npm install`
+
 ## Technologies Used In This Repo
 1. Node (https://nodejs.org/)
 
